@@ -44,7 +44,10 @@ function sisColorMod() {
 	{
 		for(i = 0; i < body.length; i++)
 		{
+            body[i].style.cssText = "margin: 0 auto";
 			body[i].style.backgroundColor = bgColor;
+            body[i].style.width = 600;
+            
 		}
 	}
 	
