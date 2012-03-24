@@ -20,6 +20,7 @@ var bgColor = "#F8F7ED";
 loadFunc = function loadFunc() {
     sisColorMod();
     removeAlpha();
+    addLogos();
   //  fixExpandedSearch();
     //selectZeroDepartmentNumber();
 
@@ -27,6 +28,26 @@ loadFunc = function loadFunc() {
 
     convertLetterCodeToNumber();
 }
+
+function addLogos() {
+    var searchClasses = document.getElementById("DERIVED_CLSRCH_SS_TRANSACT_TITLE");
+    searchClasses.innerText = "";
+    var ritImage = document.getElementById('RIT_logo');
+    if (!ritImage) {
+        ritImage = document.createElement("img");
+        ritImage.setAttribute('id', 'RIT_logo');
+        ritImage.setAttribute('src', 'http://people.rit.edu/~tjd9961/RIT_SIS/rit_black_no_bar.png');
+        ritImage.setAttribute('alt', 'RIT');
+        ritImage.setAttribute('height', '102');
+        ritImage.setAttribute('width', '341');
+        ritImage.style.position = "fixed";
+         ritImage.style.top = "250px";
+        ritImage.style.left = "10px";
+                ritImage.style.zIndex = "-1";
+
+        document.body.appendChild(ritImage);
+    }
+} 
 
 function sisColorMod() {
     var headers = document.getElementsByClassName("PSGROUPBOXLABEL");
@@ -46,9 +67,11 @@ function sisColorMod() {
 		{
             body[i].style.cssText = "margin: 0 auto";
 			body[i].style.backgroundColor = bgColor;
-            body[i].style.width = 600;
+            body[i].style.width = "600px";
             
 		}
+        var bodyContainer = document.getElementsByClassName("PSPAGE");
+        bodyContainer[0].style.backgroundColor = bgColor;
 	}
 	
 	var labels = document.getElementsByClassName("PSEDITBOXLABEL");
