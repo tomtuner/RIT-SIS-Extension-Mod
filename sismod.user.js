@@ -9,7 +9,8 @@
 //window.onload = loadFunc;
 loadFunc = function loadFunc() {
     sismod();
-    removeAlpha();
+	bodyTextColor();
+   //removeAlpha();
 }
 
 function sismod() {
@@ -22,10 +23,27 @@ function sismod() {
     //console.log("SIS Mod");
 }
 
+function bodyTextColor() {
+    var headers = document.getElementsByClassName("PSGROUPBOX");
+    for (i = 0; i < headers.length; i++) {
+	//console.log(headers[i].backgroundColor);
+	headers[i].style.color = "#42271B";
+    }
+}
+
+function addSrcCrit(){
+	var headers = document.getElementsByClassName("SSSMSGSUCCESSFRAMEWBO");
+	for (i = 0; i < headers.length; i++) {
+		//console.log(headers[i].bacgroundColor);
+		headers[i].style.backgroundColor = "#CBCAAC";
+		headers[i].style.borderColor = "gray";
+	}	
+}
+
 function removeAlpha() {
     var alphaTable = document.getElementsByClassName("PSFRAME");
     alphaTable[0].style.display = 'none';
-    console.log("Remove Alpha");
+    //console.log("Remove Alpha");
 }
 
-setInterval("loadFunc()", 100);
+setInterval("loadFunc()", 5000);
