@@ -84,7 +84,7 @@ function removeAlpha() {
 
     }
 }
-
+/*
 function fixExpandedSearch() {
     var advancedSearch = document.getElementById("win0divDERIVED_CLSRCH_SSR_EXPAND_COLLAPS$80$");
     var array = advancedSearch.childNodes();
@@ -101,11 +101,12 @@ function fixExpandedSearch() {
 /*
     var selectionDiv = document.getElementById("win0divDERIVED_CLSRCH_GROUP4");
     selectionDiv.style.display = 'none';
-*/
+
     console.log("Fix Expanded Search");
 
 
 }
+*/
 
 function selectZeroDepartmentNumber() {
     submitAction_win0(document.win0,'SSR_CLSRCH_WRK2_SSR_ALPHANUM_0');
