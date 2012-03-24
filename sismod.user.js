@@ -21,7 +21,7 @@ loadFunc = function loadFunc() {
     sisColorMod();
     removeAlpha();
   //  fixExpandedSearch();
-    selectZeroDepartmentNumber();
+    //selectZeroDepartmentNumber();
 
    // selectZeroDepartmentNumber();
 
