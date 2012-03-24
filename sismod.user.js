@@ -4,17 +4,28 @@
 // @namespace          demeo.rit.sismod
 // @author             Thomas DeMeo
 // @include            http://mycampus.rit.edu/*
-// @include            https://mycampus.rit.edu/psc/sasrch/EMPLOYEE/HRMS/c/*
+// @include            https://mycampus.rit.edu/*
 // ==/UserScript==
-sismod = function () {
-    var headers = document.getElementsByClassName("PSGROUPBOXLABEL");
-    for (i = 0; i < headers.length; i++) {
-        headers[i].style.backgroundColor = "#F36E21";
-	headers[i].innerText = "Thomas DeMeo";
-    }
+//window.onload = loadFunc;
+loadFunc = function loadFunc() {
+    sismod();
+    removeAlpha();
 }
 
-function () {
-    var alphaTable = document.getElementByClassName("PSFRAME");
-    alphaTable[0].style.display = 'none';
+function sismod() {
+    var headers = document.getElementsByClassName("PSGROUPBOXLABEL");
+    for (i = 0; i < headers.length; i++) {
+	console.log(headers[i].backgroundColor);
+	headers[i].style.backgroundColor = "#F36E21";
+	headers[i].style.borderColor = "#513127";
+    }
+    //console.log("SIS Mod");
 }
+
+function removeAlpha() {
+    var alphaTable = document.getElementsByClassName("PSFRAME");
+    alphaTable[0].style.display = 'none';
+    console.log("Remove Alpha");
+}
+
+setInterval("loadFunc()", 100);
