@@ -24,12 +24,42 @@ loadFunc = function loadFunc() {
     removeAlpha();
     addLogos();
     addMouseOver();
+    changeInputLimit();
   //  fixExpandedSearch();
     //selectZeroDepartmentNumber();
 
    // selectZeroDepartmentNumber();
 
     convertLetterCodeToNumber();
+}
+
+function validateNumberInput(evt) {
+    var theEvent = evt || window.event;
+    var key = theEvent.keyCode || theEvent.which;
+    key = String.fromCharCode( key );
+    var regex = /[0-9]|\./;
+    if( !regex.test(key) ) {
+        theEvent.returnValue = false;
+        if(theEvent.preventDefault) theEvent.preventDefault();
+    }
+}
+
+function changeInputLimit() {
+    var courseNumberInput = document.getElementById("CLASS_SRCH_WRK2_CATALOG_NBR$72$");
+    courseNumberInput.setAttribute('maxlength', '3');
+    
+    courseNumberInput.onkeypress = validateNumberInput;
+    var minUnitInput = document.getElementById("CLASS_SRCH_WRK2_UNITS_MINIMUM");
+    minUnitInput.onkeypress = validateNumberInput;
+    minUnitInput.setAttribute('maxlength', '1');
+
+    var maxUnitInput = document.getElementById("CLASS_SRCH_WRK2_UNITS_MAXIMUM");
+    maxUnitInput.onkeypress = validateNumberInput;
+    maxUnitInput.setAttribute('maxlength', '1');
+    
+    var classNumberInput = document.getElementById("CLASS_SRCH_WRK2_CLASS_NBR$112$");
+    classNumberInput.onkeypress = validateNumberInput;
+
 }
 
 function unitsMouseOver() {
@@ -118,14 +148,14 @@ function sisColorMod() {
             bodyContainer[0].style.backgroundColor = bgColor;
         }
         	var page = document.getElementById("PAGECONTAINER");
-            if (page) {
-                page.style.cssText = "margin: 0 auto";
-                page.style.backgroundColor = bgColor;          
-                page.style.width = "600px";
+           	var pageHeader = document.getElementById("DERIVED_CLSRCH_SSR_CLASS_LBL_LBL");
+            if(!(pageHeader.innerText == "Search Results")){
+                if (page) {
+                    page.style.cssText = "margin: 0 auto";
+                    page.style.backgroundColor = bgColor;          
+                    page.style.width = "600px";
+                }
             }
-
-        
-
 	}
 	
 	var labels = document.getElementsByClassName("PSEDITBOXLABEL");
