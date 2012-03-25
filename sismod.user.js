@@ -153,11 +153,12 @@ function sisColorMod() {
     }
 	
 	var pageHeader = document.getElementById("DERIVED_CLSRCH_SSR_CLASS_LBL_LBL");
-	if(pageHeader.innerText == "Enter Search Criteria"){
-		pageHeader.innerText = "Search For Classes";
+    if (pageHeader) {
+        if(pageHeader.innerText == "Enter Search Criteria"){
+            pageHeader.innerText = "Search For Classes";
+        }
+        pageHeader.style.color = ritBrown;
 	}
-	pageHeader.style.color = ritBrown;
-	
 
 	var institution = document.getElementById("win0div$ICField46");
 	if(institution){
