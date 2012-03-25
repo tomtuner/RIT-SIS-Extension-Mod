@@ -1,12 +1,18 @@
 RIT SIS Extensions Mod
 
+“Unless someone like you cares a whole awful lot, nothing is going to get better. It's not.”
+										-Dr. Seuss
+
 This project is meant to deliver extended funtionality for students
 who use the new RIT GeneSIS registration system.
+
+Any unauthorized use or modification of this project in any form
+will result in the forceful laws of nature being brought down upon you.
 
 @author Thomas DeMeo - thomasdemeo@gmail.com
 @author Daniel Fenton - def2191@rit.edu
 
-**Current Features to date**
+**Current features to date**
 
 * Allows users to search by subject name, by converting alpha code to numeric code
 * Added RIT Logo
