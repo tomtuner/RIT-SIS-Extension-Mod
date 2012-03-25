@@ -21,6 +21,8 @@ var ritBrown = "#513127";
 var bgColor = "#F8F7ED";
 var boxBGColor = "#CBCAAC";
 
+var zoomSearchImageURL = "https://mycampus.rit.edu/cs/sasrch/cache/PT_PROMPT_LOOKUP_1.gif";
+
 loadFunc = function loadFunc() {
     sisColorMod();
     removeAlpha();
@@ -142,10 +144,13 @@ function sisColorMod() {
 					}
 				}else {
                     var searchBar = document.getElementsByClassName("PSLEVEL1GRIDLABEL");
+                    searchBar[0].style.backgroundColor = ritBrown;
                     for(i = 0; i < searchBar.length; i++)
 					{
 						searchBar[i].style.backgroundColor = ritBrown;
 					}
+                    var zoomImage = document.getElementsByName("DERIVED_CLSRCH$pt_modal_cntrl$img$0");
+                    zoomImage[0].setAttribute('src', zoomSearchImageURL);
                 }
 			}
 	}
