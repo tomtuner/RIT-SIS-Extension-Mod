@@ -136,10 +136,14 @@ function sisColorMod() {
 						page.style.cssText = "margin: 0 auto";
 						page.style.backgroundColor = bgColor;          
 						page.style.width = "600px";
+
 					}
 				}
 			}
 	}
+	
+
+	
 	
 	var labels = document.getElementsByClassName("PSEDITBOXLABEL");
 	var dropDownLabels = document.getElementsByClassName("PSDROPDOWNLABEL");
