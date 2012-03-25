@@ -214,4 +214,4 @@ function convertLetterCodeToNumber() {
     }
 }
 
-setInterval("loadFunc()", 100);
+setInterval("loadFunc()", 500);
