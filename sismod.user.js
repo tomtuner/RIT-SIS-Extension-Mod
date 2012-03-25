@@ -21,6 +21,7 @@ loadFunc = function loadFunc() {
     sisColorMod();
     removeAlpha();
     addLogos();
+    addMouseOver();
   //  fixExpandedSearch();
     //selectZeroDepartmentNumber();
 
@@ -29,9 +30,58 @@ loadFunc = function loadFunc() {
     convertLetterCodeToNumber();
 }
 
+function unitsMouseOver() {
+    var units = document.getElementById("CLASS_SRCH_WRK2_UNITS_MINIMUM_LBL");
+    if (units) {
+        var credits = document.createElement("span");
+        credits.setAttribute('id', 'credits');
+        credits.style.backgroundColor = "yellow";
+        credits.style.opacity = "60%";
+        credits.style.margin = "5px";
+        credits.style.position = "relative";
+        credits.style.left = "-140px";
+        credits.style.padding = "2px";
+        credits.style.border = "1px solid black";
+        credits.style.color = "black";
+        credits.style.fontWeight = "normal";
+        credits.innerText = "Credits are now Units";
+        var br = document.createElement("br");
+        br.setAttribute('id', 'break');
+        units.appendChild(br);
+        units.appendChild(credits);
+    }
+}
+
+function unitsMouseOut() {
+    var credits = document.getElementById("credits");
+    var br = document.getElementById("break");
+    if (credits) {
+        credits.parentNode.removeChild(credits);
+    }
+    if (br) {
+        br.parentNode.removeChild(br);
+    }
+}
+
+function addMouseOver() {
+    var units = document.getElementById("CLASS_SRCH_WRK2_UNITS_MINIMUM_LBL");
+    var maxUnits = document.getElementById("CLASS_SRCH_WRK2_UNITS_MAXIMUM_LBL");
+    if (units) {
+        units.onmouseover = unitsMouseOver;
+        units.onmouseout = unitsMouseOut;
+    }
+    if (maxUnits) {
+        maxUnits.onmouseover = unitsMouseOver;
+        maxUnits.onmouseout = unitsMouseOut;
+    }
+    
+}
+
 function addLogos() {
     var searchClasses = document.getElementById("DERIVED_CLSRCH_SS_TRANSACT_TITLE");
-    searchClasses.innerText = "";
+    if (searchClasses) {
+        searchClasses.innerText = "";
+    }
     var ritImage = document.getElementById('RIT_logo');
     if (!ritImage) {
         ritImage = document.createElement("img");
@@ -41,9 +91,9 @@ function addLogos() {
         ritImage.setAttribute('height', '102');
         ritImage.setAttribute('width', '341');
         ritImage.style.position = "fixed";
-         ritImage.style.top = "250px";
+        ritImage.style.top = "250px";
         ritImage.style.left = "10px";
-                ritImage.style.zIndex = "-1";
+        ritImage.style.zIndex = "-1";
 
         document.body.appendChild(ritImage);
     }
@@ -71,7 +121,18 @@ function sisColorMod() {
             
 		}
         var bodyContainer = document.getElementsByClassName("PSPAGE");
-        bodyContainer[0].style.backgroundColor = bgColor;
+        if (bodyContainer[0]) {
+            bodyContainer[0].style.backgroundColor = bgColor;
+        }
+        	var page = document.getElementById("PAGECONTAINER");
+            if (page) {
+                page.style.cssText = "margin: 0 auto";
+                page.style.backgroundColor = bgColor;          
+                page.style.width = "600px";
+            }
+
+        
+
 	}
 	
 	var labels = document.getElementsByClassName("PSEDITBOXLABEL");
@@ -92,7 +153,6 @@ function sisColorMod() {
 
     if (headers) {
 	for (i = 0; i < headers.length; i++) {
-	    console.log(headers[i].backgroundColor);
 	    headers[i].style.backgroundColor = "#F36E21";
 	    headers[i].style.borderColor = "#513127";
 	}
@@ -144,17 +204,13 @@ function selectZeroDepartmentNumber() {
 
 function convertLetterCodeToNumber() {
     var letterCode = document.getElementsByClassName("PSEDITBOX");
+    if (letterCode[0]) {
     for(var i = 0; i < alphaCodes.length; i++){
-	
-	if (letterCode[0].value == alphaCodes[i]) {
-	    letterCode[0].value = numericCodes[i];
-	    //console.log("if + " + alphaCodes[i]);
-	    //console.log("if + " + numericCodes[i]);
+        if (letterCode[0].value == alphaCodes[i]) {
+            letterCode[0].value = numericCodes[i];
 
-	    console.log("if + " + alphaCodes[i]);
-	    console.log("if + " + numericCodes[i]);
-
-	}
+        }
+    }
     }
 }
 
