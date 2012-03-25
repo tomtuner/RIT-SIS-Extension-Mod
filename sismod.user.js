@@ -3,6 +3,7 @@
 // @description        Adds enhancements to the RIT SIS system such as an RIT color theme
 // @namespace          demeo.rit.sismod
 // @author             Thomas DeMeo
+// @author			   Dan Fenton
 // @include            http://mycampus.rit.edu/*
 // @include            https://mycampus.rit.edu/*
 // @icon               http://development.garnishmobile.com/TriSigma/background_tile.jpg
@@ -16,6 +17,7 @@ var numericCodes = new Array("0101", "0102", "0103", "0104", "0105", "0106", "01
 var ritOrange = "#F36E21";
 var ritBrown = "#513127";
 var bgColor = "#F8F7ED";
+var boxBGColor = "#CBCAAC";
 
 loadFunc = function loadFunc() {
     sisColorMod();
@@ -29,16 +31,7 @@ loadFunc = function loadFunc() {
 }
 
 function sisColorMod() {
-    var headers = document.getElementsByClassName("PSGROUPBOXLABEL");
-    if (headers) 
-	{
-		for (i = 0; i < headers.length; i++) {
-			//console.log(headers[i].backgroundColor);
-			headers[i].style.backgroundColor = ritOrange;
-			headers[i].style.borderColor = ritBrown;
-		}
-    }
-	
+    var headers = document.getElementsByClassName("PSGROUPBOXLABEL");	
 	var body = document.getElementsByClassName("PSPAGECONTAINER");
 	if(body)
 	{
@@ -66,15 +59,40 @@ function sisColorMod() {
 		}
 		
 	}
-
+    var headers = document.getElementsByClassName("PSGROUPBOXLABEL");
     if (headers) {
 	for (i = 0; i < headers.length; i++) {
 	    console.log(headers[i].backgroundColor);
-	    headers[i].style.backgroundColor = "#F36E21";
-	    headers[i].style.borderColor = "#513127";
+	    headers[i].style.backgroundColor = ritOrange;
+	    headers[i].style.borderColor = ritBrown;
 	}
 	//console.log("SIS Mod");
     }
+	
+	var pageHeader = document.getElementById("DERIVED_CLSRCH_SSR_CLASS_LBL_LBL");
+	if(pageHeader.innerText == "Enter Search Criteria"){
+		pageHeader.innerText = "Search For Classes";
+	}
+	pageHeader.style.color = ritBrown;
+	
+
+	var institution = document.getElementById("win0div$ICField46");
+	if(institution){
+		institution.parentNode.removeChild(institution);
+	}
+	
+	var addSrcCrit = document.getElementsByClassName("SSSMSGSUCCESSFRAME");
+	var addSrcCritFrame = document.getElementsByClassName("SSSMSGSUCCESSFRAMEWBO");
+	if(addSrcCrit)
+	{
+		for(i = 0; i < addSrcCrit.length; i++)
+		{
+			addSrcCrit[i].style.backgroundColor = boxBGColor;
+			addSrcCritFrame[i].style.backgroundColor = boxBGColor;
+			addSrcCritFrame[i].style.borderColor = ritBrown;
+		}
+	}
+	
 }
 
 function removeAlpha() {
@@ -135,4 +153,4 @@ function convertLetterCodeToNumber() {
     }
 }
 
-setInterval("loadFunc()", 100);
+setInterval("loadFunc()", 500);
