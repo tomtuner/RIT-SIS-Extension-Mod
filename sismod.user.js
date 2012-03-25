@@ -142,7 +142,10 @@ function sisColorMod() {
 					}
 				}else {
                     var searchBar = document.getElementsByClassName("PSLEVEL1GRIDLABEL");
-                    searchBar[0].style.backgroundColor = ritBrown;
+                    for(i = 0; i < searchBar.length; i++)
+					{
+						searchBar[i].style.backgroundColor = ritBrown;
+					}
                 }
 			}
 	}
