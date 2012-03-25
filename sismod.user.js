@@ -46,65 +46,46 @@ function validateNumberInput(evt) {
 
 function changeInputLimit() {
     var courseNumberInput = document.getElementById("CLASS_SRCH_WRK2_CATALOG_NBR$72$");
-    courseNumberInput.setAttribute('maxlength', '3');
-    
-    courseNumberInput.onkeypress = validateNumberInput;
+    if(courseNumberInput)
+	{	
+		courseNumberInput.setAttribute('maxlength', '3');    
+		courseNumberInput.onkeypress = validateNumberInput;
+	}
+	
     var minUnitInput = document.getElementById("CLASS_SRCH_WRK2_UNITS_MINIMUM");
-    minUnitInput.onkeypress = validateNumberInput;
-    minUnitInput.setAttribute('maxlength', '1');
-
+    if(minUnitInput)
+	{
+		minUnitInput.onkeypress = validateNumberInput;
+		minUnitInput.setAttribute('maxlength', '1');
+	}
+	
     var maxUnitInput = document.getElementById("CLASS_SRCH_WRK2_UNITS_MAXIMUM");
-    maxUnitInput.onkeypress = validateNumberInput;
-    maxUnitInput.setAttribute('maxlength', '1');
-    
+    if(maxUnitInput)
+	{
+		maxUnitInput.onkeypress = validateNumberInput;
+		maxUnitInput.setAttribute('maxlength', '1');
+    }
+	
     var classNumberInput = document.getElementById("CLASS_SRCH_WRK2_CLASS_NBR$112$");
-    classNumberInput.onkeypress = validateNumberInput;
-
+    if(classNumberInput)
+	{
+		classNumberInput.onkeypress = validateNumberInput;
+	}
 }
 
-function unitsMouseOver() {
-    var units = document.getElementById("CLASS_SRCH_WRK2_UNITS_MINIMUM_LBL");
-    if (units) {
-        var credits = document.createElement("span");
-        credits.setAttribute('id', 'credits');
-        credits.style.backgroundColor = "yellow";
-        credits.style.opacity = "60%";
-        credits.style.margin = "5px";
-        credits.style.position = "relative";
-        credits.style.left = "-140px";
-        credits.style.padding = "2px";
-        credits.style.border = "1px solid black";
-        credits.style.color = "black";
-        credits.style.fontWeight = "normal";
-        credits.innerText = "Credits are now Units";
-        var br = document.createElement("br");
-        br.setAttribute('id', 'break');
-        units.appendChild(br);
-        units.appendChild(credits);
-    }
-}
 
-function unitsMouseOut() {
-    var credits = document.getElementById("credits");
-    var br = document.getElementById("break");
-    if (credits) {
-        credits.parentNode.removeChild(credits);
-    }
-    if (br) {
-        br.parentNode.removeChild(br);
-    }
-}
+
 
 function addMouseOver() {
     var units = document.getElementById("CLASS_SRCH_WRK2_UNITS_MINIMUM_LBL");
     var maxUnits = document.getElementById("CLASS_SRCH_WRK2_UNITS_MAXIMUM_LBL");
     if (units) {
-        units.onmouseover = unitsMouseOver;
-        units.onmouseout = unitsMouseOut;
+		units.style.cursor = "help";
+		units.setAttribute('title',"Credits are now Units");
     }
     if (maxUnits) {
-        maxUnits.onmouseover = unitsMouseOver;
-        maxUnits.onmouseout = unitsMouseOut;
+		maxUnits.style.cursor = "help";
+		maxUnits.setAttribute('title',"Credits are now Units");
     }
     
 }
@@ -149,13 +130,15 @@ function sisColorMod() {
         }
         	var page = document.getElementById("PAGECONTAINER");
            	var pageHeader = document.getElementById("DERIVED_CLSRCH_SSR_CLASS_LBL_LBL");
-            if(!(pageHeader.innerText == "Search Results")){
-                if (page) {
-                    page.style.cssText = "margin: 0 auto";
-                    page.style.backgroundColor = bgColor;          
-                    page.style.width = "600px";
-                }
-            }
+			if(pageHeader){
+				if(!(pageHeader.innerText == "Search Results")){
+					if (page) {
+						page.style.cssText = "margin: 0 auto";
+						page.style.backgroundColor = bgColor;          
+						page.style.width = "600px";
+					}
+				}
+			}
 	}
 	
 	var labels = document.getElementsByClassName("PSEDITBOXLABEL");
@@ -197,13 +180,33 @@ function sisColorMod() {
 	
 	var addSrcCrit = document.getElementsByClassName("SSSMSGSUCCESSFRAME");
 	var addSrcCritFrame = document.getElementsByClassName("SSSMSGSUCCESSFRAMEWBO");
+	var click = document.getElementById("DERIVED_CLSRCH_SSR_EXPAND_COLLAPS$81$");
+	if(click){
+		click.style.color = "#FFFFFF";
+	}
+	
 	if(addSrcCrit)
 	{
 		for(i = 0; i < addSrcCrit.length; i++)
 		{
-			addSrcCrit[i].style.backgroundColor = boxBGColor;
-			addSrcCritFrame[i].style.backgroundColor = boxBGColor;
+			addSrcCrit[i].style.backgroundColor = ritBrown;
+			addSrcCritFrame[i].style.backgroundColor = ritBrown;
 			addSrcCritFrame[i].style.borderColor = ritBrown;
+		}
+	}
+	
+	
+	
+	var tableHeader = document.getElementsByClassName("PSLEVEL1GRIDCOLUMNHDR");
+	if(tableHeader)
+	{
+		for(i = 0; i < tableHeader.length; i++)
+		{
+			tableHeader[i].style.color = "#545446";
+			tableHeader[i].style.borderRightWidth = "0px";
+			tableHeader[i].style.borderTopWidth = "0px";
+			tableHeader[i].style.borderBottomWidth = "0px";
+			tableHeader[i].style.backgroundColor = "#DFDECB";
 		}
 	}
 	
