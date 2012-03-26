@@ -1,12 +1,15 @@
 // ==UserScript==
 // @name               RIT SIS Modifications
-// @description        Adds enhancements to the RIT SIS system such as an RIT color theme
+// @description        Adds enhancements to the RIT SIS system such as an RIT color theme.
 // @namespace          demeo.rit.sismod
 // @author             Thomas DeMeo
 // @author			   Dan Fenton
+
 // @include            http://mycampus.rit.edu/*
 // @include            https://mycampus.rit.edu/*
 // @icon               http://development.garnishmobile.com/TriSigma/background_tile.jpg
+// @downloadURL        https://people.rit.edu/~tjd9961/RIT_SIS/sismod.user.js
+// @updateURL          https://people.rit.edu/~tjd9961/RIT_SIS/sismod.user.js
 // @version            0.1
 // ==/UserScript==
 
