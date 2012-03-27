@@ -26,7 +26,7 @@ var boxBGColor = "#CBCAAC";
 
 var zoomSearchImageURL = "https://mycampus.rit.edu/cs/sasrch/cache/PT_PROMPT_LOOKUP_1.gif";
 
-loadFunc = function loadFunc() {
+function loadFunc() {
     sisColorMod();
     removeAlpha();
     addLogos();
@@ -55,28 +55,35 @@ function changeInputLimit() {
     var courseNumberInput = document.getElementById("CLASS_SRCH_WRK2_CATALOG_NBR$72$");
     if(courseNumberInput)
 	{	
-		courseNumberInput.setAttribute('maxlength', '3');    
-		courseNumberInput.onkeypress = validateNumberInput;
+		courseNumberInput.setAttribute('maxlength', '3');
+		courseNumberInput.addEventListener('keypress', validateNumberInput, true);
+		//courseNumberInput.onkeypress = validateNumberInput;
 	}
 	
     var minUnitInput = document.getElementById("CLASS_SRCH_WRK2_UNITS_MINIMUM");
     if(minUnitInput)
 	{
-		minUnitInput.onkeypress = validateNumberInput;
+		//minUnitInput.onkeypress = validateNumberInput;
 		minUnitInput.setAttribute('maxlength', '1');
+		minUnitInput.addEventListener('keypress', validateNumberInput, true);
+
 	}
 	
     var maxUnitInput = document.getElementById("CLASS_SRCH_WRK2_UNITS_MAXIMUM");
     if(maxUnitInput)
 	{
-		maxUnitInput.onkeypress = validateNumberInput;
+		//maxUnitInput.onkeypress = validateNumberInput;
 		maxUnitInput.setAttribute('maxlength', '1');
+		maxUnitInput.addEventListener('keypress', validateNumberInput, true);
+
     }
 	
     var classNumberInput = document.getElementById("CLASS_SRCH_WRK2_CLASS_NBR$112$");
     if(classNumberInput)
 	{
-		classNumberInput.onkeypress = validateNumberInput;
+		//classNumberInput.onkeypress = validateNumberInput;
+		classNumberInput.addEventListener('keypress', validateNumberInput, true);
+
 	}
 }
 
@@ -299,4 +306,4 @@ function convertLetterCodeToNumber() {
     }
 }
 
-setInterval("loadFunc()", 500);
+setInterval(loadFunc, 200);
