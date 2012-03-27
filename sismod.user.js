@@ -94,6 +94,19 @@ function addMouseOver() {
 		maxUnits.style.cursor = "help";
 		maxUnits.setAttribute('title',"Credits are now Units");
     }
+    var classStatusImage = document.getElementsByClassName("SSSIMAGECENTER");
+    
+	for(i = 0; i < classStatusImage.length; i++) {
+
+        if (classStatusImage[i]) {
+            classStatusImage[i].style.cursor = "help"
+            if (classStatusImage[i].alt == "Open") {
+                classStatusImage[i].setAttribute('title', "Class is OPEN");
+            }
+        
+            // Add Checks for class open and wait list here and change the tooltip
+        }
+    }
     
 }
 
