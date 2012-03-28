@@ -170,10 +170,21 @@ function sisColorMod() {
                     searchBar[0].style.backgroundColor = ritBrown;
                     for(i = 0; i < searchBar.length; i++)
 					{
-						searchBar[i].style.backgroundColor = ritBrown;
+						searchBar[i].style.backgroundColor = ritOrange;
 					}
                     var zoomImage = document.getElementsByName("DERIVED_CLSRCH$pt_modal_cntrl$img$0");
                     zoomImage[0].setAttribute('src', zoomSearchImageURL);
+					
+					
+					var subTableHeader = document.getElementsByClassName("PSGRIDTABBACKGROUND");
+					if(subTableHeader)
+					{
+						for(i = 0; i < subTableHeader.length; i++)
+						{
+							subTableHeader[i].style.backgroundColor=ritBrown;
+						}
+					}			
+					
                 }
 			}
 	}
@@ -249,6 +260,35 @@ function sisColorMod() {
 			tableHeader[i].style.backgroundColor = "#DFDECB";
 		}
 	}
+	
+	/* Class Detail Page **************************************************************************
+	***********************************************************************************************
+	***********************************************************************************************/
+	
+	var boxHeaders = document.getElementsByClassName("PAGROUPBOXLABELLEVEL1");
+	if(boxHeaders)
+	{
+		for(i = 0; i < boxHeaders.length; i++)
+		{
+			boxHeaders[i].style.backgroundColor = ritOrange;
+			boxHeaders[i].style.color = ritBrown;
+		}
+	}
+	
+	var table = document.getElementsByClassName("PSLEVEL1GRIDCOLUMNHDR");
+		if(table)
+	{
+		for(i = 0; i < table.length; i++)
+		{
+			table[i].style.backgroundColor = "#DFDECB";
+			table[i].style.color = "#545446";
+			table[i].style.borderRightWidth = "0px";
+			table[i].style.borderTopWidth = "0px";
+			table[i].style.borderBottomWidth = "0px";
+			table[i].style.paddingWidth = "0px";
+		}
+	}
+
 	
 }
 
