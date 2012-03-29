@@ -68,6 +68,11 @@ function constructHeader() {
 		document.body.insertBefore(fragment, document.body.childNodes[0]);
 		setHeaderStyle();
 	}
+	// Remove "Search for Classes" header
+	var searchClasses = document.getElementById("DERIVED_CLSRCH_SS_TRANSACT_TITLE");
+    if (searchClasses) {
+        searchClasses.innerText = "";
+    }
 }
 
 function setHeaderStyle() {
@@ -174,10 +179,6 @@ function addMouseOver() {
 }
 
 function addLogos() {
-    var searchClasses = document.getElementById("DERIVED_CLSRCH_SS_TRANSACT_TITLE");
-    if (searchClasses) {
-        searchClasses.innerText = "";
-    }
     var ritImage = document.getElementById('RIT_logo');
     if (!ritImage) {
         ritImage = document.createElement("img");
