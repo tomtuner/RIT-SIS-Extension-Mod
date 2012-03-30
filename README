@@ -14,16 +14,18 @@ will result in the forceful laws of nature being brought down upon you.
 
 **Current features to date**
 
-* Allows users to search by subject name, by converting alpha code to numeric code
-* Added RIT Logo
-* Updated color theme to match RIT
-* Enhanced the layout of the pages (centered)
-* Formatted numerical input fields to correct sizes
-* Removed unneccesary verbiage
-* Added mouseover affect to describe new terminology
+* Allows users to search by subject name, by converting alpha code to numeric code.
+* Added RIT Logo.
+* Updated color theme to match RIT.
+* Enhanced the layout of the pages (centered).
+* Formatted numerical input fields to correct sizes.
+* Removed unneccesary verbiage.
+* Added mouseover affect to describe new terminology.
 
 **Desired future features**
 
-* Correct formatting for "Aditional Search Criteria" link of page load
-* Integrate Rate My Professor Scores when viewing classes/instructors
-* Matching teacher search to subject selection
+* Correct formatting for "Aditional Search Criteria" link of page load.
+* Integrate Rate My Professor Scores when viewing classes/instructors.
+* Matching teacher search to subject selection.
+* Add Google Analytics Integration?
+* Change logo to a standard RIT header.
