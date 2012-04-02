@@ -3,7 +3,7 @@
 // @description        Adds enhancements to the RIT SIS system such as an RIT color theme.
 // @namespace          demeo.rit.sismod
 // @author             Thomas DeMeo
-// @author			   Dan Fenton
+// @author             Dan Fenton
 
 // @include            http://mycampus.rit.edu/*
 // @include            https://mycampus.rit.edu/*
@@ -15,6 +15,195 @@
 // @updateURL          https://people.rit.edu/~tjd9961/RIT_SIS/sismod.user.js
 // @version            0.1
 // ==/UserScript==
+
+// Code for updating the script
+
+// Code for Chrome where GM_getValue is not supported, switch to HTML5 storage format for Chrome
+
+if (!this.GM_getValue || (this.GM_getValue.toString && this.GM_getValue.toString().indexOf("not supported")>-1)) {
+    this.GM_getValue=function (key,def) {
+        return localStorage[key] || def;
+    };
+    this.GM_setValue=function (key,value) {
+        return localStorage[key]=value;
+    };
+    this.GM_deleteValue=function (key) {
+        return delete localStorage[key];
+    };
+}
+
+// **COPYRIGHT NOTICE**
+// 
+// I, Richard Gibson, hereby establish my original authorship of this
+// work, and announce its release into the public domain.  I claim no
+// exclusive copyrights to it, and will neither pursue myself (nor
+// condone pursuit by others of) punishment, retribution, or forced
+// payment for its full or partial reproduction in any form.
+// 
+// That being said, I would like to receive credit for this work
+// whenever it, or any part thereof, is reproduced or incorporated into
+// another creation; and would also like compensation whenever revenue
+// is derived from such reproduction or inclusion.  At the very least,
+// please let me know if you find this work useful or enjoyable, and
+// contact me with any comments or criticisms regarding it.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+// 
+// **END COPYRIGHT NOTICE**
+
+(function(){
+
+// constants
+var SCRIPT = {
+	 name: "User Script Updates"
+	,namespace: "http://userscripts.org/people/336"
+	,source: "http://people.rit.edu/~tjd9961/RIT_SIS"      // script homepage/description URL
+			+ "/"
+	,identifier: "http://people.rit.edu/~tjd9961/RIT_SIS"  // script URL
+			+ "/sismod.user.js"
+	,meta: "http://people.rit.edu/~tjd9961/RIT_SIS"        // metadata URL
+			+ "/sismod.user.js"
+	,version: "0.1"                        // version (this should ALWAYS match the version number at the top)
+	,date: "2012-04-02"                    // update date
+};
+// test for dependencies
+var UPDATE = SCRIPT.namespace + ' ' + SCRIPT.identifier;
+try {
+	GM_setValue(UPDATE, 1);
+	if (GM_getValue(UPDATE)) {
+		UPDATE = {key: UPDATE, get: GM_getValue, set: GM_setValue};
+	}
+	else {
+		throw {};
+	}
+}
+catch(x){
+	UPDATE = {
+		 set: function(key, value){ try{ localStorage.setItem(key, value); }catch(x){} }
+		,get: function(key, varDefault) {
+			try {
+				var stored = localStorage.getItem(key);
+				if(stored===null){ return varDefault; }
+				return stored;
+			}
+			catch(x) {
+				return varDefault;
+			}
+		}
+	};
+}
+UPDATE = {
+	 SCRIPT: SCRIPT
+	,defaults: {checkDays: 3, version: SCRIPT.version, date: SCRIPT.date, name: SCRIPT.name,
+			lastCheck: typeof(GM_xmlhttpRequest)!='undefined' ? 0 : (new Date()).getTime()}
+	,getValue: UPDATE.get
+	,setValue: UPDATE.set
+	,HttpRequest: (typeof(GM_xmlhttpRequest)!='undefined' && GM_xmlhttpRequest) || function(){}
+	,ready: false
+	,init: function() {
+		if(this.ready){ return; }
+		this.ready = true;
+	 	for (var name in this.defaults) {
+	 		if(name in this){ delete this.defaults[name]; }
+	 		else{ this[name] = this.getValue('_UPDATE_' + name, this.defaults[name]); }
+	 	}
+	 	for (var p in {checkDays:0, lastCheck:0}) { delete this.defaults[p]; }
+	}
+	,check: function(fnOnNewer, fnIsNewer, blnForce) {
+		this.init();
+		var interval = Math.max(parseFloat(this.checkDays) * 24 * 60 * 60 * 1000, 0) || Infinity;
+		var diff = (new Date()) - parseInt(this.lastCheck,10);
+		if(!blnForce && !this.isNewer(this, this.SCRIPT, fnIsNewer) && !(diff > interval)){ return false; }
+		if (blnForce || (diff > interval)) {
+			var t = this;
+			return this.HttpRequest({method: 'GET', url: this.SCRIPT.meta || this.SCRIPT.identifier, onload: function(r){
+				t.setValue('_UPDATE_' + 'lastCheck', t.lastCheck = '' + (new Date()).getTime());
+				t.parse(r.responseText, [fnOnNewer, fnIsNewer, false]);
+			}});
+		}
+		try{ fnOnNewer(this, this.SCRIPT); }catch(x){}
+	}
+	,parse: function(strResponse, arrCheckArgs) {
+		var re = /\/\/\s*(?:@(\S+)\s+(.*?)\s*(?:$|\n)|(==\/UserScript==))/gm, match = true, name;
+		while (match && (match = re.exec(strResponse))) {
+			if(match[3]){ match = null; continue; }
+			name = match[1];
+			if(name in this.defaults){ this.setValue('_UPDATE_' + name, this[name] = match[2]); }
+		}
+		this.check.apply(this, arrCheckArgs || []);
+	}
+	,isNewer: function(objUpdate, objScript, fnIsNewer) {
+		if(!objUpdate){ objUpdate = this; }
+		if(!objScript || (objUpdate.date > objScript.date)){ return true; }
+		try {
+			return fnIsNewer(objUpdate, objScript);
+		}
+		catch (x) {
+			return (!(objUpdate.date < objScript.date) && (objUpdate.version != objScript.version));
+		}
+	}
+};
+var UNSAFE = ((typeof unsafeWindow) != 'undefined'
+	? unsafeWindow
+	: ((typeof window) != 'undefined'
+		? window
+		: (function(){return this;})()
+	)
+);
+
+function showUpdate(objUpdate, objScript) {
+	if(UNSAFE.self !== UNSAFE.top){ return; }
+	if(arguments.length < 2){ return UPDATE.check(arguments.callee); }
+	var title = objUpdate.name + ' ' + objUpdate.version + ', released ' + objUpdate.date;
+	var style = [
+		 'position:absolute; position:fixed; z-index:9999;'
+		,'bottom:0; right:0;'
+		,'border:1px solid black; padding:2px 2px 2px 0.5ex;'
+		,'background:#dddddd; font-weight:bold; font-size:small;'
+	].join(' ');
+	document.body.appendChild($E('div', {title: title, style: style}
+		,$E('a', {href: objScript.source, style: 'color:blue;'}, objScript.name + ' ')
+		,$E('a', {href: objScript.identifier, style: 'color:red;'}, 'updated!')
+		,$E('button', {onclick: 'return this.parentNode.parentNode.removeChild(this.parentNode) && false;',
+				style: 'margin-left:1ex;font-size:50%;vertical-align:super;'}, '\u2573')
+	));
+}
+
+var $E = function createElement (strName, objAttributes, varContent /*, varContent, ...*/) {
+    var el = document.createElement(strName);
+    try{
+        for (var attribute in objAttributes) {
+            el.setAttribute(attribute, objAttributes[attribute]);
+        }
+    }catch(x){}
+    if (arguments.length > 3 || (!/^(string|undefined)$/.test(typeof(varContent)) && !(varContent instanceof Array))) {
+    	varContent = Array.prototype.slice.call(arguments, 2);
+    }
+    if (varContent instanceof Array) {
+        for (var L = varContent.length, i = 0, c; i < L; i++) {
+            c = varContent[i];
+            el.appendChild(c && typeof(c) == 'object' && 'parentNode' in c
+            		? c : document.createTextNode(c));
+        }
+    }
+    else if (varContent) {
+    	el.innerHTML = varContent;
+    }
+    return el;
+}
+
+if ((window.document || {}).readyState === 'complete') {
+	showUpdate();
+}
+else {
+	window.addEventListener("load", showUpdate, true);
+}
+
+})();
+
+// End of Update Code
 
 var alphaCodes = new Array("ACCT", "MGMT", "ESCB", "FINC", "MKTG", "DECS", "BLEG", "MGIS", "INTB", "CFIN", "EEEE", "EGEN", "ISEE", "MECE", "MCEE", "CMPE", "CQAS", "MCSE", "CHME", "BIME", "LADA", "CRIM", "ENGL", "ENGL", "FNRT", "HUMA", "HIST", "STSO", "PHIL", "ANTH", "ECON", "SOCS", "POLS", "PSYC", "SOCI", "GENS", "ITDA", "ITDL", "PUBL", "WGST", "INGS", "MLAR", "MLAS", "MLCH", "MLFR", "MLGR", "MLIT", "MLJP", "MLPO", "MLRU", "MLSP", "URCS", "SPSY", "MCLS", "CRST", "COMM", "HONL", "ENGT", "PACK", "CVET", "EEET", "MCET", "TCET", "MFET", "CPET", "HSPS", "NUTR", "FOOD", "HOTL", "TRAV", "HSPT", "SERQ", "HRDE", "INST", "ESHS", "FCMG", "SFTE", "DEMT", "HLTH", "ROTC", "AERO", "EMET", "ACBS", "BUSI", "QLTM", "GLSO", "TCOM", "MTSC", "GEOT", "SECU", "CMDS", "PROF", "NACC", "NAST", "NBUS", "NACN", "NACS", "NACT", "NCAR", "NCIM", "NSVP", "MSSE", "NCAR", "NAIS", "NGRD", "NGRP", "INTP", "NLST", "NCOM", "NHSS", "NHSS", "NHSS", "NENG", "NMTH", "NSCI", "NASL", "NCAR", "NCAD", "NAUT", "BIOL", "BIOG", "BIOG", "ENVS", "CHMA", "CHMB", "CHEM", "CHMG", "CHMI", "CHMO", "CHMP", "CHEN", "MATH", "STAT", "PHYS", "GSCI", "CMPM", "CHMC", "MEDS", "MTSE", "CHPO", "DMSO", "PHYA", "PMED", "CLRS", "IMGS", "HOSM", "ASTP", "BIOE", "ITDS", "WVAR", "WCLB", "WHWS", "WDAN", "WFIT", "WHLS", "WREC", "WINT", "WMAR", "WMIL", "FACW", "ELCE", "CRPP", "ACSC", "FYEP", "ITDI", "NMDE", "GRDE", "ARED", "ARDE", "FDTN", "CMGD", "INDE", "ILLS", "ILLM", "FNAS", "IDDE", "ADGR", "ARTH", "CCER", "CGLS", "CMTJ", "CWTD", "CWFD", "CGEN", "CEXT", "PHFA", "PHBM", "SOFA", "PHGR", "PHAR", "IMSM", "IMPT", "PRTM", "PRTT", "GMEP", "NMEP", "USPC", "CMPR", "ISTE", "CSCI", "ISTE", "CSCI", "MEDI", "SWEN", "SWEN", "CINT", "CISC", "NSSA", "NSSA", "IGME", "IGME", "ISUS");
 var numericCodes = new Array("0101", "0102", "0103", "0104", "0105", "0106", "0110", "0112", "0113", "0116", "0301", "0302", "0303", "0304", "0305", "0306", "0307", "0308", "0309", "0310", "0500", "0501", "0502", "0504", "0505", "0506", "0507", "0508", "0509", "0510", "0511", "0512", "0513", "0514", "0515", "0517", "0519", "0520", "0521", "0522", "0524", "0525", "0525", "0525", "0525", "0525", "0525", "0525", "0525", "0525", "0525", "0526", "0527", "0531", "0533", "0535", "0550", "0606", "0607", "0608", "0609", "0610", "0614", "0617", "0618", "0619", "0620", "0621", "0622", "0623", "0624", "0625", "0626", "0627", "0630", "0632", "0633", "0634", "0635", "0640", "0650", "0660", "0680", "0681", "0684", "0685", "0688", "0692", "0693", "0696", "0697", "0699", "0801", "0804", "0804", "0805", "0805", "0805", "0806", "0813", "0826", "0835", "0853", "0855", "0855", "0855", "0875", "0879", "0880", "0880", "0881", "0882", "0883", "0884", "0885", "0886", "0887", "0890", "0891", "1001", "1004", "1005", "1006", "1008", "1009", "1010", "1011", "1012", "1013", "1014", "1015", "1016", "1016", "1017", "1018", "1022", "1023", "1026", "1028", "1029", "1030", "1032", "1040", "1050", "1051", "1055", "1060", "1070", "1099", "1103", "1106", "1107", "1108", "1109", "1110", "1111", "1112", "1113", "1114", "1115", "1701", "1715", "1716", "1720", "2001", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2019", "2020", "2021", "2035", "2037", "2039", "2040", "2041", "2042", "2043", "2044", "2045", "2046", "2060", "2061", "2065", "2066", "2067", "2068", "2076", "2080", "2081", "2082", "2083", "3002", "4001", "4002", "4003", "4004", "4005", "4006", "4010", "4011", "4020", "4040", "4050", "4055", "4080", "4085", "5001");
