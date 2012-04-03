@@ -220,11 +220,10 @@ var boxBGColor = "#CBCAAC";
 
 var zoomSearchImageURL = "https://mycampus.rit.edu/cs/sasrch/cache/PT_PROMPT_LOOKUP_1.gif";
 var wikiFAQURL = "https://wiki.rit.edu/display/itskb/PeopleSoft+Frequently+Asked+Questions";
+var ritURL = "http://www.rit.edu";
 
 function loadFunc() {
     sisColorMod();
-    removeAlpha();
-    //addLogos();
     addMouseOver();
     changeInputLimit();
   //  fixExpandedSearch();
@@ -234,6 +233,7 @@ function loadFunc() {
 
     convertLetterCodeToNumber();
 	constructHeader();
+    constructFooter();
 }
 
 function create(htmlStr) {
@@ -293,6 +293,45 @@ function setHeaderStyle() {
 		rightHeader.style.marginTop = '20px';
 	}
 
+}
+
+function constructFooter() {
+	if (!(document.getElementById('enhance_footer'))) {
+		var fragment = create('<div id="footer_bar">' +
+								'<div id="enhance_footer">' +
+									'<div id="center_footer">' +
+										'<span>Improved and enchanced by the <a id="RIT_URL" href="' + ritURL + 
+                                        '" title="RIT">RIT</a> community.' +
+									'</div>' +
+								'</div></div>');
+		
+		// You can use native DOM methods to insert the fragment:
+		document.body.appendChild(fragment);
+		setFooterStyle();
+	}
+}
+
+function setFooterStyle() {
+	/*var footer = document.getElementById('footer_bar');
+	if (footer) {
+		footer.style.backgroundColor = ritOrange;
+		footer.style.height = "65px";
+	}*/
+	
+	var centerFooter = document.getElementById('center_footer');
+	if (centerFooter) {
+		centerFooter.style.cssText = "margin: 0 auto";
+		centerFooter.style.width = "275px";
+        centerFooter.style.color = "gray";
+        centerFooter.style.fontSize = "0.75em";
+	}
+    
+    var ritURLId = document.getElementById('RIT_URL');
+	if (ritURLId) {
+        ritURLId.style.color = ritOrange;
+        ritURLId.style.fontSize = "1.0em";
+        ritURLId.style.textDecoration = "none";
+	}
 }
 
 function validateNumberInput(evt) {
@@ -542,17 +581,6 @@ function sisColorMod() {
 
 	
 }
-
-function removeAlpha() {
-    var alphaTable = document.getElementsByClassName("PSFRAME");
-    if (!alphaTable) {
-	alphaTable[0].style.display = 'none';
-	//console.log("Remove Alpha");
-
-	console.log("Remove Alpha");
-
-    }
-}
 /*
 function fixExpandedSearch() {
     var advancedSearch = document.getElementById("win0divDERIVED_CLSRCH_SSR_EXPAND_COLLAPS$80$");
@@ -586,14 +614,12 @@ function selectZeroDepartmentNumber() {
 }
 
 function convertLetterCodeToNumber() {
-    var letterCode = document.getElementsByClassName("PSEDITBOX");
-    if (letterCode[0]) {
-    for(var i = 0; i < alphaCodes.length; i++){
-        if (letterCode[0].value == alphaCodes[i]) {
-            letterCode[0].value = numericCodes[i];
-
+    var letterCode = document.getElementById("CLASS_SRCH_WRK2_SUBJECT$68$");
+    if (letterCode) {
+        if (letterCode.value == alphaCodes[i]) {
+            letterCode.value = numericCodes[i];
         }
-    }
+        
     }
 }
 
