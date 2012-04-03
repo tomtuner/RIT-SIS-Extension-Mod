@@ -7,6 +7,8 @@
 
 // @include            http://mycampus.rit.edu/*
 // @include            https://mycampus.rit.edu/*
+// @include            http://mycampustest.rit.edu/*
+// @include            https://mycampustest.rit.edu/*
 // @include            http://mycampustest2.rit.edu/*
 // @include            https://mycampustest2.rit.edu/*
 
@@ -57,16 +59,16 @@ if (!this.GM_getValue || (this.GM_getValue.toString && this.GM_getValue.toString
 
 // constants
 var SCRIPT = {
-	 name: "User Script Updates"
-	,namespace: "http://userscripts.org/people/336"
+	 name: "RIT SIS Modifications"
+	,namespace: "demeo.rit.sismod"
 	,source: "http://people.rit.edu/~tjd9961/RIT_SIS"      // script homepage/description URL
-			+ "/"
+			+ "/sismod.user.js"
 	,identifier: "http://people.rit.edu/~tjd9961/RIT_SIS"  // script URL
 			+ "/sismod.user.js"
 	,meta: "http://people.rit.edu/~tjd9961/RIT_SIS"        // metadata URL
 			+ "/sismod.user.js"
 	,version: "0.1"                        // version (this should ALWAYS match the version number at the top)
-	,date: "2012-04-02"                    // update date
+	,date: "04-02-2012"                    // update date
 };
 // test for dependencies
 var UPDATE = SCRIPT.namespace + ' ' + SCRIPT.identifier;
@@ -161,11 +163,11 @@ function showUpdate(objUpdate, objScript) {
 		 'position:absolute; position:fixed; z-index:9999;'
 		,'bottom:0; right:0;'
 		,'border:1px solid black; padding:2px 2px 2px 0.5ex;'
-		,'background:#dddddd; font-weight:bold; font-size:small;'
+		,'background:#513127; font-weight:bold; font-size:small;'
 	].join(' ');
 	document.body.appendChild($E('div', {title: title, style: style}
-		,$E('a', {href: objScript.source, style: 'color:blue;'}, objScript.name + ' ')
-		,$E('a', {href: objScript.identifier, style: 'color:red;'}, 'updated!')
+		,$E('a', {href: objScript.source, style: 'color:#F36E21;'}, objScript.name + ' ')
+		,$E('a', {href: objScript.identifier, style: 'color:white;'}, 'updated!')
 		,$E('button', {onclick: 'return this.parentNode.parentNode.removeChild(this.parentNode) && false;',
 				style: 'margin-left:1ex;font-size:50%;vertical-align:super;'}, '\u2573')
 	));
@@ -520,7 +522,7 @@ function sisColorMod() {
 		for(i = 0; i < boxHeaders.length; i++)
 		{
 			boxHeaders[i].style.backgroundColor = ritOrange;
-			boxHeaders[i].style.color = ritBrown;
+			//boxHeaders[i].style.color = ritBrown;
 		}
 	}
 	
