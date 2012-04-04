@@ -162,12 +162,13 @@ function showUpdate(objUpdate, objScript) {
 	var style = [
 		 'position:absolute; position:fixed; z-index:9999;'
 		,'bottom:0; right:0;'
-		,'border:1px solid black; padding:2px 2px 2px 0.5ex;'
-		,'background:#513127; font-weight:bold; font-size:small;'
+		,'border:1px solid black; padding:10px 10px 10px 10px;'
+		,'background:white; font-weight:bold; font-size:small;'
+        ,'box-shadow: 0 0 3px black; border-top-left-radius:5px;'
 	].join(' ');
 	document.body.appendChild($E('div', {title: title, style: style}
-		,$E('a', {href: objScript.source, style: 'color:#F36E21;'}, objScript.name + ' ')
-		,$E('a', {href: objScript.identifier, style: 'color:white;'}, 'updated!')
+		,$E('a', {href: objScript.source, style: 'color:#513127;'}, objScript.name + ' ')
+		,$E('a', {href: objScript.identifier, style: 'color:#F36E21;'}, 'updated!')
 		,$E('button', {onclick: 'return this.parentNode.parentNode.removeChild(this.parentNode) && false;',
 				style: 'margin-left:1ex;font-size:50%;vertical-align:super;'}, '\u2573')
 	));
@@ -222,6 +223,9 @@ var zoomSearchImageURL = "https://mycampus.rit.edu/cs/sasrch/cache/PT_PROMPT_LOO
 var wikiFAQURL = "https://wiki.rit.edu/display/itskb/PeopleSoft+Frequently+Asked+Questions";
 var ritURL = "http://www.rit.edu";
 
+var githubSuggestionURL = "https://github.com/tomtuner/RIT-SIS-Extension-Mod/wiki";
+var githubIssueURL = "https://github.com/tomtuner/RIT-SIS-Extension-Mod/issues";
+
 function loadFunc() {
     sisColorMod();
     addMouseOver();
@@ -230,10 +234,12 @@ function loadFunc() {
     //selectZeroDepartmentNumber();
 
    // selectZeroDepartmentNumber();
-
+   
+    
     convertLetterCodeToNumber();
 	constructHeader();
     constructFooter();
+    constructFeedbackBox();
 }
 
 function create(htmlStr) {
@@ -246,6 +252,57 @@ function create(htmlStr) {
     return frag;
 }
 
+function constructFeedbackBox() {
+	if (!(document.getElementById('feedback_box'))) {
+		var fragment = create('<div id="feedback_box">' +
+									'<div id="top_feedback">' +
+										'<span>Have a <a class="feedback_url" target="_blank" href="' + githubSuggestionURL + '" title="Suggestion Reporting">suggestion?</a></span>' +
+									'</div>' +
+									'<div id="bottom_feedback">' +
+										'<span>Submit an <a class="feedback_url" target="_blank" href="' + githubIssueURL + '" title="Issue Reporting">issue or bugfix</a></span>' +
+									'</div>' +
+								'</div></div>');
+		
+		// You can use native DOM methods to insert the fragment:
+		document.body.appendChild(fragment);
+		setFeedbackBoxStyle();
+	}
+}
+
+function setFeedbackBoxStyle() {
+	var feedback = document.getElementById('feedback_box');
+	if (feedback) {
+        feedback.style.cssText = "position:absolute; position:fixed; z-index:9999;left: 0; bottom: 0;";
+		feedback.style.backgroundColor = "white";
+        feedback.style.border = "1px solid black";
+        feedback.style.padding = "10px 10px 10px 10px";
+        feedback.style.boxShadow = "0 0 3px black";
+        feedback.style.borderTopRightRadius = "5px";
+        feedback.style.fontSize = "small";
+	}
+	
+	var topFeedback = document.getElementById('top_feedback');
+	if (topFeedback) {
+		//topFeedback.style.cssText = "margin: 0 auto";
+		//topFeedback.style.width = "960px";
+	}
+    
+	var bottomFeedback = document.getElementById('bottom_feedback');
+	if (bottomFeedback) {
+		//bottomFeedback.style.float = "right";
+		//bottomFeedback.style.marginTop = '20px';
+	}
+    
+    var feedbackURLS = document.getElementsByClassName('feedback_url');
+    if (feedbackURLS) {
+        for(i = 0; i < feedbackURLS.length; i++) {
+            feedbackURLS[i].style.color = ritOrange;
+            feedbackURLS[i].style.textDecoration = "none";
+
+        }
+    }
+}
+
 function constructHeader() {
 	if (!(document.getElementById('enhance_header'))) {
 		var fragment = create('<div id="header_bar">' +
@@ -254,7 +311,7 @@ function constructHeader() {
 										'<img id= "RIT_header_logo" width="466" height="49" title="RIT Header Logo" alt="RIT Logo" src=' + ritHeaderLogoURI + ' />' +
 									'</div>' +
 									'<div id="right_header">' +
-										'<a href="' + wikiFAQURL + '" title="SIS FAQ">SIS FAQ</a>' +
+										'<a id="genesis_faq" href="' + wikiFAQURL + '" title="SIS FAQ">SIS FAQ</a>' +
 									'</div>' +
 								'</div></div>');
 		
@@ -292,7 +349,13 @@ function setHeaderStyle() {
 		//rightHeader.style.marginTop = ((header.style.height)/2) + ''; Cannot get the marginTop to be set mathmatically
 		rightHeader.style.marginTop = '20px';
 	}
-
+    
+    var faqLink = document.getElementById('genesis_faq');
+    if (faqLink) {
+        faqLink.style.textDecoration = "none";
+        faqLink.style.color = ritBrown;
+        faqLink.style.fontWeight = "bold";
+    }
 }
 
 function constructFooter() {
