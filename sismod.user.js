@@ -12,6 +12,8 @@
 // @include            http://mycampustest2.rit.edu/*
 // @include            https://mycampustest2.rit.edu/*
 
+// @require            https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
+
 // @icon               http://development.garnishmobile.com/TriSigma/background_tile.jpg
 // @downloadURL        https://people.rit.edu/~tjd9961/RIT_SIS/sismod.user.js
 // @updateURL          https://people.rit.edu/~tjd9961/RIT_SIS/sismod.user.js
@@ -227,6 +229,14 @@ var githubSuggestionURL = "https://github.com/tomtuner/RIT-SIS-Extension-Mod/wik
 var githubIssueURL = "https://github.com/tomtuner/RIT-SIS-Extension-Mod/issues";
 
 function loadFunc() {
+    
+    // Check to see if you are on the main search page
+    if (onFirstPage()) {
+        constructFeedbackBox();
+        uncheckOpenClassesOnly();
+        setCourseCareerDropDown();
+    }
+
     sisColorMod();
     addMouseOver();
     changeInputLimit();
@@ -239,7 +249,34 @@ function loadFunc() {
     convertLetterCodeToNumber();
 	constructHeader();
     constructFooter();
-    constructFeedbackBox();
+}
+
+function setCourseCareerDropDown() {
+    var courseCareerDropDown = document.getElementById("CLASS_SRCH_WRK2_ACAD_CAREER");
+    if (courseCareerDropDown) {
+        courseCareerDropDown.options[3].selected = true;
+    }
+}
+
+function uncheckOpenClassesOnly() {
+    var openClassesCheckBox = document.getElementById("CLASS_SRCH_WRK2_SSR_OPEN_ONLY");
+    if (openClassesCheckBox) {
+        if (openClassesCheckBox.value == "Y") {
+            openClassesCheckBox.click();
+        }
+    }
+
+}
+
+function onFirstPage() {
+    var pageHeader = document.getElementById("DERIVED_CLSRCH_SSR_CLASS_LBL_LBL");
+    if (pageHeader) {
+        if((pageHeader.innerText == "Enter Search Criteria")){
+            console.log(pageHeader.innerText);
+            console.log ("TRUE");
+            return true;
+        }
+	}
 }
 
 function create(htmlStr) {
@@ -677,10 +714,23 @@ function selectZeroDepartmentNumber() {
 }
 
 function convertLetterCodeToNumber() {
+
+    Array.prototype.contains = function (element) {
+        for (var i = 0; i < this.length; i++) {
+            if (this[i] == element) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     var letterCode = document.getElementById("CLASS_SRCH_WRK2_SUBJECT$68$");
     if (letterCode) {
-        if (letterCode.value == alphaCodes[i]) {
-            letterCode.value = numericCodes[i];
+    
+        for (var i = 0; i < alphaCodes.length; i++) {
+            if (letterCode.value == alphaCodes[i]) {
+                letterCode.value = numericCodes[i];
+            }
         }
         
     }
