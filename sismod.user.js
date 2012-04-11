@@ -14,7 +14,7 @@
 // @icon               http://development.garnishmobile.com/TriSigma/background_tile.jpg
 // @downloadURL        https://people.rit.edu/~tjd9961/RIT_SIS/sismod.user.js
 // @updateURL          https://people.rit.edu/~tjd9961/RIT_SIS/sismod.user.js
-// @version            0.1
+// @version            0.1.0
 // ==/UserScript==
 
 // Adds support for jQuery
@@ -33,6 +33,17 @@ function addJQuery(callback) {
 // the guts of this userscript
 function main() {
     jQuery.noConflict();
+    
+	// Google Analytics Code
+	 var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-30757586-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
 
     // Code for updating the script
     // Code for Chrome where GM_getValue is not supported, switch to HTML5 storage format for Chrome
@@ -550,7 +561,7 @@ function main() {
     }
 
     function sisColorMod() {
-        var headers = document.getElementsByClassName("PSGROUPBOXLABEL");
+    
         var body = document.getElementsByClassName("PSPAGECONTAINER");
         if (body) {
             for (i = 0; i < body.length; i++) {
@@ -611,6 +622,8 @@ function main() {
             for (i = 0; i < headers.length; i++) {
                 headers[i].style.backgroundColor = ritOrange;
                 headers[i].style.borderColor = ritBrown;
+                headers[i].style.fontSize = '1.0em';
+                headers[i].style.fontWeight = 'normal';
             }
         }
 
