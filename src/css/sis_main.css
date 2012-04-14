@@ -10,6 +10,12 @@ author:    Thomas DeMeo
 email:     thomasdemeo@gmail.com
 -----------------------------------------------------------------------------*/
 
+$ritOrange-color: #F36E21;
+$ritBrown-color: #513127;
+$bgColor-color: #F8F7ED;
+$boxBGColor-color: #CBCAAC;
+
+
 .PSPAGE {
 
 	background-color: #F8F7ED;
@@ -72,3 +78,45 @@ email:     thomasdemeo@gmail.com
 #CLASS_SRCH_WRK2_SUBJECT$70$ {
 	width: 150px;
 }
+
+#header_bar{
+    background-color: $ritOrange-color;
+    height: 65px;
+}
+
+#enhanced_header{
+    margin: 0 auto;
+    /* width: 960px; */
+}
+
+#left_header{
+    float: left;
+}
+
+#right_header{
+    float: right;
+    margin-top: 20px;
+}
+
+#genesis_faq{
+    text-decoration: none;
+    color: #ritBrown-color;
+    font-weight: bold;
+}
+
+#center_footer{
+    margin: 0 auto;
+    width: 275px;
+    color: gray;
+    font-size: 0.75em;
+}
+
+#RIT_URL{
+    color: $ritOrange-color;
+    font-size: 1.0em;
+    text-decoration: none;
+}
+#CLASS_SRCH_WRK2_UNITS_MINIMUM_LBL, #CLASS_SRCH_WRK2_UNITS_MAXIMUM_LBL,#SSSIMAGECENTER{
+    cursor: help;
+}
+
