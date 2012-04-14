@@ -557,7 +557,7 @@
 
             // You can use native DOM methods to insert the fragment:
             document.body.insertBefore(fragment, document.body.childNodes[0]);
-            setHeaderStyle();
+            //setHeaderStyle();
         }
         // Remove "Search for Classes" header
         var searchClasses = document.getElementById("DERIVED_CLSRCH_SS_TRANSACT_TITLE");
@@ -566,37 +566,37 @@
         }
     }
 
-    function setHeaderStyle() {
-        var header = document.getElementById('header_bar');
-        if (header) {
-            header.style.backgroundColor = ritOrange;
-            header.style.height = "65px";
-        }
-
-        var enhanceHeader = document.getElementById('enhance_header');
-        if (enhanceHeader) {
-            enhanceHeader.style.cssText = "margin: 0 auto";
-            enhanceHeader.style.width = "960px";
-        }
-
-        var headerLogoImage = document.getElementById('left_header');
-        if (headerLogoImage) {
-            headerLogoImage.style.float = "left";
-        }
-        var rightHeader = document.getElementById('right_header');
-        if (rightHeader) {
-            rightHeader.style.float = "right";
-            //rightHeader.style.marginTop = ((header.style.height)/2) + ''; Cannot get the marginTop to be set mathmatically
-            rightHeader.style.marginTop = '20px';
-        }
-
-        var faqLink = document.getElementById('genesis_faq');
-        if (faqLink) {
-            faqLink.style.textDecoration = "none";
-            faqLink.style.color = ritBrown;
-            faqLink.style.fontWeight = "bold";
-        }
-    }
+//  function setHeaderStyle() {
+//      var header = document.getElementById('header_bar');
+//      if (header) {
+//          header.style.backgroundColor = ritOrange;
+//          header.style.height = "65px";
+//      }
+//
+//      var enhanceHeader = document.getElementById('enhance_header');
+//      if (enhanceHeader) {
+//          enhanceHeader.style.cssText = "margin: 0 auto";
+//          enhanceHeader.style.width = "960px";
+//      }
+//
+//      var headerLogoImage = document.getElementById('left_header');
+//      if (headerLogoImage) {
+//          headerLogoImage.style.float = "left";
+//      }
+//      var rightHeader = document.getElementById('right_header');
+//      if (rightHeader) {
+//          rightHeader.style.float = "right";
+//          //rightHeader.style.marginTop = ((header.style.height)/2) + ''; Cannot get the marginTop to be set mathmatically
+//          rightHeader.style.marginTop = '20px';
+//      }
+//
+//      var faqLink = document.getElementById('genesis_faq');
+//      if (faqLink) {
+//          faqLink.style.textDecoration = "none";
+//          faqLink.style.color = ritBrown;
+//          faqLink.style.fontWeight = "bold";
+//      }
+//  }
 
     function constructFooter() {
         if (!(document.getElementById('enhance_footer'))) {
@@ -604,32 +604,32 @@
 
             // You can use native DOM methods to insert the fragment:
             document.body.appendChild(fragment);
-            setFooterStyle();
+            //setFooterStyle();
         }
     }
 
-    function setFooterStyle() {
-        /*var footer = document.getElementById('footer_bar');
-	if (footer) {
-		footer.style.backgroundColor = ritOrange;
-		footer.style.height = "65px";
-	}*/
-
-        var centerFooter = document.getElementById('center_footer');
-        if (centerFooter) {
-            centerFooter.style.cssText = "margin: 0 auto";
-            centerFooter.style.width = "275px";
-            centerFooter.style.color = "gray";
-            centerFooter.style.fontSize = "0.75em";
-        }
-
-        var ritURLId = document.getElementById('RIT_URL');
-        if (ritURLId) {
-            ritURLId.style.color = ritOrange;
-            ritURLId.style.fontSize = "1.0em";
-            ritURLId.style.textDecoration = "none";
-        }
-    }
+//  function setFooterStyle() {
+//      /*var footer = document.getElementById('footer_bar');
+//  if (footer) {
+//  	footer.style.backgroundColor = ritOrange;
+//  	footer.style.height = "65px";
+//  }*/
+//
+//      var centerFooter = document.getElementById('center_footer');
+//      if (centerFooter) {
+//          centerFooter.style.cssText = "margin: 0 auto";
+//          centerFooter.style.width = "275px";
+//          centerFooter.style.color = "gray";
+//          centerFooter.style.fontSize = "0.75em";
+//      }
+//
+//      var ritURLId = document.getElementById('RIT_URL');
+//      if (ritURLId) {
+//          ritURLId.style.color = ritOrange;
+//          ritURLId.style.fontSize = "1.0em";
+//          ritURLId.style.textDecoration = "none";
+//      }
+//  }
 
     function validateNumberInput(evt) {
         var theEvent = evt || window.event;
