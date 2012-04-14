@@ -330,7 +330,7 @@
     }
    	
    	// Currently not working
-   	var td = $.getElementsByTagName('td');
+   	var td = document.getElementsByTagName('td');
    	if (td) {
    		for (var i = 0; i < td.length; i++) {
 
@@ -353,7 +353,7 @@
    	}
    	
    	// Only needs to be done once
-	 var majorInput = $.getElementById('CLASS_SRCH_WRK2_SUBJECT$70$');
+	 var majorInput = document.getElementById('CLASS_SRCH_WRK2_SUBJECT$70$');
 	 if(majorInput) {
 	 	if (!majorInput.value) {
 			 majorInput.value = 'Start typing in your major';
@@ -362,7 +362,7 @@
 
     
     function majorAutocomplete() {
-    	 var majorInput = $.getElementById('CLASS_SRCH_WRK2_SUBJECT$70$');
+    	 var majorInput = document.getElementById('CLASS_SRCH_WRK2_SUBJECT$70$');
 		    if (majorInput) {
 		    	majorInput.maxLength = 50;
 		    	majorInput.style.width = '150px';
@@ -389,7 +389,7 @@
 		   	console.log('Key Up');
 		   	// Arrow down event
 				if (event.keyCode == 40 || event.keyCode == 38) {
-					var list = $.getElementsByTagName('ul');
+					var list = document.getElementsByTagName('ul');
 					var listChilds = list[0].childNodes;
 					var noMatch = true;
 					for (var i= 0; i < listChilds.length; i++) {
@@ -414,7 +414,11 @@
 						listChilds[0].className += " " + "selected";
 					}					
 				}else if (event.keyCode == 13) {
-					var list = $.getElementsByTagName('ul');
+				// Enter was pressed
+				if (majorInput.value.length == 4) {
+					majorInput.click;
+				}
+					var list = document.getElementsByTagName('ul');
 					var listChilds = list[0].childNodes;
 					var noMatch = true;
 					for (var i= 0; i < listChilds.length; i++) {
@@ -426,7 +430,7 @@
 				}else {
 		   		var value = majorInput.value;
 		   		var matches = getIndexes(majorNames, value);
-		   		var suggestions = $.getElementById('suggestions');
+		   		var suggestions = document.getElementById('suggestions');
 		   		
 		/*    		console.log(matches.length); */
 		   		
@@ -443,7 +447,7 @@
 		   					suggestions.appendChild(fragment);
 		   				}
 		   					// Add click event to suggestion box
-					   	var suggestionOptions = $.getElementsByClassName('suggestion_option');
+					   	var suggestionOptions = document.getElementsByClassName('suggestion_option');
 					   	if (suggestionOptions) {
 					   		for (var i = 0; i < suggestionOptions.length; i++) {
 						   		if (suggestionOptions[i]) {
@@ -462,8 +466,8 @@
     }
     
     function majorSelectedWithElement(element) {
-    	var suggestions = $.getElementById('suggestions');
-		var majorInput = $.getElementById('CLASS_SRCH_WRK2_SUBJECT$70$');
+    	var suggestions = document.getElementById('suggestions');
+		var majorInput = document.getElementById('CLASS_SRCH_WRK2_SUBJECT$70$');
 		if (majorInput && suggestions) {
 		    majorInput.value = (element).id;
 			suggestions.style.visibility = 'hidden';
@@ -471,8 +475,8 @@
     }
     
     function majorSelected() {
-   		var suggestions = $.getElementById('suggestions');
-		var majorInput = $.getElementById('CLASS_SRCH_WRK2_SUBJECT$70$');
+   		var suggestions = document.getElementById('suggestions');
+		var majorInput = document.getElementById('CLASS_SRCH_WRK2_SUBJECT$70$');
 		if (majorInput && suggestions) {
 		    majorInput.value = (this).id;
 			suggestions.style.visibility = 'hidden';

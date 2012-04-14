@@ -9,18 +9,23 @@
  *			thomasdemeo@gmail.com
  */
 
-/*  var $ = jQuery; // shortcut  */
+// DO NOT FORGET TO CHANGE THIS TO FALSE WHEN PUSHING LIVE
+var testEnvironment = true;
 
-var $ = document;
+// Test Path
+var testPath = 'https://people.rit.edu/~tjd9961/SIS/test/src';
+
+// Production Path
+var prodPath = 'https://people.rit.edu/~tjd9961/SIS/src';
 
 // Adds support for jQuery
 // a function that loads jQuery and calls a callback function when jQuery has finished loading
 function addJQuery(callback) {
     
     var jQueryId = "jQuery";  // you could encode the css path itself to generate id..
-	if (!$.getElementById(jQueryId)) {
-	    var head  = $.getElementsByTagName('head')[0];
-	    var link  = $.createElement('script');
+	if (!document.getElementById(jQueryId)) {
+	    var head  = document.getElementsByTagName('head')[0];
+	    var link  = document.createElement('script');
 	    link.id   = jQueryId;
 	    link.language  = 'JavaScript';
 	    link.type = 'text/javascript';
@@ -32,13 +37,17 @@ function addJQuery(callback) {
 
 function addCSS() {
 	var mainCSSId = "mainCSS";  // you could encode the css path itself to generate id..
-	if (!$.getElementById(mainCSSId)) {
-	    var head  = $.getElementsByTagName('head')[0];
-	    var link  = $.createElement('link');
+	if (!document.getElementById(mainCSSId)) {
+	    var head  = document.getElementsByTagName('head')[0];
+	    var link  = document.createElement('link');
 	    link.id   = mainCSSId;
 	    link.rel  = 'stylesheet';
 	    link.type = 'text/css';
-	    link.href = 'https://people.rit.edu/~tjd9961/SIS/src/css/sis_main.css';
+	    if (testEnvironment) {
+	    	link.href = testPath + '/css/sis_main.css';
+	    }else {
+	    	link.href = prodPath + '/css/sis_main.css';
+	    }
 	    link.media = 'all';
 	    head.appendChild(link);
 	}
@@ -46,19 +55,23 @@ function addCSS() {
 
 function addJavascript() {
 	var mainJavascript = "mainJavascript";  // you could encode the css path itself to generate id..
-	if (!$.getElementById(mainJavascript)) {
-	    var head  = $.getElementsByTagName('head')[0];
-	    var link  = $.createElement('script');
+	if (!document.getElementById(mainJavascript)) {
+	    var head  = document.getElementsByTagName('head')[0];
+	    var link  = document.createElement('script');
 	    link.id   = mainJavascript;
 	    link.language  = 'JavaScript';
 	    link.type = 'text/javascript';
-	    link.src = 'https://people.rit.edu/~tjd9961/SIS/src/js/main.js';
+	    if (testEnvironment) {
+	    	link.src = testPath + '/js/main.js';
+	    }else {
+	    	link.src = prodPath + '/js/main.js';
+	   	}
 	    head.appendChild(link);
 	}
 
 }
 
-// load jQuery, css and javascript and execute the callback function
+// load jQuery, css and javascript files
 addJQuery();
 addCSS();
 addJavascript();
