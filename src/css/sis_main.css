@@ -1,0 +1,74 @@
+/*----------------------------------------------------------------------------- 
+RIT SIS Extension Stylesheet 
+
+name: sis_main.css
+description: The "default" css file to include on all pages of the site
+
+version:   1.0 
+date:      04/13/12 
+author:    Thomas DeMeo
+email:     thomasdemeo@gmail.com
+-----------------------------------------------------------------------------*/
+
+.PSPAGE {
+
+	background-color: #F8F7ED;
+}
+
+.selected {
+	background-color: #FBEC5D;
+
+}
+
+#suggestions {
+	list-style-type: none;
+	-moz-border-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+/* 	width: 250px; */
+	background-color: #FFFFFF;
+	position: fixed;
+	padding: 5px;
+	visibility: hidden;
+	border: 1px solid #000000;
+	-webkit-margin-before: 0em;
+	-webkit-margin-after: 0em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	-webkit-padding-start: 0px;
+}
+
+.suggestion_option {
+	font-size: 14px;
+/* 	border: 1px solid gray; */
+	font-family: Arial, Palatino, Georgia;
+	font-weight: bold;
+	cursor: pointer;
+	padding: 2px 2px 2px 2px;
+	
+}
+
+.suggestion_option:hover {
+	color: #F36E21;
+}
+
+.course_number {
+	color: gray;
+	font-style: italic;
+	font-size: 14px;
+	font-family: Palatino, Georgia, Arial;
+	font-weight: normal;
+/* 	opacity: 0.8; */
+}
+
+.PSEDITBOX_DISPONLY {
+	padding-left: 5px;
+}
+
+#CLASS_SRCH_WRK2_SUBJECT$70$ {
+	width: 150px;
+}
