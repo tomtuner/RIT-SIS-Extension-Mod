@@ -10,10 +10,10 @@ author:    Thomas DeMeo
 email:     thomasdemeo@gmail.com
 -----------------------------------------------------------------------------*/
 
-$ritOrange-color: #F36E21;
-$ritBrown-color: #513127;
-$bgColor-color: #F8F7ED;
-$boxBGColor-color: #CBCAAC;
+/*$ritOrange-color: #F36E21; */
+/*$ritBrown-color: #513127;  */
+/*$bgColor-color: #F8F7ED;   */
+/*$boxBGColor-color: #CBCAAC;*/
 
 
 .PSPAGE {
@@ -80,7 +80,7 @@ $boxBGColor-color: #CBCAAC;
 }
 
 #header_bar{
-    background-color: $ritOrange-color;
+    background-color: #F36E21;
     height: 65px;
 }
 
@@ -95,13 +95,13 @@ $boxBGColor-color: #CBCAAC;
 
 #right_header{
     float: right;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
-#genesis_faq{
-    text-decoration: none;
-    color: #ritBrown-color;
-    font-weight: bold;
+.right_header_text{
+    color: #FFFFFF;
+    padding-right: 5px;
+    font-size: 14px;
 }
 
 #center_footer{
@@ -112,11 +112,90 @@ $boxBGColor-color: #CBCAAC;
 }
 
 #RIT_URL{
-    color: $ritOrange-color;
+    color: #F36E21;
     font-size: 1.0em;
     text-decoration: none;
 }
 #CLASS_SRCH_WRK2_UNITS_MINIMUM_LBL, #CLASS_SRCH_WRK2_UNITS_MAXIMUM_LBL,#SSSIMAGECENTER{
     cursor: help;
 }
+/* Box Header and Text styling*/
+.SSSGROUPBOXRIGHTLABEL,
+.PSLEVEL3GRIDLABEL,
+.PSLEVEL2GRIDLABEL,
+.PSGRIDTABBACKGROUND{
+    background-color: #513127;
+    color: #FFFFFF;
+}
 
+.SSSGROUPBOXLEFTLABEL,
+.PSGROUPBOXLABEL{
+    background-color: #F36E21;
+}
+
+.SSSGROUPBOXLEFTNBO{
+    border: 1px solid #000000;
+}
+
+.SSSGROUPBOXRIGHTWBO,
+.PSGROUPBOXWBO,
+.PSLEVEL3GRIDCOLUMNHDR,
+.PSLEVEL3GRIDCOLUMNHDRTXT,
+#ACE_DERIVED_SSS_SCL_LS_PORT_HOLDS_LINK,
+#ACE_DERIVED_SSS_SCL_LS_PORT_TODO_LINK,
+#ACE_DERIVED_SSS_SCL_SS_ENRL_APP_LINK,
+#ACE_DERIVED_SSS_SCL_SS_ADVISOR_LINK,
+#ACE_DERIVED_SSS_SCL_SSS_SC_LNK1_NAME,
+#ACE_DERIVED_SSS_SCL_SSS_SC_LNK2_NAME,
+#ACE_DERIVED_SSS_SCL_SSS_SC_LNK3_NAME,
+#ACE_DERIVED_SSS_SCL_SSS_GO_4{
+    background-color: #DFDECB;
+}
+
+.PSLONGEDITLABEL, 
+.PATRANSACTIONTITLE,
+.PABOLDTEXT,
+.PALEVEL0PRIMARY,
+.PAPAGETITLE,
+.PSEDITBOXLABEL,
+.PSDROPDOWNLABEL{
+    color: #513127;
+    border-color: #000000;
+}
+
+.PSLEVEL3GRIDCOLUMNHDR:link,
+.PSLEVEL3GRIDCOLUMNHDR:active,
+.PSLEVEL3GRIDCOLUMNHDR:visited{
+    background-color: #DFDECB;
+    color: #545446;
+}
+
+/*Search For classes Colors and Styles*/
+
+#PAGECONTAINER,
+#DERIVED_CLSRCH_SSR_CLAS_LBL_LBL{
+    margin: 0 auto;
+    background-color: #F8F7ED;
+    width = 600px;
+}
+
+.PSLEVEL1GRIDLABEL{
+    background-color: #F36E21;
+}
+
+ .PAGROUPBOXLABELLEVEL1 {
+       background-color: #F36E21;
+}
+
+.SSSMSGSUCCESSFRAME,
+.SSSMSGSUCCESSFRAMEWBO,
+# {
+       background-color: #513127;
+       border-color: #513127;
+}
+
+.SSSHYPERLINKBOLD {
+       color: #FFFFFF;
+       padding: 2px 2px 2px 2px;
+       border: 1px solid #999999;
+}
