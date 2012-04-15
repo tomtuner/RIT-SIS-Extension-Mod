@@ -129,7 +129,9 @@ email:     thomasdemeo@gmail.com
 }
 
 .SSSGROUPBOXLEFTLABEL,
-.PSGROUPBOXLABEL{
+.PSGROUPBOXLABEL,
+.PAGROUPBOXLABELLEVEL1,
+.PSLEVEL1GRIDLABEL{
     background-color: #F36E21;
 }
 
@@ -140,7 +142,8 @@ email:     thomasdemeo@gmail.com
 .SSSGROUPBOXRIGHTWBO,
 .PSGROUPBOXWBO,
 .PSLEVEL3GRIDCOLUMNHDR,
-.PSLEVEL1GRIDCOLUMNHDR,
+.PAFRAMELEVEL1WBO,
+.PAGROUPDIVIDER,
 #ACE_DERIVED_SSS_SCL_LS_PORT_HOLDS_LINK,
 #ACE_DERIVED_SSS_SCL_LS_PORT_TODO_LINK,
 #ACE_DERIVED_SSS_SCL_SS_ENRL_APP_LINK,
@@ -187,14 +190,6 @@ email:     thomasdemeo@gmail.com
     width = 600px;
 }
 
-.PSLEVEL1GRIDLABEL{
-    background-color: #F36E21;
-}
-
- .PAGROUPBOXLABELLEVEL1 {
-       background-color: #F36E21;
-}
-
 .SSSMSGSUCCESSFRAME,
 .SSSMSGSUCCESSFRAMEWBO {
        background-color: #513127;
@@ -206,16 +201,12 @@ email:     thomasdemeo@gmail.com
        color: #FFFFFF;
        padding: 2px 2px 2px 2px;
 
-.PSLEVEL1GRID {
+.PSLEVEL1GRID,
+.PSLEVEL1GRIDCOLUMNHDR {
     background-color: #DFDECB;
     color: #545446;
-    border-width: 0px;
+    border: 0px;
     padding: 0px;
-}
-
-.PAFRAMELEVEL1WBO,
-.PAGROUPDIVIDER {
-    background-color: #DFDECB;
 }
 
 .PAGROUPDIVIDER {
