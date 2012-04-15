@@ -166,14 +166,19 @@ email:     thomasdemeo@gmail.com
     border-color: #000000;
 }
 
+.PSLEVEL1GRIDCOLUMNHDR,
+.PSLEVEL1GRIDCOLUMNHDRTXT,
 .PSLEVEL3GRIDCOLUMNHDR:link,
 .PSLEVEL3GRIDCOLUMNHDR:active,
-.PSLEVEL3GRIDCOLUMNHDR:visited
+.PSLEVEL3GRIDCOLUMNHDR:visited,
 .PSLEVEL1GRIDCOLUMNHDR:link,
 .PSLEVEL1GRIDCOLUMNHDR:active,
-.PSLEVEL1GRIDCOLUMNHDR:visited{
+.PSLEVEL1GRIDCOLUMNHDR:visited {
     background-color: #DFDECB;
     color: #545446;
+    border-top-style: none;
+ 	border-bottom-style: none;
+ 	border-right-style: none;
 }
 
 /*Search For classes Colors and Styles*/
@@ -197,10 +202,13 @@ email:     thomasdemeo@gmail.com
        padding: 2px 2px 2px 2px;
 
 .PSLEVEL1GRID,
+.PSLEVEL1GRIDWBO,
 .PSLEVEL1GRIDCOLUMNHDR {
     background-color: #DFDECB;
     color: #545446;
-    border: 0px;
+ 	border-top-style: none;
+ 	border-bottom-style: none;
+ 	border-right-style: none;
     padding: 0px;
 }
 
