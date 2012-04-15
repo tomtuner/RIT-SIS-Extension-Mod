@@ -516,10 +516,17 @@ if (majorInput.value.length == 4) {
     function onStudentCenterPage() {
         var pageHeader = document.getElementsByClassName("PATRANSACTIONTITLE");
         if (pageHeader[0]) {
-            if ((pageHeader[0].innerText).match('Student Center')) {
-                return true;
-            }
+        	if (pageHeader[0].textContent) {
+        		if (pageHeader[0].textContent.match('Student Center')) {
+               	 return true;
+           	 	}
+       	 	}else {
+        		if (pageHeader[0].innerText.match('Student Center')) {
+                	return true;
+           	 	}
+       	 	}
         }
+        return false;
     }
 
     
@@ -723,9 +730,11 @@ if (majorInput.value.length == 4) {
                 classStatusImage[i].style.cursor = "help"
                 if (classStatusImage[i].alt == "Open") {
                     classStatusImage[i].setAttribute('title', "Class is OPEN");
-                }
-
-                // Add Checks for class open and wait list here and change the tooltip
+                }else if (classStatusImage[i].alt == "Wait List") {
+                    classStatusImage[i].setAttribute('title', "Class is FULL, but the Wait List is OPEN");
+				}else if (classStatusImage[i].alt == "Closed") {
+                    classStatusImage[i].setAttribute('title', "Class is FULL, and the Wait List is FULL");
+				}
             }
         }
 

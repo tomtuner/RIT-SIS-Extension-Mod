@@ -16,14 +16,13 @@ email:     thomasdemeo@gmail.com
 /*$boxBGColor-color: #CBCAAC;*/
 
 
-.PSPAGE {
-
+.PSPAGE, .PSPAGECONTAINER {
+	margin: 0 auto;
 	background-color: #F8F7ED;
 }
 
 .selected {
 	background-color: #FBEC5D;
-
 }
 
 #suggestions {
