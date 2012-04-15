@@ -8,9 +8,6 @@
  *			thomasdemeo@gmail.com
  */
  
- var $ = document;
-
-
 	// Google Analytics Code
 	var _gaq = _gaq || [];
 	_gaq.push(['_setAccount', 'UA-30757586-1']);
@@ -274,24 +271,29 @@
 
     var githubSuggestionURL = "https://github.com/tomtuner/RIT-SIS-Extension-Mod/wiki";
     var githubIssueURL = "https://github.com/tomtuner/RIT-SIS-Extension-Mod/issues";
+    
+    var itsSISURL = "https://www.rit.edu/its/help/peoplesoftsupport/";
+    
+    var rootURL = "https://mycampus.rit.edu/";
+    
+    var homeLink = rootURL + "/psp/TRITXJ/EMPLOYEE/HRMS/h/?tab=DEFAULT";
+    var addToFavoritesLink = rootURL + "../../../EMPLOYEE/HRMS/s/WEBLIB_PTIFRAME.ISCRIPT1.FieldFormula.IScript_PT_Popup";
+    var signOutLink = rootURL + "/psc/TRITXJ/EMPLOYEE/HRMS/?cmd=logout";
 
-	var once = true;
 
     function loadFunc() {
     
     	
     
         // Check to see if you are on the main search page
-        if (onFirstPage()) {
+        if (onStudentCenterPage()) {
             constructFeedbackBox();
-            uncheckOpenClassesOnly();
-            setCourseCareerDropDown();
         }
         
-/*         if (once) { */
-        	constructAutocompleteBox();
-        	once = false;
-/*         } */
+        uncheckOpenClassesOnly();
+        setCourseCareerDropDown();
+        
+        constructAutocompleteBox();
 
         sisColorMod();
         addMouseOver();
@@ -300,6 +302,7 @@
         convertLetterCodeToNumber();
         
         majorAutocomplete();
+        removeOldHeader();
         constructHeader();
         constructFooter();
     }
@@ -385,7 +388,7 @@
 				}
 		   	}
 */
-		   	majorInput.onkeyup = (function(event) {
+		   	majorInput.onkeydown = (function(event) {
 		   	console.log('Key Up');
 		   	// Arrow down event
 				if (event.keyCode == 40 || event.keyCode == 38) {
@@ -500,10 +503,10 @@
 
     }
 
-    function onFirstPage() {
-        var pageHeader = document.getElementById("DERIVED_CLSRCH_SSR_CLASS_LBL_LBL");
-        if (pageHeader) {
-            if ((pageHeader.innerText == "Enter Search Criteria")) {
+    function onStudentCenterPage() {
+        var pageHeader = document.getElementsByClassName("PATRANSACTIONTITLE");
+        if (pageHeader[0]) {
+            if ((pageHeader[0].innerText).match('Student Center')) {
                 return true;
             }
         }
@@ -513,7 +516,7 @@
 
     function constructFeedbackBox() {
         if (!(document.getElementById('feedback_box'))) {
-            var fragment = create('<div id="feedback_box">' + '<div id="top_feedback">' + '<span>Have a <a class="feedback_url" target="_blank" href="' + githubSuggestionURL + '" title="Suggestion Reporting">suggestion?</a></span>' + '</div>' + '<div id="bottom_feedback">' + '<span>Submit an <a class="feedback_url" target="_blank" href="' + githubIssueURL + '" title="Issue Reporting">issue or bugfix</a></span>' + '</div>' + '</div></div>');
+            var fragment = create('<div id="feedback_box">' + '<div id="top_feedback">' + '<span>Have a <a class="feedback_url" target="_blank" href="' + itsSISURL + '" title="Suggestion Reporting">suggestion?</a></span>' + '</div>' + '<div id="bottom_feedback">' + '<span>Submit an <a class="feedback_url" target="_blank" href="' + itsSISURL + '" title="Issue Reporting">issue or bugfix</a></span>' + '</div>' + '</div></div>');
 
             // You can use native DOM methods to insert the fragment:
             document.body.appendChild(fragment);
@@ -554,13 +557,23 @@
             }
         }
     }
+    
+    function removeOldHeader() {
+    	var oldHeader = document.getElementById('pthdr2container');
+    	if (oldHeader) {
+    		oldHeader.parentNode.removeChild(oldHeader);
+    	}
+    }
 
     function constructHeader() {
         if (!(document.getElementById('enhance_header'))) {
-            var fragment = create('<div id="header_bar">' + '<div id="enhance_header">' + '<div id="left_header">' + '<img id= "RIT_header_logo" width="466" height="49" title="RIT Header Logo" alt="RIT Logo" src=' + ritHeaderLogoURI + ' />' + '</div>' + '<div id="right_header">' + '<a id="genesis_faq" target="_blank" href="' + wikiFAQURL + '" title="SIS FAQ">SIS FAQ</a>' + '</div>' + '</div></div>');
+            var fragment = create('<div id="header_bar">' + '<div id="enhance_header">' + '<div id="left_header">' + '<img id= "RIT_header_logo" width="466" height="49" title="RIT Header Logo" alt="RIT Logo" src=' + ritHeaderLogoURI + ' />' + '</div>' + '<div id="right_header"><span>' + '<a class="right_header_text" id="sis_home" href="' + homeLink + '" title="SIS Home">Home</a>' + ' <a class="right_header_text" id="sis_add_to_favorites" href="' + addToFavoritesLink + '" title="Add to Favorites">Add to Favorites</a>' + ' <a class="right_header_text" id="sign_out" href="' + signOutLink + '" title="Sign Out">Sign Out</a>' + '</span></div>' + '</div></div>');
 
+			var firstBody = document.getElementById('ptifrmtemplate');
             // You can use native DOM methods to insert the fragment:
-            document.body.insertBefore(fragment, document.body.childNodes[0]);
+            if (firstBody) {
+	            firstBody.insertBefore(fragment, document.body.childNodes[0]);
+	        }
             //setHeaderStyle();
         }
         // Remove "Search for Classes" header
@@ -759,10 +772,7 @@ var bodyContainer = document.getElementsByClassName("PSPAGE");
                 for (i = 0; i < searchBar.length; i++) {
                     searchBar[i].style.backgroundColor = ritOrange;
                 }
-                var zoomImage = document.getElementsByName("DERIVED_CLSRCH$pt_modal_cntrl$img$0");
-                zoomImage[0].setAttribute('src', zoomSearchImageURL);
-
-
+ 
                 var subTableHeader = document.getElementsByClassName("PSGRIDTABBACKGROUND");
                 if (subTableHeader) {
                     for (i = 0; i < subTableHeader.length; i++) {
@@ -771,8 +781,12 @@ var bodyContainer = document.getElementsByClassName("PSPAGE");
                 }
             }
         }
+        
+        var zoomImage = document.getElementsByName("DERIVED_CLSRCH$pt_modal_cntrl$img$0");
+        zoomImage[0].setAttribute('src', zoomSearchImageURL);
 
-        var labels = document.getElementsByClassName("PSEDITBOXLABEL");
+        /*
+var labels = document.getElementsByClassName("PSEDITBOXLABEL");
         var dropDownLabels = document.getElementsByClassName("PSDROPDOWNLABEL");
         if (labels && dropDownLabels) {
             for (i = 0; i < labels.length; i++) {
@@ -784,7 +798,10 @@ var bodyContainer = document.getElementsByClassName("PSPAGE");
             }
 
         }
-        var headers = document.getElementsByClassName("PSGROUPBOXLABEL");
+*/
+        
+        /*
+var headers = document.getElementsByClassName("PSGROUPBOXLABEL");
         if (headers) {
             for (i = 0; i < headers.length; i++) {
                 headers[i].style.backgroundColor = ritOrange;
@@ -793,13 +810,17 @@ var bodyContainer = document.getElementsByClassName("PSPAGE");
                 headers[i].style.fontWeight = 'normal';
             }
         }
+*/
 
-        jQuery(".SSSHYPERLINKBOLD").css('color', 'white');
+        /*
+jQuery(".SSSHYPERLINKBOLD").css('color', 'white');
         jQuery(':text').css('padding', '2px');
         jQuery(':text').css('border', '1px solid #999999');
+*/
 
 
-        var pageHeader = document.getElementById("DERIVED_CLSRCH_SSR_CLASS_LBL_LBL");
+        /*
+var pageHeader = document.getElementById("DERIVED_CLSRCH_SSR_CLASS_LBL_LBL");
         if (pageHeader) {
             if (pageHeader.innerText == "Enter Search Criteria") {
                 pageHeader.innerText = "Search For Classes";
@@ -811,8 +832,10 @@ var bodyContainer = document.getElementsByClassName("PSPAGE");
         if (institution) {
             institution.parentNode.removeChild(institution);
         }
+*/
 
-        var addSrcCrit = document.getElementsByClassName("SSSMSGSUCCESSFRAME");
+        /*
+var addSrcCrit = document.getElementsByClassName("SSSMSGSUCCESSFRAME");
         var addSrcCritFrame = document.getElementsByClassName("SSSMSGSUCCESSFRAMEWBO");
         var click = document.getElementById("DERIVED_CLSRCH_SSR_EXPAND_COLLAPS$81$");
         if (click) {
@@ -826,10 +849,12 @@ var bodyContainer = document.getElementsByClassName("PSPAGE");
                 addSrcCritFrame[i].style.borderColor = ritBrown;
             }
         }
+*/
 
 
 
-        var tableHeader = document.getElementsByClassName("PSLEVEL1GRIDCOLUMNHDR");
+        /*
+var tableHeader = document.getElementsByClassName("PSLEVEL1GRIDCOLUMNHDR");
         if (tableHeader) {
             for (i = 0; i < tableHeader.length; i++) {
                 tableHeader[i].style.color = "#545446";
@@ -839,20 +864,24 @@ var bodyContainer = document.getElementsByClassName("PSPAGE");
                 tableHeader[i].style.backgroundColor = "#DFDECB";
             }
         }
+*/
 
         /* Class Detail Page **************************************************************************
          ***********************************************************************************************
          ***********************************************************************************************/
 
-        var boxHeaders = document.getElementsByClassName("PAGROUPBOXLABELLEVEL1");
+        /*
+var boxHeaders = document.getElementsByClassName("PAGROUPBOXLABELLEVEL1");
         if (boxHeaders) {
             for (i = 0; i < boxHeaders.length; i++) {
                 boxHeaders[i].style.backgroundColor = ritOrange;
                 //boxHeaders[i].style.color = ritBrown;
             }
         }
+*/
 
-        var table = document.getElementsByClassName("PSLEVEL1GRIDCOLUMNHDR");
+        /*
+var table = document.getElementsByClassName("PSLEVEL1GRIDCOLUMNHDR");
         if (table) {
             for (i = 0; i < table.length; i++) {
                 table[i].style.backgroundColor = "#DFDECB";
@@ -863,32 +892,10 @@ var bodyContainer = document.getElementsByClassName("PSPAGE");
                 table[i].style.paddingWidth = "0px";
             }
         }
-
-
-    }
-    /*
-function fixExpandedSearch() {
-    var advancedSearch = document.getElementById("win0divDERIVED_CLSRCH_SSR_EXPAND_COLLAPS$80$");
-    var array = advancedSearch.childNodes();
-    for(var i = 0; i < array.length; i++){
-
-		array.item(i).click();
-    }
-
-    //console.log("Fix Expanded Search");
-
-	array.item(i).click();
-    }
-   // console.log(advancedSearch[1].innerText);
-/*
-    var selectionDiv = document.getElementById("win0divDERIVED_CLSRCH_GROUP4");
-    selectionDiv.style.display = 'none';
-
-    console.log("Fix Expanded Search");
-
-
-}
 */
+
+
+    }
 	function contains(arrayName, element) {
             for (var i = 0; i < arrayName.length; i++) {
                 if (arrayName[i] == element) {
@@ -899,8 +906,6 @@ function fixExpandedSearch() {
     }
 
     function convertLetterCodeToNumber() {
-
-       
         
         var letterCode = document.getElementById("CLASS_SRCH_WRK2_SUBJECT$70$");
         if (letterCode) {
