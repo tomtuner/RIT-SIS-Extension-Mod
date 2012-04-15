@@ -18,7 +18,7 @@
 // @icon               http://development.garnishmobile.com/TriSigma/background_tile.jpg
 // @downloadURL        https://people.rit.edu/~tjd9961/RIT_SIS/sismod.user.js
 // @updateURL          https://people.rit.edu/~tjd9961/RIT_SIS/sismod.user.js
-// @version            0.1.0
+// @version            1.0.0
 // ==/UserScript==
 
 function loadExtensionScript(callback) {
