@@ -784,23 +784,23 @@ var bodyContainer = document.getElementsByClassName("PSPAGE");
 //              }
 //          }
 //      }
-
-                }
-            } else {
-                var searchBar = document.getElementsByClassName("PSLEVEL1GRIDLABEL");
-                searchBar[0].style.backgroundColor = ritBrown;
-                for (i = 0; i < searchBar.length; i++) {
-                    searchBar[i].style.backgroundColor = ritOrange;
-                }
- 
-                var subTableHeader = document.getElementsByClassName("PSGRIDTABBACKGROUND");
-                if (subTableHeader) {
-                    for (i = 0; i < subTableHeader.length; i++) {
-                        subTableHeader[i].style.backgroundColor = ritBrown;
-                    }
-                }
-            }
-        }
+//
+//              }
+//          } else {
+//              var searchBar = document.getElementsByClassName("PSLEVEL1GRIDLABEL");
+//              searchBar[0].style.backgroundColor = ritBrown;
+//              for (i = 0; i < searchBar.length; i++) {
+//                  searchBar[i].style.backgroundColor = ritOrange;
+//              }
+//
+//              var subTableHeader = document.getElementsByClassName("PSGRIDTABBACKGROUND");
+//              if (subTableHeader) {
+//                  for (i = 0; i < subTableHeader.length; i++) {
+//                      subTableHeader[i].style.backgroundColor = ritBrown;
+//                  }
+//              }
+//          }
+//      }
         
         var zoomImage = document.getElementsByName("DERIVED_CLSRCH$pt_modal_cntrl$img$0");
         zoomImage[0].setAttribute('src', zoomSearchImageURL);
