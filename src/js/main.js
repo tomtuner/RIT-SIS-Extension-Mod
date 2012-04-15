@@ -743,34 +743,34 @@ var bodyContainer = document.getElementsByClassName("PSPAGE");
             bodyContainer[0].style.backgroundColor = bgColor;
         }
 */
-        var page = document.getElementById("PAGECONTAINER");
-        var pageHeader = document.getElementById("DERIVED_CLSRCH_SSR_CLASS_LBL_LBL");
-        if (pageHeader) {
-            if (!(pageHeader.innerText == "Search Results")) {
-                if (page) {
-                    page.style.cssText = "margin: 0 auto";
-                    page.style.backgroundColor = bgColor;
-                    page.style.width = "600px";
-
-                }
-            } else {
-                var searchBar = document.getElementsByClassName("PSLEVEL1GRIDLABEL");
-                searchBar[0].style.backgroundColor = ritBrown;
-                for (i = 0; i < searchBar.length; i++) {
-                    searchBar[i].style.backgroundColor = ritOrange;
-                }
-                var zoomImage = document.getElementsByName("DERIVED_CLSRCH$pt_modal_cntrl$img$0");
-                zoomImage[0].setAttribute('src', zoomSearchImageURL);
-
-
-                var subTableHeader = document.getElementsByClassName("PSGRIDTABBACKGROUND");
-                if (subTableHeader) {
-                    for (i = 0; i < subTableHeader.length; i++) {
-                        subTableHeader[i].style.backgroundColor = ritBrown;
-                    }
-                }
-            }
-        }
+//      var page = document.getElementById("PAGECONTAINER");
+//      var pageHeader = document.getElementById("DERIVED_CLSRCH_SSR_CLASS_LBL_LBL");
+//      if (pageHeader) {
+//          if (!(pageHeader.innerText == "Search Results")) {
+//              if (page) {
+//                  page.style.cssText = "margin: 0 auto";
+//                  page.style.backgroundColor = bgColor;
+//                  page.style.width = "600px";
+//
+//              }
+//          } else {
+//              var searchBar = document.getElementsByClassName("PSLEVEL1GRIDLABEL");
+//              searchBar[0].style.backgroundColor = ritBrown;
+//              for (i = 0; i < searchBar.length; i++) {
+//                  searchBar[i].style.backgroundColor = ritOrange;
+//              }
+//              var zoomImage = document.getElementsByName("DERIVED_CLSRCH$pt_modal_cntrl$img$0");
+//              zoomImage[0].setAttribute('src', zoomSearchImageURL);
+//
+//
+//              var subTableHeader = document.getElementsByClassName("PSGRIDTABBACKGROUND");
+//              if (subTableHeader) {
+//                  for (i = 0; i < subTableHeader.length; i++) {
+//                      subTableHeader[i].style.backgroundColor = ritBrown;
+//                  }
+//              }
+//          }
+//      }
 
         var labels = document.getElementsByClassName("PSEDITBOXLABEL");
         var dropDownLabels = document.getElementsByClassName("PSDROPDOWNLABEL");
