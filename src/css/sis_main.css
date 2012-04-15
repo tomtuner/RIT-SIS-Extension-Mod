@@ -58,7 +58,8 @@ email:     thomasdemeo@gmail.com
 	
 }
 
-.suggestion_option:hover {
+.suggestion_option:hover,
+.SSSFOOTERLINKBOLD {
 	color: #F36E21;
 }
 
@@ -140,7 +141,7 @@ email:     thomasdemeo@gmail.com
 .SSSGROUPBOXRIGHTWBO,
 .PSGROUPBOXWBO,
 .PSLEVEL3GRIDCOLUMNHDR,
-.PSLEVEL3GRIDCOLUMNHDRTXT,
+.PSLEVEL1GRIDCOLUMNHDR,
 #ACE_DERIVED_SSS_SCL_LS_PORT_HOLDS_LINK,
 #ACE_DERIVED_SSS_SCL_LS_PORT_TODO_LINK,
 #ACE_DERIVED_SSS_SCL_SS_ENRL_APP_LINK,
@@ -158,14 +159,18 @@ email:     thomasdemeo@gmail.com
 .PALEVEL0PRIMARY,
 .PAPAGETITLE,
 .PSEDITBOXLABEL,
-.PSDROPDOWNLABEL{
+.PSDROPDOWNLABEL,
+.SSSMSGINFOTEXT{
     color: #513127;
     border-color: #000000;
 }
 
 .PSLEVEL3GRIDCOLUMNHDR:link,
 .PSLEVEL3GRIDCOLUMNHDR:active,
-.PSLEVEL3GRIDCOLUMNHDR:visited{
+.PSLEVEL3GRIDCOLUMNHDR:visited
+.PSLEVEL1GRIDCOLUMNHDR:link,
+.PSLEVEL1GRIDCOLUMNHDR:active,
+.PSLEVEL1GRIDCOLUMNHDR:visited{
     background-color: #DFDECB;
     color: #545446;
 }
@@ -188,14 +193,28 @@ email:     thomasdemeo@gmail.com
 }
 
 .SSSMSGSUCCESSFRAME,
-.SSSMSGSUCCESSFRAMEWBO,
-# {
+.SSSMSGSUCCESSFRAMEWBO {
        background-color: #513127;
        border-color: #513127;
 }
 
-.SSSHYPERLINKBOLD {
+.SSSHYPERLINKBOLD,
+.SSSHYPERLINKBOLD:hover {
        color: #FFFFFF;
        padding: 2px 2px 2px 2px;
-       border: 1px solid #999999;
+
+.PSLEVEL1GRID {
+    background-color: #DFDECB;
+    color: #545446;
+    border-width: 0px;
+    padding: 0px;
+}
+
+.PAFRAMELEVEL1WBO,
+.PAGROUPDIVIDER {
+    background-color: #DFDECB;
+}
+
+.PAGROUPDIVIDER {
+    border: 1px solid #000000;
 }
