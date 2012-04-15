@@ -290,7 +290,7 @@
             constructFeedbackBox();
         }
         
-        uncheckOpenClassesOnly();
+/*         uncheckOpenClassesOnly(); */ 
         setCourseCareerDropDown();
         
         constructAutocompleteBox();
@@ -374,6 +374,11 @@
 					majorInput.value = '';    	
 				}
 		   	})
+		   	
+		   	if (majorInput.value == '') {
+		   		var suggestions = document.getElementById('suggestions');
+				suggestions.style.visibility = 'hidden';
+		   	}
 		   /*
 	
 		   	majorInput.onkeypress = function(event) {
@@ -418,9 +423,11 @@
 					}					
 				}else if (event.keyCode == 13) {
 				// Enter was pressed
-				if (majorInput.value.length == 4) {
+				/*
+if (majorInput.value.length == 4) {
 					majorInput.click;
 				}
+*/
 					var list = document.getElementsByTagName('ul');
 					var listChilds = list[0].childNodes;
 					var noMatch = true;
@@ -429,7 +436,11 @@
 							majorSelectedWithElement(listChilds[i]);
 						}
 					}
-				
+					/*
+
+					var numberSelector = document.getElementById('CLASS_SRCH_WRK2_SUBJECT$70$');
+		   			numberSelector.blur();
+*/
 				}else {
 		   		var value = majorInput.value;
 		   		var matches = getIndexes(majorNames, value);
@@ -463,6 +474,7 @@
 		   		}else {
 					suggestions.style.visibility = 'hidden';
 		   		}
+		   		
 		   		}
 		   	});
 		   	}    	    	
@@ -493,15 +505,13 @@
         }
     }
 
-    function uncheckOpenClassesOnly() {
-        var openClassesCheckBox = document.getElementById("CLASS_SRCH_WRK2_SSR_OPEN_ONLY");
-        if (openClassesCheckBox) {
-            if (openClassesCheckBox.checked) {
-                openClassesCheckBox.checked = false;
-            }
+    var openClassesCheckBox = document.getElementById("CLASS_SRCH_WRK2_SSR_OPEN_ONLY");
+    if (openClassesCheckBox) {
+        if (openClassesCheckBox.checked) {
+            openClassesCheckBox.click;
         }
-
     }
+
 
     function onStudentCenterPage() {
         var pageHeader = document.getElementsByClassName("PATRANSACTIONTITLE");
