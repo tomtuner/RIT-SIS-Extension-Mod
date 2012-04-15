@@ -27,7 +27,6 @@ email:     thomasdemeo@gmail.com
 
 #suggestions {
 	list-style-type: none;
-	-moz-border-radius: 5px;
 	-moz-border-radius-topright: 5px;
 	-moz-border-radius-bottomright: 5px;
 	-moz-border-radius-bottomleft: 5px;
@@ -40,11 +39,7 @@ email:     thomasdemeo@gmail.com
 	padding: 5px;
 	visibility: hidden;
 	border: 1px solid #000000;
-	-webkit-margin-before: 0em;
-	-webkit-margin-after: 0em;
-	-webkit-margin-start: 0px;
-	-webkit-margin-end: 0px;
-	-webkit-padding-start: 0px;
+	margin: 0;
 }
 
 .suggestion_option {
