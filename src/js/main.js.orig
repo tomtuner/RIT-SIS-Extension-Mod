@@ -437,7 +437,7 @@
 		   		
 		/*    		console.log(matches.length); */
 		   		
-		   		if (majorInput.value) {
+		   		if (majorInput.value != "") {
 		   			if (matches.length) {
 		   				if (suggestions) {
 		   				suggestions.style.visibility = 'visible';
@@ -756,6 +756,36 @@ var bodyContainer = document.getElementsByClassName("PSPAGE");
             bodyContainer[0].style.backgroundColor = bgColor;
         }
 */
+<<<<<<< HEAD
+        var page = document.getElementById("PAGECONTAINER");
+        var pageHeader = document.getElementById("DERIVED_CLSRCH_SSR_CLASS_LBL_LBL");
+        if (pageHeader) {
+            if (!(pageHeader.innerText == "Search Results")) {
+                if (page) {
+                    page.style.cssText = "margin: 0 auto";
+                    page.style.backgroundColor = bgColor;
+                    page.style.width = "600px";
+
+                }
+            } else {
+                var searchBar = document.getElementsByClassName("PSLEVEL1GRIDLABEL");
+                searchBar[0].style.backgroundColor = ritBrown;
+                for (i = 0; i < searchBar.length; i++) {
+                    searchBar[i].style.backgroundColor = ritOrange;
+                }
+ 
+                var subTableHeader = document.getElementsByClassName("PSGRIDTABBACKGROUND");
+                if (subTableHeader) {
+                    for (i = 0; i < subTableHeader.length; i++) {
+                        subTableHeader[i].style.backgroundColor = ritBrown;
+                    }
+                }
+            }
+        }
+        
+        var zoomImage = document.getElementsByName("DERIVED_CLSRCH$pt_modal_cntrl$img$0");
+        zoomImage[0].setAttribute('src', zoomSearchImageURL);
+=======
 //      var page = document.getElementById("PAGECONTAINER");
 //      var pageHeader = document.getElementById("DERIVED_CLSRCH_SSR_CLASS_LBL_LBL");
 //      if (pageHeader) {
@@ -784,28 +814,7 @@ var bodyContainer = document.getElementsByClassName("PSPAGE");
 //              }
 //          }
 //      }
-//
-//              }
-//          } else {
-//              var searchBar = document.getElementsByClassName("PSLEVEL1GRIDLABEL");
-//              searchBar[0].style.backgroundColor = ritBrown;
-//              for (i = 0; i < searchBar.length; i++) {
-//                  searchBar[i].style.backgroundColor = ritOrange;
-//              }
-//
-//              var subTableHeader = document.getElementsByClassName("PSGRIDTABBACKGROUND");
-//              if (subTableHeader) {
-//                  for (i = 0; i < subTableHeader.length; i++) {
-//                      subTableHeader[i].style.backgroundColor = ritBrown;
-//                  }
-//              }
-//          }
-//      }
-        
-        var zoomImage = document.getElementsByName("DERIVED_CLSRCH$pt_modal_cntrl$img$0");
-        if (zoomImage[0]) {
-	        zoomImage[0].setAttribute('src', zoomSearchImageURL);
-        }
+>>>>>>> 5a8a5fdaef00e4b075897dcd00ae05526f15dce7
 
         /*
 var labels = document.getElementsByClassName("PSEDITBOXLABEL");
