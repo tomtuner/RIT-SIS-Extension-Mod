@@ -10,6 +10,8 @@
 // @include            https://mycampustest.rit.edu/*
 // @include            http://mycampustest2.rit.edu/*
 // @include            https://mycampustest2.rit.edu/*
+// @include            http://campus.rit.edu/*
+// @include            https://campus.rit.edu/*
 
 // @include            http://campustest2.rit.edu/*
 // @include            https://campustest2.rit.edu/*

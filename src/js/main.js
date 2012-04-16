@@ -265,7 +265,7 @@
     var bgColor = "#F8F7ED";
     var boxBGColor = "#CBCAAC";
 
-    var zoomSearchImageURL = "https://mycampus.rit.edu/cs/sasrch/cache/PT_PROMPT_LOOKUP_1.gif";
+    var zoomSearchImageURL = "https://campus.rit.edu/cs/sasrch/cache/PT_PROMPT_LOOKUP_1.gif";
     var wikiFAQURL = "https://wiki.rit.edu/display/itskb/PeopleSoft+Frequently+Asked+Questions";
     var ritURL = "http://www.rit.edu";
 
@@ -274,11 +274,12 @@
     
     var itsSISURL = "https://www.rit.edu/its/help/peoplesoftsupport/";
     
-    var rootURL = "https://mycampus.rit.edu/";
+    var rootURL = "https://campus.rit.edu";
     
     var homeLink = rootURL + "/psp/TRITXJ/EMPLOYEE/HRMS/h/?tab=DEFAULT";
-    var addToFavoritesLink = rootURL + "../../../EMPLOYEE/HRMS/s/WEBLIB_PTIFRAME.ISCRIPT1.FieldFormula.IScript_PT_Popup";
-    var signOutLink = rootURL + "/psc/TRITXJ/EMPLOYEE/HRMS/?cmd=logout";
+    var studentCenterLink = rootURL + "/psp/PRITXJ/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES.SSS_STUDENT_CENTER.GBL?PORTALPARAM_PTCNAV=HC_SSS_STUDENT_CENTER&EOPP.SCNode=HRMS&EOPP.SCPortal=EMPLOYEE&EOPP.SCName=CO_EMPLOYEE_SELF_SERVICE&EOPP.SCLabel=Self%20Service&EOPP.SCPTfname=CO_EMPLOYEE_SELF_SERVICE&FolderPath=PORTAL_ROOT_OBJECT.CO_EMPLOYEE_SELF_SERVICE.HC_SSS_STUDENT_CENTER&IsFolder=false";
+    var addToFavoritesLink = rootURL + "/psp/PRITXJ/EMPLOYEE/HRMS/s/WEBLIB_PTIFRAME.ISCRIPT1.FieldFormula.IScript_PT_Popup";
+    var signOutLink = rootURL + "/psp/PRITXJ/EMPLOYEE/HRMS/?cmd=logout";
 
 
     function loadFunc() {
@@ -584,7 +585,7 @@ if (majorInput.value.length == 4) {
 
     function constructHeader() {
         if (!(document.getElementById('enhance_header'))) {
-            var fragment = create('<div id="header_bar">' + '<div id="enhance_header">' + '<div id="left_header">' + '<img id= "RIT_header_logo" width="466" height="49" title="RIT Header Logo" alt="RIT Logo" src=' + ritHeaderLogoURI + ' />' + '</div>' + '<div id="right_header"><span>' + '<a class="right_header_text" id="sis_home" href="' + homeLink + '" title="SIS Home">Home</a>' + ' <a class="right_header_text" id="sis_add_to_favorites" href="' + addToFavoritesLink + '" title="Add to Favorites">Add to Favorites</a>' + ' <a class="right_header_text" id="sign_out" href="' + signOutLink + '" title="Sign Out">Sign Out</a>' + '</span></div>' + '</div></div>');
+            var fragment = create('<div id="header_bar">' + '<div id="enhance_header">' + '<div id="left_header">' + '<img id= "RIT_header_logo" width="466" height="49" title="RIT Header Logo" alt="RIT Logo" src=' + ritHeaderLogoURI + ' />' + '</div>' + '<div id="right_header"><span>' + '<a class="right_header_text" id="sis_student_center" href="' + studentCenterLink + '" title="SIS Student Center">Student Center</a>' + ' <a class="right_header_text" id="sis_add_to_favorites" href="' + addToFavoritesLink + '" title="Add to Favorites">Add to Favorites</a>' + ' <a class="right_header_text" id="sign_out" href="' + signOutLink + '" title="Sign Out">Sign Out</a>' + '</span></div>' + '</div></div>');
 
 			var firstBody = document.getElementById('ptifrmtemplate');
             // You can use native DOM methods to insert the fragment:
@@ -634,7 +635,7 @@ if (majorInput.value.length == 4) {
 
     function constructFooter() {
         if (!(document.getElementById('enhance_footer'))) {
-            var fragment = create('<div id="footer_bar">' + '<div id="enhance_footer">' + '<div id="center_footer">' + '<span>Improved and enchanced by the <a id="RIT_URL" href="' + ritURL + '" title="RIT">RIT</a> community.' + '</div>' + '</div></div>');
+            var fragment = create('<div id="footer_bar">' + '<div id="enhance_footer">' + '<div id="center_footer">' + '<span>Improved and enchanced by the <a id="RIT_URL" href="' + ritURL + '" title="RIT">RIT</a> student body.' + '</div>' + '</div></div>');
 
             // You can use native DOM methods to insert the fragment:
             document.body.appendChild(fragment);
@@ -821,10 +822,12 @@ var bodyContainer = document.getElementsByClassName("PSPAGE");
 //          }
 //      }
         
-        var zoomImage = document.getElementsByName("DERIVED_CLSRCH$pt_modal_cntrl$img$0");
+        /*
+var zoomImage = document.getElementsByName("DERIVED_CLSRCH$pt_modal_cntrl$img$0");
         if (zoomImage[0]) {
 	        zoomImage[0].setAttribute('src', zoomSearchImageURL);
         }
+*/
 
         /*
 var labels = document.getElementsByClassName("PSEDITBOXLABEL");
