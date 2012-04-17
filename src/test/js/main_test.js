@@ -312,6 +312,8 @@
         //  fixExpandedSearch();
         convertLetterCodeToNumber();
         
+        formatTopTabBar();
+        
         majorAutocomplete();
         removeOldHeader();
         constructHeader();
@@ -343,6 +345,9 @@
         return frag;
     }
     
+    var twitterFeedHeader = '<h3>RIT Twitter Feed</h3>' + 
+	            '<ul id="twitter_choices"><li class="twitter_titles selected_orange" id="tweet_news" style="display:inline-block;" onclick="selectTwitterFeed(\'RITNEWS\', \'tweet_news\');">RIT News</li><li class="twitter_titles" id="tweet_athletics" style="display:inline-block;" onclick="selectTwitterFeed(\'RITsports\', \'tweet_athletics\');">RIT Athletics<li class="twitter_titles" id="tweet_sg" style="display:inline-block;" onclick="selectTwitterFeed(\'RIT_SG\', \'tweet_sg\');">RIT SG</li></ul>';
+    
     function addTwitterBox() {
     	if (window.innerWidth > 800) {
     		// Load Tweet plugin
@@ -368,8 +373,8 @@ var twitterJavascript = "twitterJavascript";  // you could encode the css path i
 
 			
 			if (!(document.getElementById('tweets'))) {
-			console.log("IN HERE NOW");
-	            var fragment = create('<div class="twitters" id="tweets"><h3>Twitter</h3></div>');
+				console.log("IN HERE NOW");
+	            var fragment = create('<div class="twitters" id="tweets">' + twitterFeedHeader + '</div>');
 	
 	            // You can use native DOM methods to insert the fragment:
 	            document.body.appendChild(fragment);
@@ -386,6 +391,52 @@ var twitterJavascript = "twitterJavascript";  // you could encode the css path i
     	}
     }
     
+    function selectTwitterFeed(feed_id, div_id) {
+    	var tweets = document.getElementById('tweets');
+    	if (tweets) {
+    	
+    		// Clear contents before adding new tweets
+	    	tweets.innerHTML = twitterFeedHeader;
+    	
+	    	var twitter_titles = document.getElementsByClassName('twitter_titles');
+	    	// Clear class names
+	    	for (var i = 0; i < twitter_titles.length; i++) {
+	    		console.log(twitter_titles[i].className);
+	    		twitter_titles[i].className = 'twitter_titles';
+	    	}
+	    	var tweet_title_div = document.getElementById(div_id);
+	    	
+	    	tweet_title_div.className += " selected_orange";
+	    	
+
+    		getTwitters('tweets', {
+      		  	id: feed_id, 
+       			 prefix: '<img height="16" width="16" src="%profile_image_url%" /><a href="http://twitter.com/%screen_name%">%name%</a> said: ', 
+       			 clearContents: false, // leave the original message in place
+       			 count: 5, 
+       			 ignoreReplies: true,
+       			 newwindow: true
+   				 });
+		 }
+    }
+    
+    // Format Top Tab Bar
+    function formatTopTabBar() {
+    	var topBarDiv = document.getElementById('win0divDERIVED_SSTSNAV_SSTS_NAV_TABS');
+    	if (topBarDiv) {
+    		var topBarImages = topBarDiv.getElementsByTagName('img');
+    		for (var i = 0; i < topBarImages.length; i++) {
+	    		topBarImages[i].parentNode.removeChild(topBarImages[i]);
+    		}
+    	}
+    	var middleBarDiv = document.getElementById('win0divDERIVED_SSTSNAV_SSTS_NAV_SUBTABS');
+    	if (middleBarDiv) {
+    		var middleBarImages = middleBarDiv.getElementsByTagName('img');
+    		for (var i = 0; i < middleBarImages.length; i++) {
+	    		middleBarImages[i].parentNode.removeChild(middleBarImages[i]);
+    		}
+    	}
+    }
     
     
    	
