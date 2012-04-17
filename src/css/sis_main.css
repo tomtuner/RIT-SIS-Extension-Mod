@@ -21,8 +21,119 @@ email:     thomasdemeo@gmail.com
 	background-color: #F8F7ED;
 }
 
+/** Style the tweets */
+
+.twitters {
+  border: 1px solid #007FA5;
+  padding: 5px;
+/*   overflow: auto; */
+  margin: 20px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+	-moz-box-shadow: black 1px 2px 3px;
+  box-shadow: black 1px 2px 3px;
+}
+
+.twitters ul {
+  list-style: none;
+  padding: 0;
+  background-color: white;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	border: 1px solid black;
+	padding: 5px;
+}
+
+.twitters ul li {
+	padding: 5px;
+}
+
+.twitters span.prefix {
+  font-weight: bold;
+}
+
+.twitters span.time {
+  font-style: italic;
+  color: #c5c5c5;
+}
+
+.twitters span.status {
+  font-style: italic;
+}
+
+#tweets {
+	position: absolute;
+	top: 0;
+	right: 10px;
+	width: 300px;
+	background-color: #00A0D1;
+}
+
+ul#twitter_choices {
+	margin: 0 auto;
+}
+
+.twitter_titles {
+	color: white;
+	background-color: #513127;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	padding: 2px;
+	border: 1px solid black;
+	cursor: pointer;
+	margin: 4px;
+	-moz-box-shadow: black 1px 2px 3px;
+  box-shadow: black 1px 2px 3px;
+}
+
+
+
+/******************************
+*****************************
+    Tab Styles
+******************************
+*****************************/
+
+.ssstabactive{
+    background: -webkit-gradient(linear, left top, left bottom, from(#D9CDCA), to(white));
+    background: -moz-linear-gradient(center top , rgb(217, 205, 202), rgb(255, 255, 255)) repeat scroll 0% 0% transparent;
+    text-decoration:none;
+    vertical-align: text-top;
+    text-transform: lowercase;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 5px 5px 0px 0px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    padding: 5px 2px 2px 2px;
+    border: 1px solid #000000;
+    -moz-box-shadow: 2px -2px 7px #000000;
+    box-shadow: 2px -2px 7px #000000;
+    border-bottom: 0px;
+}
+
+.ssstabinactive{
+    background: -webkit-gradient(linear, left top, left bottom, from(#DFDECB), to(#D9CDCA));
+    background: -moz-linear-gradient(center top , rgb(255, 255, 255), rgb(223, 222, 203)) repeat scroll 0% 0% transparent;
+    text-decoration:none;
+    vertical-align: text-top;
+    text-transform: lowercase;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 5px 5px 0px 0px;
+    padding: 5px 2px 2px 2px;
+    border: 1px solid #000000;
+}
+
+.ssstabmaintext {
+	color: black;
+}
+
 .selected {
 	background-color: #FBEC5D;
+}
+
+.selected_orange {
+	background-color: #F36E21;
 }
 
 #suggestions {
@@ -149,6 +260,13 @@ email:     thomasdemeo@gmail.com
 #ACE_DERIVED_SSS_SCL_SSS_SC_LNK3_NAME,
 #ACE_DERIVED_SSS_SCL_SSS_GO_4 {
     background-color: #DFDECB;
+}
+
+.SSSGROUPBOXLEFTNBO,
+.SSSGROUPBOXRIGHTWBO,
+.PSGROUPBOXWBO {
+/*     -moz-box-shadow: black 1px 2px 3px; */
+    box-shadow: black 1px 2px 3px;
 }
 
 #ACE_DERIVED_SSS_ENR_GROUP_BOX {

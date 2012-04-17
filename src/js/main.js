@@ -11,6 +11,7 @@
 	// Google Analytics Code
 	var _gaq = _gaq || [];
 	_gaq.push(['_setAccount', 'UA-30757586-1']);
+	_gaq.push(['_setAllowLinker', true]);	
 	_gaq.push(['_trackPageview']);
 	
 	(function() {
@@ -32,223 +33,6 @@
 	    	return delete localStorage[key];
 		};
 	}
-
-/*
-    // **COPYRIGHT NOTICE**
-    // 
-    // I, Richard Gibson, hereby establish my original authorship of this
-    // work, and announce its release into the public domain.  I claim no
-    // exclusive copyrights to it, and will neither pursue myself (nor
-    // condone pursuit by others of) punishment, retribution, or forced
-    // payment for its full or partial reproduction in any form.
-    // 
-    // That being said, I would like to receive credit for this work
-    // whenever it, or any part thereof, is reproduced or incorporated into
-    // another creation; and would also like compensation whenever revenue
-    // is derived from such reproduction or inclusion.  At the very least,
-    // please let me know if you find this work useful or enjoyable, and
-    // contact me with any comments or criticisms regarding it.
-    // 
-    // This program is distributed in the hope that it will be useful,
-    // but WITHOUT ANY WARRANTY; without even the implied warranty of
-    // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-    // 
-    // **END COPYRIGHT NOTICE**
-    (function () {
-
-        // constants
-        var SCRIPT = {
-            name: "RIT SIS Modifications",
-            namespace: "demeo.rit.sismod",
-            source: "http://people.rit.edu/~tjd9961/RIT_SIS" // script homepage/description URL
-            +
-            "/sismod.user.js",
-            identifier: "http://people.rit.edu/~tjd9961/RIT_SIS" // script URL
-            +
-            "/sismod.user.js",
-            meta: "http://people.rit.edu/~tjd9961/RIT_SIS" // metadata URL
-            +
-            "/sismod.user.js",
-            version: "0.1" // version (this should ALWAYS match the version number at the top)
-            ,
-            date: "04-02-2012" // update date
-        };
-        // test for dependencies
-        var UPDATE = SCRIPT.namespace + ' ' + SCRIPT.identifier;
-        try {
-            GM_setValue(UPDATE, 1);
-            if (GM_getValue(UPDATE)) {
-                UPDATE = {
-                    key: UPDATE,
-                    get: GM_getValue,
-                    set: GM_setValue
-                };
-            } else {
-                throw {};
-            }
-        } catch (x) {
-            UPDATE = {
-                set: function (key, value) {
-                    try {
-                        localStorage.setItem(key, value);
-                    } catch (x) {}
-                },
-                get: function (key, varDefault) {
-                    try {
-                        var stored = localStorage.getItem(key);
-                        if (stored === null) {
-                            return varDefault;
-                        }
-                        return stored;
-                    } catch (x) {
-                        return varDefault;
-                    }
-                }
-            };
-        }
-        UPDATE = {
-            SCRIPT: SCRIPT,
-            defaults: {
-                checkDays: 3,
-                version: SCRIPT.version,
-                date: SCRIPT.date,
-                name: SCRIPT.name,
-                lastCheck: typeof (GM_xmlhttpRequest) != 'undefined' ? 0 : (new Date()).getTime()
-            },
-            getValue: UPDATE.get,
-            setValue: UPDATE.set,
-            HttpRequest: (typeof (GM_xmlhttpRequest) != 'undefined' && GM_xmlhttpRequest) ||
-            function () {},
-            ready: false,
-            init: function () {
-                if (this.ready) {
-                    return;
-                }
-                this.ready = true;
-                for (var name in this.defaults) {
-                    if (name in this) {
-                        delete this.defaults[name];
-                    } else {
-                        this[name] = this.getValue('_UPDATE_' + name, this.defaults[name]);
-                    }
-                }
-                for (var p in {
-                    checkDays: 0,
-                    lastCheck: 0
-                }) {
-                    delete this.defaults[p];
-                }
-            },
-            check: function (fnOnNewer, fnIsNewer, blnForce) {
-                this.init();
-                var interval = Math.max(parseFloat(this.checkDays) * 24 * 60 * 60 * 1000, 0) || Infinity;
-                var diff = (new Date()) - parseInt(this.lastCheck, 10);
-                if (!blnForce && !this.isNewer(this, this.SCRIPT, fnIsNewer) && !(diff > interval)) {
-                    return false;
-                }
-                if (blnForce || (diff > interval)) {
-                    var t = this;
-                    return this.HttpRequest({
-                        method: 'GET',
-                        url: this.SCRIPT.meta || this.SCRIPT.identifier,
-                        onload: function (r) {
-                            t.setValue('_UPDATE_' + 'lastCheck', t.lastCheck = '' + (new Date()).getTime());
-                            t.parse(r.responseText, [fnOnNewer, fnIsNewer, false]);
-                        }
-                    });
-                }
-                try {
-                    fnOnNewer(this, this.SCRIPT);
-                } catch (x) {}
-            },
-            parse: function (strResponse, arrCheckArgs) {
-                var re = /\/\/\s*(?:@(\S+)\s+(.*?)\s*(?:$|\n)|(==\/UserScript==))/gm,
-                    match = true,
-                    name;
-                while (match && (match = re.exec(strResponse))) {
-                    if (match[3]) {
-                        match = null;
-                        continue;
-                    }
-                    name = match[1];
-                    if (name in this.defaults) {
-                        this.setValue('_UPDATE_' + name, this[name] = match[2]);
-                    }
-                }
-                this.check.apply(this, arrCheckArgs || []);
-            },
-            isNewer: function (objUpdate, objScript, fnIsNewer) {
-                if (!objUpdate) {
-                    objUpdate = this;
-                }
-                if (!objScript || (objUpdate.date > objScript.date)) {
-                    return true;
-                }
-                try {
-                    return fnIsNewer(objUpdate, objScript);
-                } catch (x) {
-                    return (!(objUpdate.date < objScript.date) && (objUpdate.version != objScript.version));
-                }
-            }
-        };
-        var UNSAFE = ((typeof unsafeWindow) != 'undefined' ? unsafeWindow : ((typeof window) != 'undefined' ? window : (function () {
-            return this;
-        })()));
-
-        function showUpdate(objUpdate, objScript) {
-            if (UNSAFE.self !== UNSAFE.top) {
-                return;
-            }
-            if (arguments.length < 2) {
-                return UPDATE.check(arguments.callee);
-            }
-            var title = objUpdate.name + ' ' + objUpdate.version + ', released ' + objUpdate.date;
-            var style = ['position:absolute; position:fixed; z-index:9999;', 'bottom:0; right:0;', 'border:1px solid black; padding:10px 10px 10px 10px;', 'background:white; font-weight:bold; font-size:small;', 'box-shadow: 0 0 3px black; border-top-left-radius:5px;'].join(' ');
-            document.body.appendChild($E('div', {
-                title: title,
-                style: style
-            }, $E('a', {
-                href: objScript.source,
-                style: 'color:#513127;'
-            }, objScript.name + ' '), $E('a', {
-                href: objScript.identifier,
-                style: 'color:#F36E21;'
-            }, 'updated!'), $E('button', {
-                onclick: 'return this.parentNode.parentNode.removeChild(this.parentNode) && false;',
-                style: 'margin-left:1ex;font-size:50%;vertical-align:super;'
-            }, '\u2573')));
-        }
-
-        var $E = function createElement(strName, objAttributes, varContent /*, varContent, ...*/ /* ) { */
-  /*
-              var el = document.createElement(strName);
-                try {
-                    for (var attribute in objAttributes) {
-                        el.setAttribute(attribute, objAttributes[attribute]);
-                    }
-                } catch (x) {}
-                if (arguments.length > 3 || (!/^(string|undefined)$/.test(typeof (varContent)) && !(varContent instanceof Array))) {
-                    varContent = Array.prototype.slice.call(arguments, 2);
-                }
-                if (varContent instanceof Array) {
-                    for (var L = varContent.length, i = 0, c; i < L; i++) {
-                        c = varContent[i];
-                        el.appendChild(c && typeof (c) == 'object' && 'parentNode' in c ? c : document.createTextNode(c));
-                    }
-                } else if (varContent) {
-                    el.innerHTML = varContent;
-                }
-                return el;
-            }
-
-        if ((window.document || {}).readyState === 'complete') {
-            showUpdate();
-        } else {
-            window.addEventListener("load", showUpdate, true);
-        }
-
-    })();
-*/
 
     // End of Update Code
     var alphaCodes = new Array("ACCT", "MGMT", "ESCB", "FINC", "MKTG", "DECS", "BLEG", "MGIS", "INTB", "CFIN", "EEEE", "EGEN", "ISEE", "MECE", "MCEE", "CMPE", "CQAS", "MCSE", "CHME", "BIME", "LADA", "CRIM", "ENGL", "ENGL", "FNRT", "HUMA", "HIST", "STSO", "PHIL", "ANTH", "ECON", "SOCS", "POLS", "PSYC", "SOCI", "GENS", "ITDA", "ITDL", "PUBL", "WGST", "INGS", "MLAR", "MLAS", "MLCH", "MLFR", "MLGR", "MLIT", "MLJP", "MLPO", "MLRU", "MLSP", "URCS", "SPSY", "MCLS", "CRST", "COMM", "HONL", "ENGT", "PACK", "CVET", "EEET", "MCET", "TCET", "MFET", "CPET", "HSPS", "NUTR", "FOOD", "HOTL", "TRAV", "HSPT", "SERQ", "HRDE", "INST", "ESHS", "FCMG", "SFTE", "DEMT", "HLTH", "ROTC", "AERO", "EMET", "ACBS", "BUSI", "QLTM", "GLSO", "TCOM", "MTSC", "GEOT", "SECU", "CMDS", "PROF", "NACC", "NAST", "NBUS", "NACN", "NACS", "NACT", "NCAR", "NCIM", "NSVP", "MSSE", "NCAR", "NAIS", "NGRD", "NGRP", "INTP", "NLST", "NCOM", "NHSS", "NHSS", "NHSS", "NENG", "NMTH", "NSCI", "NASL", "NCAR", "NCAD", "NAUT", "BIOL", "BIOG", "BIOG", "ENVS", "CHMA", "CHMB", "CHEM", "CHMG", "CHMI", "CHMO", "CHMP", "CHEN", "MATH", "STAT", "PHYS", "GSCI", "CMPM", "CHMC", "MEDS", "MTSE", "CHPO", "DMSO", "PHYA", "PMED", "CLRS", "IMGS", "HOSM", "ASTP", "BIOE", "ITDS", "WVAR", "WCLB", "WHWS", "WDAN", "WFIT", "WHLS", "WREC", "WINT", "WMAR", "WMIL", "FACW", "ELCE", "CRPP", "ACSC", "FYEP", "ITDI", "NMDE", "GRDE", "ARED", "ARDE", "FDTN", "CMGD", "INDE", "ILLS", "ILLM", "FNAS", "IDDE", "ADGR", "ARTH", "CCER", "CGLS", "CMTJ", "CWTD", "CWFD", "CGEN", "CEXT", "PHFA", "PHBM", "SOFA", "PHGR", "PHAR", "IMSM", "IMPT", "PRTM", "PRTT", "GMEP", "NMEP", "USPC", "CMPR", "ISTE", "CSCI", "ISTE", "CSCI", "MEDI", "SWEN", "SWEN", "CINT", "CISC", "NSSA", "NSSA", "IGME", "IGME", "ISUS");
@@ -280,6 +64,15 @@
     var studentCenterLink = rootURL + "/psp/PRITXJ/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES.SSS_STUDENT_CENTER.GBL?PORTALPARAM_PTCNAV=HC_SSS_STUDENT_CENTER&EOPP.SCNode=HRMS&EOPP.SCPortal=EMPLOYEE&EOPP.SCName=CO_EMPLOYEE_SELF_SERVICE&EOPP.SCLabel=Self%20Service&EOPP.SCPTfname=CO_EMPLOYEE_SELF_SERVICE&FolderPath=PORTAL_ROOT_OBJECT.CO_EMPLOYEE_SELF_SERVICE.HC_SSS_STUDENT_CENTER&IsFolder=false";
     var addToFavoritesLink = rootURL + "/psp/PRITXJ/EMPLOYEE/HRMS/s/WEBLIB_PTIFRAME.ISCRIPT1.FieldFormula.IScript_PT_Popup";
     var signOutLink = rootURL + "/psp/PRITXJ/EMPLOYEE/HRMS/?cmd=logout";
+    
+    // DO NOT FORGET TO CHANGE THIS TO FALSE WHEN PUSHING LIVE
+	var testEnvironment = true;
+
+	// Test Path
+	var testPath = 'https://people.rit.edu/~tjd9961/SIS/test/src';
+
+	// Production Path
+	var prodPath = 'https://people.rit.edu/~tjd9961/SIS/src';
 
 
     function loadFunc() {
@@ -289,6 +82,7 @@
         // Check to see if you are on the main search page
         if (onStudentCenterPage()) {
             constructFeedbackBox();
+            addTwitterBox();
         }
         
 /*         uncheckOpenClassesOnly(); */ 
@@ -301,6 +95,8 @@
         changeInputLimit();
         //  fixExpandedSearch();
         convertLetterCodeToNumber();
+        
+        formatTopTabBar();
         
         majorAutocomplete();
         removeOldHeader();
@@ -332,6 +128,96 @@
         }
         return frag;
     }
+    
+    var twitterFeedHeader = '<h3>RIT Twitter Feed</h3>' + 
+	            '<ul id="twitter_choices"><li class="twitter_titles selected_orange" id="tweet_news" style="display:inline-block;" onclick="selectTwitterFeed(\'RITNEWS\', \'tweet_news\'); _gaq.push([\'_trackEvent\', \'Twitter\', \'Selected\', \'RIT News\']);">RIT News</li><li class="twitter_titles" id="tweet_athletics" style="display:inline-block;" onclick="selectTwitterFeed(\'RITsports\', \'tweet_athletics\');_gaq.push([\'_trackEvent\', \'Twitter\', \'Selected\', \'RIT Athletics\']);">RIT Athletics<li class="twitter_titles" id="tweet_sg" style="display:inline-block;" onclick="selectTwitterFeed(\'RIT_SG\', \'tweet_sg\');_gaq.push([\'_trackEvent\', \'Twitter\', \'Selected\', \'RIT Student Government\']);">RIT SG</li></ul>';
+    
+    function addTwitterBox() {
+    	if (window.innerWidth > 1150) {
+    		// Load Tweet plugin		
+			if (!(document.getElementById('tweets'))) {
+	            var fragment = create('<div class="twitters" id="tweets">' + twitterFeedHeader + '</div>');
+	
+	            // You can use native DOM methods to insert the fragment:
+	            document.body.appendChild(fragment);
+	            getTwitters('tweets', {
+      		  	id: 'ritnews', 
+       			 prefix: '<img height="16" width="16" src="%profile_image_url%" /><a href="http://twitter.com/%screen_name%">%name%</a> said: ', 
+       			 clearContents: false, // leave the original message in place
+       			 count: 5, 
+       			 ignoreReplies: true,
+       			 newwindow: true
+   				 });
+   				 
+   				 
+            }
+            
+    	}else {
+    		var tweetBox = document.getElementById('tweets');
+    		if (tweetBox) {
+	    		tweetBox.parentNode.removeChild(tweetBox);
+    		}
+    	}
+    }
+    
+    function selectTwitterFeed(feed_id, div_id) {
+    	var tweets = document.getElementById('tweets');
+    	if (tweets) {
+    	
+    		// Clear contents before adding new tweets
+	    	tweets.innerHTML = twitterFeedHeader;
+    	
+	    	var twitter_titles = document.getElementsByClassName('twitter_titles');
+	    	// Clear class names
+	    	for (var i = 0; i < twitter_titles.length; i++) {
+	    		console.log(twitter_titles[i].className);
+	    		twitter_titles[i].className = 'twitter_titles';
+	    	}
+	    	var tweet_title_div = document.getElementById(div_id);
+	    	
+	    	tweet_title_div.className += " selected_orange";
+	    	
+
+    		getTwitters('tweets', {
+      		  	id: feed_id, 
+       			 prefix: '<img height="16" width="16" src="%profile_image_url%" /><a href="http://twitter.com/%screen_name%">%name%</a> said: ', 
+       			 clearContents: false, // leave the original message in place
+       			 count: 5, 
+       			 ignoreReplies: true,
+       			 newwindow: true
+   				 });
+		 }
+    }
+    
+    // Format Top Tab Bar
+    function formatTopTabBar() {
+    	var topBarDiv = document.getElementById('win0divDERIVED_SSTSNAV_SSTS_NAV_TABS');
+    	if (topBarDiv) {
+    		var topBarImages = topBarDiv.getElementsByTagName('img');
+    		for (var i = 0; i < topBarImages.length; i++) {
+	    		topBarImages[i].parentNode.removeChild(topBarImages[i]);
+    		}
+    	}
+    	var middleBarDiv = document.getElementById('win0divDERIVED_SSTSNAV_SSTS_NAV_SUBTABS');
+    	if (middleBarDiv) {
+    		var middleBarImages = middleBarDiv.getElementsByTagName('img');
+    		for (var i = 0; i < middleBarImages.length; i++) {
+	    		middleBarImages[i].parentNode.removeChild(middleBarImages[i]);
+    		}
+    	}
+    	
+    	if (middleBarDiv) {
+    		var middleBarTd = middleBarDiv.getElementsByTagName('td');
+    		for (var i = 0; i < middleBarTd.length; i++) {
+    		console.log(middleBarTd[i].height);
+    			if (middleBarTd[i].height == '2' || middleBarTd[i].height == '1') {
+		    		middleBarTd[i].parentNode.removeChild(middleBarTd[i]);
+	    		}
+    		}
+		}
+    }
+    
+    
    	
    	// Currently not working
    	var td = document.getElementsByTagName('td');
@@ -380,20 +266,6 @@
 		   		var suggestions = document.getElementById('suggestions');
 				suggestions.style.visibility = 'hidden';
 		   	}
-		   /*
-	
-		   	majorInput.onkeypress = function(event) {
-			   	var suggestions = $.getElementById('suggestions');
-
-		   		// Arrow down event
-				if (event.keyCode == 40) {
-					console.log("Down Arrow");
-					var selectElement = $.getElementsByClassName('selected');
-					selectElement.className = 'suggestion_option';
-					selectElement.nextSibling.className += " " + "selected";
-				}
-		   	}
-*/
 		   	majorInput.onkeydown = (function(event) {
 		   	console.log('Key Up');
 		   	// Arrow down event
@@ -424,11 +296,6 @@
 					}					
 				}else if (event.keyCode == 13) {
 				// Enter was pressed
-				/*
-if (majorInput.value.length == 4) {
-					majorInput.click;
-				}
-*/
 					var list = document.getElementsByTagName('ul');
 					var listChilds = list[0].childNodes;
 					var noMatch = true;
@@ -643,29 +510,6 @@ if (majorInput.value.length == 4) {
         }
     }
 
-//  function setFooterStyle() {
-//      /*var footer = document.getElementById('footer_bar');
-//  if (footer) {
-//  	footer.style.backgroundColor = ritOrange;
-//  	footer.style.height = "65px";
-//  }*/
-//
-//      var centerFooter = document.getElementById('center_footer');
-//      if (centerFooter) {
-//          centerFooter.style.cssText = "margin: 0 auto";
-//          centerFooter.style.width = "275px";
-//          centerFooter.style.color = "gray";
-//          centerFooter.style.fontSize = "0.75em";
-//      }
-//
-//      var ritURLId = document.getElementById('RIT_URL');
-//      if (ritURLId) {
-//          ritURLId.style.color = ritOrange;
-//          ritURLId.style.fontSize = "1.0em";
-//          ritURLId.style.textDecoration = "none";
-//      }
-//  }
-
     function validateNumberInput(evt) {
         var theEvent = evt || window.event;
         var key = theEvent.keyCode || theEvent.which;
@@ -774,174 +618,6 @@ if (majorInput.value.length == 4) {
 
             }
         }
-        /*
-var bodyContainer = document.getElementsByClassName("PSPAGE");
-        if (bodyContainer[0]) {
-            bodyContainer[0].style.backgroundColor = bgColor;
-        }
-*/
-//      var page = document.getElementById("PAGECONTAINER");
-//      var pageHeader = document.getElementById("DERIVED_CLSRCH_SSR_CLASS_LBL_LBL");
-//      if (pageHeader) {
-//          if (!(pageHeader.innerText == "Search Results")) {
-//              if (page) {
-//                  page.style.cssText = "margin: 0 auto";
-//                  page.style.backgroundColor = bgColor;
-//                  page.style.width = "600px";
-//
-//              }
-//          } else {
-//              var searchBar = document.getElementsByClassName("PSLEVEL1GRIDLABEL");
-//              searchBar[0].style.backgroundColor = ritBrown;
-//              for (i = 0; i < searchBar.length; i++) {
-//                  searchBar[i].style.backgroundColor = ritOrange;
-//              }
-//              var zoomImage = document.getElementsByName("DERIVED_CLSRCH$pt_modal_cntrl$img$0");
-//              zoomImage[0].setAttribute('src', zoomSearchImageURL);
-//
-//
-//              var subTableHeader = document.getElementsByClassName("PSGRIDTABBACKGROUND");
-//              if (subTableHeader) {
-//                  for (i = 0; i < subTableHeader.length; i++) {
-//                      subTableHeader[i].style.backgroundColor = ritBrown;
-//                  }
-//              }
-//          }
-//      }
-//
-//              }
-//          } else {
-//              var searchBar = document.getElementsByClassName("PSLEVEL1GRIDLABEL");
-//              searchBar[0].style.backgroundColor = ritBrown;
-//              for (i = 0; i < searchBar.length; i++) {
-//                  searchBar[i].style.backgroundColor = ritOrange;
-//              }
-//
-//              var subTableHeader = document.getElementsByClassName("PSGRIDTABBACKGROUND");
-//              if (subTableHeader) {
-//                  for (i = 0; i < subTableHeader.length; i++) {
-//                      subTableHeader[i].style.backgroundColor = ritBrown;
-//                  }
-//              }
-//          }
-//      }
-        
-        /*
-var zoomImage = document.getElementsByName("DERIVED_CLSRCH$pt_modal_cntrl$img$0");
-        if (zoomImage[0]) {
-	        zoomImage[0].setAttribute('src', zoomSearchImageURL);
-        }
-*/
-
-        /*
-var labels = document.getElementsByClassName("PSEDITBOXLABEL");
-        var dropDownLabels = document.getElementsByClassName("PSDROPDOWNLABEL");
-        if (labels && dropDownLabels) {
-            for (i = 0; i < labels.length; i++) {
-                labels[i].style.color = ritBrown;
-            }
-
-            for (i = 0; i < dropDownLabels.length; i++) {
-                dropDownLabels[i].style.color = ritBrown;
-            }
-
-        }
-*/
-        
-        /*
-var headers = document.getElementsByClassName("PSGROUPBOXLABEL");
-        if (headers) {
-            for (i = 0; i < headers.length; i++) {
-                headers[i].style.backgroundColor = ritOrange;
-                headers[i].style.borderColor = ritBrown;
-                headers[i].style.fontSize = '1.0em';
-                headers[i].style.fontWeight = 'normal';
-            }
-        }
-*/
-
-        /*
-jQuery(".SSSHYPERLINKBOLD").css('color', 'white');
-        jQuery(':text').css('padding', '2px');
-        jQuery(':text').css('border', '1px solid #999999');
-*/
-
-
-        /*
-var pageHeader = document.getElementById("DERIVED_CLSRCH_SSR_CLASS_LBL_LBL");
-        if (pageHeader) {
-            if (pageHeader.innerText == "Enter Search Criteria") {
-                pageHeader.innerText = "Search For Classes";
-            }
-            pageHeader.style.color = ritBrown;
-        }
-
-        var institution = document.getElementById("win0div$ICField48");
-        if (institution) {
-            institution.parentNode.removeChild(institution);
-        }
-*/
-
-        /*
-var addSrcCrit = document.getElementsByClassName("SSSMSGSUCCESSFRAME");
-        var addSrcCritFrame = document.getElementsByClassName("SSSMSGSUCCESSFRAMEWBO");
-        var click = document.getElementById("DERIVED_CLSRCH_SSR_EXPAND_COLLAPS$81$");
-        if (click) {
-            click.style.color = "#FFFFFF";
-        }
-
-        if (addSrcCrit) {
-            for (i = 0; i < addSrcCrit.length; i++) {
-                addSrcCrit[i].style.backgroundColor = ritBrown;
-                addSrcCritFrame[i].style.backgroundColor = ritBrown;
-                addSrcCritFrame[i].style.borderColor = ritBrown;
-            }
-        }
-*/
-
-
-
-        /*
-var tableHeader = document.getElementsByClassName("PSLEVEL1GRIDCOLUMNHDR");
-        if (tableHeader) {
-            for (i = 0; i < tableHeader.length; i++) {
-                tableHeader[i].style.color = "#545446";
-                tableHeader[i].style.borderRightWidth = "0px";
-                tableHeader[i].style.borderTopWidth = "0px";
-                tableHeader[i].style.borderBottomWidth = "0px";
-                tableHeader[i].style.backgroundColor = "#DFDECB";
-            }
-        }
-*/
-
-        /* Class Detail Page **************************************************************************
-         ***********************************************************************************************
-         ***********************************************************************************************/
-
-        /*
-var boxHeaders = document.getElementsByClassName("PAGROUPBOXLABELLEVEL1");
-        if (boxHeaders) {
-            for (i = 0; i < boxHeaders.length; i++) {
-                boxHeaders[i].style.backgroundColor = ritOrange;
-                //boxHeaders[i].style.color = ritBrown;
-            }
-        }
-*/
-
-        /*
-var table = document.getElementsByClassName("PSLEVEL1GRIDCOLUMNHDR");
-        if (table) {
-            for (i = 0; i < table.length; i++) {
-                table[i].style.backgroundColor = "#DFDECB";
-                table[i].style.color = "#545446";
-                table[i].style.borderRightWidth = "0px";
-                table[i].style.borderTopWidth = "0px";
-                table[i].style.borderBottomWidth = "0px";
-                table[i].style.paddingWidth = "0px";
-            }
-        }
-*/
-
 
     }
 	function contains(arrayName, element) {
