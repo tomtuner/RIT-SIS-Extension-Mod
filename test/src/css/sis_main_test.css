@@ -21,6 +21,48 @@ email:     thomasdemeo@gmail.com
 	background-color: #F8F7ED;
 }
 
+/** Style the tweets */
+
+.twitters {
+  border: 1px solid #007FA5;
+  padding: 5px;
+/*   overflow: auto; */
+  margin: 20px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.twitters ul {
+  list-style: none;
+  padding: 0;
+/*   white-space: nowrap; */
+}
+
+.twitters ul li {
+	padding: 5px;
+}
+
+.twitters span.prefix {
+  font-weight: bold;
+}
+
+.twitters span.time {
+  font-style: italic;
+  color: #c5c5c5;
+}
+
+.twitters span.status {
+  font-style: italic;
+}
+
+#tweets {
+	position: absolute;
+	top: 0;
+	right: 10px;
+	width: 300px;
+	background-color: #00A0D1;
+}
+
 .selected {
 	background-color: #FBEC5D;
 }
@@ -216,3 +258,5 @@ email:     thomasdemeo@gmail.com
 .PAGROUPDIVIDER, .SSSGROUPBOXLTBLUE {
     border: 1px solid #000000;
 }
+
+

@@ -280,6 +280,15 @@
     var studentCenterLink = rootURL + "/psp/PRITXJ/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES.SSS_STUDENT_CENTER.GBL?PORTALPARAM_PTCNAV=HC_SSS_STUDENT_CENTER&EOPP.SCNode=HRMS&EOPP.SCPortal=EMPLOYEE&EOPP.SCName=CO_EMPLOYEE_SELF_SERVICE&EOPP.SCLabel=Self%20Service&EOPP.SCPTfname=CO_EMPLOYEE_SELF_SERVICE&FolderPath=PORTAL_ROOT_OBJECT.CO_EMPLOYEE_SELF_SERVICE.HC_SSS_STUDENT_CENTER&IsFolder=false";
     var addToFavoritesLink = rootURL + "/psp/PRITXJ/EMPLOYEE/HRMS/s/WEBLIB_PTIFRAME.ISCRIPT1.FieldFormula.IScript_PT_Popup";
     var signOutLink = rootURL + "/psp/PRITXJ/EMPLOYEE/HRMS/?cmd=logout";
+    
+    // DO NOT FORGET TO CHANGE THIS TO FALSE WHEN PUSHING LIVE
+	var testEnvironment = true;
+
+	// Test Path
+	var testPath = 'https://people.rit.edu/~tjd9961/SIS/test/src';
+
+	// Production Path
+	var prodPath = 'https://people.rit.edu/~tjd9961/SIS/src';
 
 
     function loadFunc() {
@@ -289,6 +298,7 @@
         // Check to see if you are on the main search page
         if (onStudentCenterPage()) {
             constructFeedbackBox();
+            addTwitterBox();
         }
         
 /*         uncheckOpenClassesOnly(); */ 
@@ -332,6 +342,52 @@
         }
         return frag;
     }
+    
+    function addTwitterBox() {
+    	if (window.innerWidth > 800) {
+    		// Load Tweet plugin
+			
+		/*
+var twitterJavascript = "twitterJavascript";  // you could encode the css path itself to generate id..
+			if (!document.getElementById(twitterJavascript)) {
+				console.log('Load Twitter');
+				console.log(window.innerWidth);
+	   			var head  = document.getElementsByTagName('head')[0];
+	   			var link  = document.createElement('script');
+	   			link.id   = twitterJavascript;
+	  			link.language  = 'JavaScript';
+	    		link.type = 'text/javascript';
+	    		if (testEnvironment) {
+	    			link.src = testPath + '/tweet/twitter.js';
+	    		}else {
+	    			link.src = prodPath + '/tweet/twitter.js';
+	   			}
+	    		head.appendChild(link);
+			}
+*/
+
+			
+			if (!(document.getElementById('tweets'))) {
+			console.log("IN HERE NOW");
+	            var fragment = create('<div class="twitters" id="tweets"><h3>Twitter</h3></div>');
+	
+	            // You can use native DOM methods to insert the fragment:
+	            document.body.appendChild(fragment);
+	            getTwitters('tweets', {
+      		  	id: 'ritnews', 
+       			 prefix: '<img height="16" width="16" src="%profile_image_url%" /><a href="http://twitter.com/%screen_name%">%name%</a> said: ', 
+       			 clearContents: false, // leave the original message in place
+       			 count: 5, 
+       			 ignoreReplies: true,
+       			 newwindow: true
+   				 });
+            }
+            
+    	}
+    }
+    
+    
+    
    	
    	// Currently not working
    	var td = document.getElementsByTagName('td');
