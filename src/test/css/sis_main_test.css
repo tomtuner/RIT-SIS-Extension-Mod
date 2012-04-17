@@ -30,6 +30,7 @@ email:     thomasdemeo@gmail.com
   margin: 20px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+  box-shadow: black 1px 2px 3px;
 }
 
 .twitters ul {
@@ -63,8 +64,27 @@ email:     thomasdemeo@gmail.com
 	background-color: #00A0D1;
 }
 
+ul#twitter_choices {
+	margin: 0 auto;
+}
+
+.twitter_titles {
+	color: white;
+	background-color: #513127;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	padding: 2px;
+	border: 1px solid black;
+	cursor: pointer;
+	margin: 4px;
+}
+
 .selected {
 	background-color: #FBEC5D;
+}
+
+.selected_orange {
+	background-color: #F36E21;
 }
 
 #suggestions {
@@ -191,6 +211,12 @@ email:     thomasdemeo@gmail.com
 #ACE_DERIVED_SSS_SCL_SSS_SC_LNK3_NAME,
 #ACE_DERIVED_SSS_SCL_SSS_GO_4 {
     background-color: #DFDECB;
+}
+
+.SSSGROUPBOXLEFTNBO,
+.SSSGROUPBOXRIGHTWBO,
+.PSGROUPBOXWBO {
+    box-shadow: black 1px 2px 3px;
 }
 
 #ACE_DERIVED_SSS_ENR_GROUP_BOX {
