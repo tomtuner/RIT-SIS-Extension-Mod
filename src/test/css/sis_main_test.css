@@ -286,3 +286,40 @@ ul#twitter_choices {
 }
 
 
+/******************************
+*****************************
+    Tab Styles
+******************************
+*****************************/
+
+.ssstabactive{
+    background: -webkit-gradient(linear, left top, left bottom, from(#D9CDCA), to(white));
+    background: -moz-linear-gradient(center top , rgb(217, 205, 202), rgb(255, 255, 255)) repeat scroll 0% 0% transparent
+    text-decoration:none;
+    vertical-align: text-top;
+    text-transform: lowercase;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 5px 5px 0px 0px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    padding: 5px 2px 2px 2px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#D9CDCA), to(white));
+    border: 1px solid #000000;
+    box-shadow: 2px -2px 7px #000000;
+    -moz-box-shadow: 2px -2px 7px #000000;
+    border-bottom: 0px;
+}
+
+.ssstabinactive{
+    background: -webkit-gradient(linear, left top, left bottom, from(#DFDECB), to(#D9CDCA));
+    background: -moz-linear-gradient(center top , rgb(255, 255, 255), rgb(223, 222, 203)) repeat scroll 0% 0% transparent
+    text-decoration:none;
+    vertical-align: text-top;
+    text-transform: lowercase;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 5px 5px 0px 0px;
+    padding: 5px 2px 2px 2px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#DFDECB), to(#D9CDCA));
+    border: 1px solid #000000;
+}
