@@ -225,6 +225,15 @@ ul#twitter_choices {
 #CLASS_SRCH_WRK2_UNITS_MINIMUM_LBL, #CLASS_SRCH_WRK2_UNITS_MAXIMUM_LBL,#SSSIMAGECENTER{
     cursor: help;
 }
+
+#ACE_DERIVED_SSS_BCC_ {
+	background-color: #CBCAAC;
+    border-color: #000000;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    border: 1px solid black;
+}
+
 /* Box Header and Text styling*/
 .SSSGROUPBOXRIGHTLABEL,
 .PSLEVEL3GRIDLABEL,
@@ -269,7 +278,8 @@ ul#twitter_choices {
     box-shadow: black 1px 2px 3px;
 }
 
-#ACE_DERIVED_SSS_ENR_GROUP_BOX {
+#ACE_DERIVED_SSS_ENR_GROUP_BOX,
+#ACE_DERIVED_CLSRCH_GROUPBOX1 {
 	background-color: #F8F7ED;
 }
 
@@ -312,13 +322,15 @@ ul#twitter_choices {
 .SSSMSGSUCCESSFRAME,
 .SSSMSGSUCCESSFRAMEWBO {
        background-color: #513127;
-       border-color: #513127;
+       border-color: #000000;
 }
 
 .SSSHYPERLINKBOLD,
 .SSSHYPERLINKBOLD:hover {
        color: #FFFFFF;
        padding: 2px 2px 2px 2px;
+       text-shadow: 1px 1px 2px black;
+}
 
 .PSLEVEL1GRID,
 .PSLEVEL1GRIDWBO,

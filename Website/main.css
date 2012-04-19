@@ -1,0 +1,326 @@
+/*----------------------------------------------------------------------------- 
+RIT SIS Extensions Stylesheet 
+
+version:   1.0 
+date:      04/08/12 
+author:    Thomas DeMeo
+email:     thomasdemeo@gmail.com
+-----------------------------------------------------------------------------*/
+
+/* Remove padding and margin */
+*
+    {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: Georgia, Palatino, "Times New Roman";
+/*     display: block; */
+}
+
+/* Set up classes for floating and clearing */
+.clear
+    {
+    clear:both;
+}
+
+.right
+    {
+    float: right;
+}
+
+.left
+    {
+    float: left;
+}
+
+.inline {
+	display: inline;
+}
+
+.underline {
+	text-decoration: underline;
+}
+
+body {
+    font: 62.5%/1.5  "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sans-serif;
+    color: #000000;
+    background-color: #F8F7ED;
+
+/*     text-align:center; */
+}
+
+.align_center {
+	text-align: center;
+}
+
+.no_cursor {
+	cursor: default;
+}
+
+#page_wrap {
+    width:980px;
+    margin-left:auto;
+    margin-right:auto;
+    background-color: #F8F7ED;  
+    margin-top: 20px;
+     
+}
+
+#header {
+	 box-shadow: 0 0 10px #000000;
+    -moz-box-shadow: 0 0 10px #000000;
+    height: 100px;
+    background-color: #513127;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+
+}
+
+.margin_top_20 {
+	margin-top: 20px;
+}
+
+/* Set up header sizes */
+
+h1
+    {
+    font-size: 2.2em;
+}
+
+h2
+    {
+    font-size: 2.0em;
+}
+
+h3
+    {
+    font-size: 1.8em;
+}
+
+h4
+    {
+    font-size: 1.6em;
+}
+
+h5
+    {
+    font-size: 1.4em;
+}
+
+p
+    {
+    font-size: 1.2em;
+}
+
+a {
+	text-decoration: none;
+	color: #F36E21;
+
+}
+
+ol {
+	font: italic 1.5em Georgia, Times, serif;
+  	color: #999999;
+}
+
+ol li {
+	margin: 5px;
+}
+
+ol p {
+  font: normal 1.0em Arial, Helvetica, sans-serif;
+  color: #000000;
+}
+
+ol span.download {
+	font-size: 1.2em;
+}
+
+#browser_select {
+	margin-top: 25px;
+	margin-bottom: 10px;
+
+}
+
+ul#browser_list {
+/* 	display: inline; */
+/* 	width: 950px; */
+}
+
+ul#browser_list li {
+	display: inline-block;
+	width: 300px;
+	height: 8em;
+	padding: 10px 10px 10px 10px;
+	text-align: right;
+}
+
+ul#feature_list {
+	font-size: 14px;
+}
+
+
+
+li span {
+	color: #494a4b;
+	font-size: 1.8em;
+	line-height: 4.5em;
+	margin-right: 20px;
+
+}
+
+
+li#chrome {
+ 	background-color: #4DB849; 
+	background: -moz-linear-gradient(top,  #76d571,  #4DB849);
+	background: -webkit-gradient(linear, left top, left bottom, from(#76d571), to(#4DB849));
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: solid 2px #4DB849;
+	cursor: pointer;
+
+}
+
+li#firefox {
+	background-color: #DF731B;
+	background: -moz-linear-gradient(top,  #ed9e30,  #DF731B);
+	background: -webkit-gradient(linear, left top, left bottom, from(#ed9e30), to(#DF731B));
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: solid 2px #DF731B;
+	cursor: pointer;
+
+}
+
+li#safari {
+	background-color: #47BAEB;
+	background: -moz-linear-gradient(top,  #6fd7f4,  #47BAEB);
+	background: -webkit-gradient(linear, left top, left bottom, from(#6fd7f4), to(#47BAEB));
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: solid 2px #47BAEB;
+	cursor: pointer;
+
+}
+
+.right_align {
+	text-align: right;
+}
+
+.tested_versions {
+	clear:both;
+	text-align: left;
+	font-size: 14px;
+	margin-top: 10px;
+}
+
+#recommended_browser {
+	margin-left: 75px;
+}
+
+#question_mark {
+	cursor: pointer;
+	display: inline;
+	margin-top: 0px;
+	margin-left: 5px;
+}
+
+.download {
+	width: 300px;
+	background-color: #513127;
+	background: -moz-linear-gradient(top,  #7a5243,  #513127);
+	background: -webkit-gradient(linear, left top, left bottom, from(#7a5243), to(#513127));
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: solid 2px #513127;
+	height: 3.4em;
+	display: inline-block;
+	line-height: 3.2em;
+	font-size: 1.6em;
+	margin-top: 10px;
+	color: #F36E21;
+	font-family: "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sans-serif;
+	font-style: normal;
+}
+
+#browser_logo {
+	float: left;
+	margin-top: -5px;
+	margin-left: 0px;
+}
+
+#browser_footer {
+	margin-top: 60px;
+	text-align: justify;
+	width: 400px;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+/* For mouseover */
+
+#tt {
+ position:absolute;
+ display:block;
+ background-color: #494a4b;
+}
+#tttop {
+ display:block;
+ height:5px;
+ margin-left:5px;
+}
+#ttcont {
+ display:block;
+ padding:2px 12px 3px 7px;
+ margin-left:5px;
+ background-color: #494a4b;
+ color:#fff;
+}
+#ttbot {
+	display:block;
+	height:5px;
+	margin-left:5px;
+}
+
+#sis_extension {
+	font-size: 52px;
+   margin: 10px;
+   margin-top: 0px;
+   letter-spacing: 2px;
+}
+
+#right_header {
+	margin-top: 20px;
+/* 	background-color: white; */
+/*
+	border-radius: 3px;
+	border: 1px solid black;
+*/
+	color: white;
+}
+
+#facebook {
+	font-size: 24px;
+	margin: 20px;
+	margin-top: 80px;
+}
+
+#facebook_link {
+	color: #3B5998;
+	text-shadow: 1px 1px 0px black;
+}
+
+.connect_widget {
+	color: white;
+}
+
+
+/* Footer 
+-----------------------------------------------------------------------------*/
+
+#page_footer {
+	text-align: center;
+	margin-top: 20px;
+	font-size: 12px;
+}
+

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="Author" content="Thomas DeMeo">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta http-equiv="Content-language" content="en">
+		<meta name="description" content="An extension for the new RIT SIS system which looks to improve on the PeoplSoft software user">
+		<meta name="keywords" content="RIT, SIS, SIS Extension, RIT SIS, RIT SIS Extension, Thomas DeMeo, Daniel Fenton">
+		<title>RIT SIS Extension</title>
+		<link rel="stylesheet" type="text/css" href="main.css">
+		<link rel="shortcut icon" href="images/favicon.ico" />
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript" src="javascript/main.js"></script>
+		
+		<!-- 	Google Analytics Code	 -->
+		
+		<script type="text/javascript">
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-30722787-1']);
+		  _gaq.push(['_setAllowLinker', true]);
+		  _gaq.push(['_trackPageview']);
+		
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+		</script>
+		<!-- 	End of Google Analytics Code	 -->
+	</head>
+	<body>
+	<!-- Facebook Code	 -->
+	<div id="fb-root"></div>
+	<script>
+	window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '372503369467075', // App ID
+      channelUrl : 'www.sisextension.com/channel.html', // Channel File
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true  // parse XFBML
+    });
+
+    // Additional initialization code here
+  };
+	(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=372503369467075";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+	<!-- End of Facebook Code	 -->
+	<div id="header">
+		<div class="left" id="left_header">
+<!-- 			<img src="https://sis.rit.edu/info/sis_images/rit_logo.gif" alt="RIT Header" width="161" height="56"/> -->
+			<span id="sis_extension">RIT SIS Extension</span>
+		</div>
+		<div class="right" id="right_header">
+<!-- 			<span id="facebook">Like us on <a id="facebook_link" target="_blank" href="http://facebook.com/sisextension">Facebook</a></span> -->
+		<div class="fb-like" data-href="https://facebook.com/sisextension" data-send="true" data-width="450" data-show-faces="true" data-colorscheme="dark" data-font="verdana"></div>
+		</div>
+	</div>
+	<!-- End of Header	 -->
+	<div id="page_wrap">
+<!-- 		<h1>RIT new SIS (GeneSIS) Extension</h1> -->
+		<h1 class="margin_top_20">Select which browser you will use the SIS system with:</h1>
+		<div id="browser_select">
+		<!-- <h5 id="recommended_browser" class="inline">(Recommended Browser)</h5><div id="question_mark" onmouseover="tooltip.show('Google Chrome includes native support for GreaseMonkey scripts. A few simple clicks and you\'re all done!', 200);" onmouseout="tooltip.hide();">?</div> -->
+		<ul id="browser_list">
+			<li id="chrome" onclick="_gaq.push(['_trackEvent', 'Browser', 'Selected', 'Chrome']);fade('chrome', 'page_wrap');">
+ 			<img id="browser_logo" src="images/chrome_logo.png" alt="Chrome Logo" width="90" height="90"/>
+			<span>Google Chrome</span>
+			<div class="tested_versions no_cursor">
+			<div>Versions tested for Mac: 18+</div>
+			<div>Versions tested for Windows: 18+</div>
+			<div class="align_center">Download <a href="http://www.google.com/chrome">Chrome</a></div></div>
+			</li>
+			<li id="firefox" onclick="_gaq.push(['_trackEvent', 'Browser', 'Selected', 'Firefox']);fade('firefox', 'page_wrap');">
+ 			<img id="browser_logo" src="images/firefox_logo.png" alt="Firefox Logo" width="90" height="90"/>
+			<span>Mozilla Firefox</span>
+			<div class="tested_versions">
+			<div>Versions tested for Mac: 11+</div>
+			<div>Versions tested for Windows: 9+</div>
+			<div class="align_center">Download <a href="http://www.mozilla.org/firefox">Firefox</a></div></div>
+			</li>
+			<li id="safari" onclick="_gaq.push(['_trackEvent', 'Browser', 'Selected', 'Safari']);fade('safari', 'page_wrap');">
+ 			<img id="browser_logo" src="images/safari_logo.png" alt="Safari Logo" width="86" height="94"/>
+			<span>Apple Safari</span>
+			<div class="tested_versions">
+			<div>Versions tested for Mac: 5+</div>
+			<div>Versions tested for Windows: 5+</div>
+			<div class="align_center">Download <a href="http://www.apple.com/safari/download/">Safari</a></div></div>
+			</li>
+		</ul>
+		</div>
+		<!-- 	End of browser select	 -->
+		<div class="align_center" id="browser_footer">
+		<h2>What we have done:</h2>
+		<p>We have developed an easy web browser plug-in that makes the new SIS system more user friendly.
+			We are continually improving and enhancing the system to make it a more enjoyable experience for students.
+			Interested in getting involved or sending us feedback? Click on one of our names below to send us an email.
+			We are always open to new ideas and suggestions.
+		</p>
+
+		<!--
+<h1>OR</h1>
+		<h4>Don't think you need instructions? Click here to download the extension.</h4>
+		<a href="https://people.rit.edu/~tjd9961/SIS/sismod.user.js" onclick="_gaq.push(['_trackEvent', 'Script', 'Downloaded', 'Main Page']);"><span class="download">SIS Extension Download</span></a>
+-->
+		</div>
+		<!-- End of browser_list -->
+		<div><h2>Current Feature List</h2>
+		<ul id="feature_list">
+			<li>Autocomplete functionality for major code selection (i.e. search by your major name)</li>
+			<li>Themed with the RIT colors</li>
+			<li>You never have to update or install again, just install once and we will take care of the rest.</li>
+			<li>Mouseover tooltips for new terms or confusing images (i.e. what does a yellow triangle mean?)</li>
+			<li>More coming soon...</li>
+		</ul>
+		</div>
+		</div>
+		<!-- End of page_wrap -->
+		<div id="page_footer">
+			<h4>Thank you for being a part of something bigger.</h4>
+			<div><span>Designed, developed, and supported by <a href="mailto:tjd9961@rit.edu">Thomas DeMeo</a> and <a href="mailto:def2191@rit.edu">Daniel Fenton</a></span></div>
+			<div><span>Hosted by <a href="http://sg.rit.edu">RIT Student Government</a></span></div>
+		</div>
+		<!-- End of page_footer -->
+	</body>
+</html>

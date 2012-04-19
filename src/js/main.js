@@ -133,7 +133,7 @@
 	            '<ul id="twitter_choices"><li class="twitter_titles selected_orange" id="tweet_news" style="display:inline-block;" onclick="selectTwitterFeed(\'RITNEWS\', \'tweet_news\'); _gaq.push([\'_trackEvent\', \'Twitter\', \'Selected\', \'RIT News\']);">RIT News</li><li class="twitter_titles" id="tweet_athletics" style="display:inline-block;" onclick="selectTwitterFeed(\'RITsports\', \'tweet_athletics\');_gaq.push([\'_trackEvent\', \'Twitter\', \'Selected\', \'RIT Athletics\']);">RIT Athletics<li class="twitter_titles" id="tweet_sg" style="display:inline-block;" onclick="selectTwitterFeed(\'RIT_SG\', \'tweet_sg\');_gaq.push([\'_trackEvent\', \'Twitter\', \'Selected\', \'RIT Student Government\']);">RIT SG</li></ul>';
     
     function addTwitterBox() {
-    	if (window.innerWidth > 1150) {
+    	if (window.innerWidth > 1429) {
     		// Load Tweet plugin		
 			if (!(document.getElementById('tweets'))) {
 	            var fragment = create('<div class="twitters" id="tweets">' + twitterFeedHeader + '</div>');
