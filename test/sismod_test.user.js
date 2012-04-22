@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name               RIT SIS Modifications Test
+// @name               RIT SIS Modifications
 // @description        Adds enhancements to the RIT SIS system such as an RIT color theme.
-// @namespace          demeo.rit.sismod.test
+// @namespace          demeo.rit.sismod
 // @author             Thomas DeMeo
 // @author             Dan Fenton
 // @include            http://mycampus.rit.edu/*
@@ -27,7 +27,7 @@ function loadExtensionScript(callback) {
     var script = document.createElement("script");
     var head  = document.getElementsByTagName('head')[0];
 
-    script.setAttribute("src", "https://people.rit.edu/~tjd9961/SIS/test/src/sis_extension_test.js");
+    script.setAttribute("src", "https://people.rit.edu/~tjd9961/SIS/test/src/sis_extension.js");
     script.addEventListener('load', function () {
         var script = document.createElement("script");
         script.textContent = "(" + callback.toString() + ")();";
