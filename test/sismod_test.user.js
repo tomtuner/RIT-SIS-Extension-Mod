@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name               RIT SIS Modifications
+// @name               TEST: RIT SIS Modifications
 // @description        Adds enhancements to the RIT SIS system such as an RIT color theme.
 // @namespace          demeo.rit.sismod
 // @author             Thomas DeMeo
