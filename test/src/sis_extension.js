@@ -44,7 +44,7 @@ function addCSS() {
 	    link.rel  = 'stylesheet';
 	    link.type = 'text/css';
 	    if (testEnvironment) {
-	    	link.href = testPath + '/css/sis_main_test.css';
+	    	link.href = testPath + '/css/sis_main.css';
 	    }else {
 	    	link.href = prodPath + '/css/sis_main.css';
 	    }
@@ -62,7 +62,7 @@ function addJavascript() {
 	    link.language  = 'JavaScript';
 	    link.type = 'text/javascript';
 	    if (testEnvironment) {
-	    	link.src = testPath + '/js/main_test.js';
+	    	link.src = testPath + '/js/main.js';
 	    }else {
 	    	link.src = prodPath + '/js/main.js';
 	   	}
