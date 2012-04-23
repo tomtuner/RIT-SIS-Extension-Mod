@@ -346,3 +346,56 @@ ul#twitter_choices {
 .PAGROUPDIVIDER, .SSSGROUPBOXLTBLUE {
     border: 1px solid #000000;
 }
+
+
+
+/************************************
+************************************
+
+Pop-up Styles
+
+************************************
+/************************************/
+
+#popupInner{
+    width: 560px;
+    height: 630px;
+}
+
+.PSSRCHPAGE {
+    background-color: #F8F7ED;
+}
+
+.PSSRCHRESULTSTITLE,
+#popupTitleBarMiddle{
+    background-color: #F36E21;
+    color: #513127;
+    border-color: #000000;
+    width: 100%;
+}
+
+.PSSRCHRESULTSHYPERLINKD{
+    color: #513127;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/* Text color */
+
+.PSSRCHSUBTITLE,
+.PSSRCHACTION {
+    color: #513127;
+}
+
+/* Table header */
+.PSSRCHRESULTSHDR {
+    border: none;
+    background-color: #DFDECB;
+    text-align: -webkit-center;
+    padding-bottom: 10px;
+}
+
+.PSSRCHRESULTSHDR {
+    color: #545446;
+    font-size: 10pt;
+}
