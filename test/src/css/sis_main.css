@@ -19,6 +19,7 @@ email:     thomasdemeo@gmail.com
 .PSPAGE, .PSPAGECONTAINER {
 	margin: 0 auto;
 	background-color: #F8F7ED;
+	font-size: 14px;
 }
 
 /** Style the tweets */
@@ -32,6 +33,7 @@ email:     thomasdemeo@gmail.com
   border-radius: 3px;
 	-moz-box-shadow: black 1px 2px 3px;
   box-shadow: black 1px 2px 3px;
+  margin-top: 80px;
 }
 
 .twitters ul {
@@ -201,13 +203,27 @@ ul#twitter_choices {
 
 #right_header{
     float: right;
-    margin-top: 40px;
+    margin-top: 25px;
 }
 
 .right_header_text{
     color: #FFFFFF;
-    padding-right: 5px;
     font-size: 14px;
+    padding: 10px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	margin-right: 10px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	text-decoration: none;
+	background-color: #513127;
+	border: 1px solid #000000;
+	background: -moz-linear-gradient(top, #7a5243, #513127);
+	background: -webkit-gradient(linear, left top, left bottom, from(#7a5243), to(#513127));
+}
+
+#footer_bar {
+	margin-bottom: 10px;
 }
 
 #center_footer{
@@ -217,11 +233,12 @@ ul#twitter_choices {
     font-size: 0.75em;
 }
 
-#RIT_URL{
+#facebook_url{
     color: #F36E21;
     font-size: 1.0em;
     text-decoration: none;
 }
+
 #CLASS_SRCH_WRK2_UNITS_MINIMUM_LBL, #CLASS_SRCH_WRK2_UNITS_MAXIMUM_LBL,#SSSIMAGECENTER{
     cursor: help;
 }
@@ -345,4 +362,113 @@ ul#twitter_choices {
 
 .PAGROUPDIVIDER, .SSSGROUPBOXLTBLUE {
     border: 1px solid #000000;
+}
+
+/* BANNER STYLE */
+
+#banner_bar{
+    background-color: #513127;
+    height: 65px;
+}
+
+#enhance_banner {
+	margin: 0 auto;
+	width: 960px;
+}
+
+#banner_left_header {
+    float: left;
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+
+#banner_center {
+	color: white;
+	font-family: Georgia, Palatino, "Times New Roman";
+	font-size: 48px;
+	margin-top: 5px;
+	margin-left: 70px;
+	text-shadow: 1px 1px 2px black;
+	float: left;
+}
+
+#banner_right_header {
+	float: right;
+    margin-top: 5px;
+    color: white;
+    margin-right: 150px;
+}
+
+#sg_vote_now_box {
+    margin-top: 5px;
+	font-size: 14px;
+	padding-left: 25px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	background-color: #F36E21;
+	background: -moz-linear-gradient(top, #f8993a, #F36E21);
+	background: -webkit-gradient(linear, left top, left bottom, from(#f8993a), to(#F36E21));
+	border: 1px solid black;
+	height: 25px;
+	padding-top: 10px;
+}
+
+#sg_vote_now {
+	text-decoration: none;	
+    color: white;
+    margin-top: 10px;
+	font-size: 18px;
+}
+
+/************************************
+************************************
+
+Pop-up Styles
+
+************************************
+/************************************/
+
+#popupInner{
+    width: 560px;
+    height: 630px;
+}
+
+.PSSRCHPAGE {
+    background-color: #F8F7ED;
+}
+
+.PSSRCHRESULTSTITLE,
+#popupTitleBarMiddle{
+    background-color: #F36E21;
+    color: #513127;
+    border-color: #000000;
+    width: 100%;
+}
+
+.PSSRCHRESULTSHYPERLINKD{
+    color: #513127;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/* Text color */
+
+.PSSRCHSUBTITLE,
+.PSSRCHACTION {
+    color: #513127;
+}
+
+/* Table header */
+.PSSRCHRESULTSHDR {
+    border: none;
+    background-color: #DFDECB;
+    text-align: -webkit-center;
+    padding-bottom: 10px;
+}
+
+.PSSRCHRESULTSHDR {
+    color: #545446;
+    font-size: 10pt;
 }

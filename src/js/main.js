@@ -181,7 +181,6 @@
 	    	var twitter_titles = document.getElementsByClassName('twitter_titles');
 	    	// Clear class names
 	    	for (var i = 0; i < twitter_titles.length; i++) {
-	    		console.log(twitter_titles[i].className);
 	    		twitter_titles[i].className = 'twitter_titles';
 	    	}
 	    	var tweet_title_div = document.getElementById(div_id);
@@ -220,7 +219,6 @@
     	if (middleBarDiv) {
     		var middleBarTd = middleBarDiv.getElementsByTagName('td');
     		for (var i = 0; i < middleBarTd.length; i++) {
-    		console.log(middleBarTd[i].height);
     			if (middleBarTd[i].height == '2' || middleBarTd[i].height == '1') {
 		    		middleBarTd[i].parentNode.removeChild(middleBarTd[i]);
 	    		}
@@ -256,10 +254,12 @@
    	// Only needs to be done once
 	 var majorInput = document.getElementById('CLASS_SRCH_WRK2_SUBJECT$70$');
 	 if(majorInput) {
-	 	if (!majorInput.value) {
+	 	if (majorInput.value != 'Start typing in a major') {
 			 majorInput.value = 'Start typing in a major';
 		 }
 	}
+	// Make sure the window is scrolled to the top
+	window.scroll(0,0);
 
     
     function majorAutocomplete() {
@@ -268,7 +268,7 @@
 		    	majorInput.maxLength = 50;
 		    	majorInput.style.width = '150px';
 		    	majorInput.onclick = (function() {
-				if (majorInput.value == 'Start typing in a major') {
+				if (majorInput.value == 'Start typing in a major' || majorInput.value == 'START TY') {
 					majorInput.value = '';    	
 				}
 		   	})
@@ -278,7 +278,7 @@
 				suggestions.style.visibility = 'hidden';
 		   	}
 		   	majorInput.onkeydown = (function(event) {
-		   	console.log('Key Up');
+
 		   	// Arrow down event
 				if (event.keyCode == 40 || event.keyCode == 38) {
 					var list = document.getElementsByTagName('ul');
@@ -307,6 +307,15 @@
 					}					
 				}else if (event.keyCode == 13) {
 				// Enter was pressed
+				
+					if (majorInput.value.length == 4) {
+						console.log('valid number and enter was pressed');
+						var search = document.getElementById('CLASS_SRCH_WRK2_SSR_PB_CLASS_SRCH');
+						if (search) {
+							window.location.href = search.href;
+						}
+					}
+				
 					var list = document.getElementsByTagName('ul');
 					var listChilds = list[0].childNodes;
 					var noMatch = true;
@@ -315,6 +324,7 @@
 							majorSelectedWithElement(listChilds[i]);
 						}
 					}
+					
 					/*
 
 					var numberSelector = document.getElementById('CLASS_SRCH_WRK2_SUBJECT$70$');
