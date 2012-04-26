@@ -447,9 +447,9 @@
     }
 
 	function onShoppingCartPage() {
-		var pageHeader = document.getElementById("DERIVED_REGFRM1_SS_TRANSACT_TITLE");
+		var pageHeader = document.getElementById("DERIVED_REGFRM1_TITLE1");
 		if (pageHeader) {
-			if (pageHeader.innerText == 'Shopping Cart') {
+			if (pageHeader.innerText == 'Add Classes to Shopping Cart') {
 				return true;
 			}else {
 				return false;
