@@ -73,16 +73,6 @@
     
     var sgVoteLink = "http://vote.rit.edu";
     var facebookURL = "http://facebook.com/sisextension"
-    
-    // DO NOT FORGET TO CHANGE THIS TO FALSE WHEN PUSHING LIVE
-	var testEnvironment = true;
-
-	// Test Path
-	var testPath = 'https://people.rit.edu/~tjd9961/SIS/test/src';
-
-	// Production Path
-	var prodPath = 'https://people.rit.edu/~tjd9961/SIS/src';
-
 
     function loadFunc() {
     
