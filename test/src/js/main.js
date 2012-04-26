@@ -154,6 +154,17 @@
 	    			classNums[i].innerText = courseNames[matches[0]] + "\n" + classNums[i].innerText;
     			}
 			}
+			
+    	}
+    	
+    	var courseDiv = document.getElementById('win0divP_CLASS_NAME$0');
+    	if (courseDiv) {
+    		courseDiv.style.width = '140px';
+    	}
+    	
+    	var courseDiv2 = document.getElementById('win0divE_CLASS_NAME$0');
+    	if (courseDiv2) {
+    		courseDiv2.style.width = '140px';
     	}
     }
   

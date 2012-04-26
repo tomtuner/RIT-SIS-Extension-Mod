@@ -472,8 +472,3 @@ Pop-up Styles
     color: #545446;
     font-size: 10pt;
 }
-
-/* Fixing table width on shopping cart page */
-#win0divP_CLASS_NAME$0 {
-	width: 140px;
-}
