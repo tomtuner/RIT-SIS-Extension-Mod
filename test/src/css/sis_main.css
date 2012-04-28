@@ -203,7 +203,7 @@ ul#twitter_choices {
 
 #right_header{
     float: right;
-    margin-top: 25px;
+    margin-top: 15px;
 }
 
 .right_header_text{
@@ -475,4 +475,10 @@ Pop-up Styles
 .PSSRCHRESULTSHDR {
     color: #545446;
     font-size: 10pt;
+}
+
+#shopping_cart_picture {
+	position: relative;
+	top: 7px;
+	left: -4px;
 }

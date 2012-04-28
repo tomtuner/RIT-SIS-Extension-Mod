@@ -11,6 +11,16 @@
 		<link rel="shortcut icon" href="images/favicon.ico" />
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script type="text/javascript" src="javascript/main.js"></script>
+		<script type="text/javascript" src="galleria/galleria-1.2.7.min.js"></script>
+		
+		<!-- 	Galleria Theme Setter	 -->
+
+		<script>
+   			 Galleria.loadTheme('galleria/themes/classic/galleria.classic.min.js');
+   			 Galleria.run('#galleria');
+    	</script>
+
+		<!-- 	End of Galleria Theme Setter	 -->
 		
 		<!-- 	Google Analytics Code	 -->
 		
@@ -96,24 +106,33 @@
 		</div>
 		<!-- 	End of browser select	 -->
 		<div class="align_center" id="browser_footer">
-		<h2>What we have done:</h2>
-		<p>We have developed an easy web browser plug-in that makes the new SIS system more user friendly.
+		<h2>Screenshots:</h2>
+		<!--
+<p>We have developed a simple web browser plug-in that makes the new SIS system more user friendly.
 			We are continually improving and enhancing the system to make it a more enjoyable experience for students.
 			Interested in getting involved or sending us feedback? Click on one of our names below to send us an email.
 			We are always open to new ideas and suggestions.
 		</p>
-
+-->
+		<div id="galleria" style="margin-left:100px; height: 500px; width: 800px;">
+    		<img data-title="Added an RIT color theme" src="images/user_screenshots/student_center_screenshot.png">
+		    <img data-title="Search your course subject my typing it in with autocomplete!" src="images/user_screenshots/major_search_autocomplete.png">
+    		<img data-title="View your course names when they are in your shopping cart!" src="images/user_screenshots/class_names_screenshot.png">
+		</div>
 		<!--
 <h1>OR</h1>
 		<h4>Don't think you need instructions? Click here to download the extension.</h4>
 		<a href="https://people.rit.edu/~tjd9961/SIS/sismod.user.js" onclick="_gaq.push(['_trackEvent', 'Script', 'Downloaded', 'Main Page']);"><span class="download">SIS Extension Download</span></a>
 -->
 		</div>
+		
 		<!-- End of browser_list -->
 		<div><h2>Current Feature List</h2>
 		<ul id="feature_list">
 			<li>Autocomplete functionality for major code selection (i.e. search by your major name)</li>
 			<li>Themed with the RIT colors</li>
+			<li>Course names now appear for classes in your shopping cart</li>
+			<li>Commonly used links across the top of every page to easily get back to things such as the student center</li>
 			<li>You never have to update or install again, just install once and we will take care of the rest.</li>
 			<li>Mouseover tooltips for new terms or confusing images (i.e. what does a yellow triangle mean?)</li>
 			<li>More coming soon...</li>
