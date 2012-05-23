@@ -477,7 +477,7 @@ Pop-up Styles
     font-size: 10pt;
 }
 
-#shopping_cart_picture {
+.header_link_image {
 	position: relative;
 	top: 7px;
 	left: -4px;
