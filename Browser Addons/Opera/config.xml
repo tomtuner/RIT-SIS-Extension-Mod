@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" id="http://www.sisextension.com" version="1.0">
+
+  <name>RIT SIS Extension</name>
+
+  <author>Thomas DeMeo</author>
+  <description>An add-on to enhance the user experience of the RIT SIS System</description>
+  <icon src="images/Icon-64.png"/>
+ 	
+</widget>
