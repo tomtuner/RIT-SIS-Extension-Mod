@@ -75,7 +75,7 @@ var tooltip=function(){
 
 var TimeToFade = 500.0;
 var extensionURL = 'https://people.rit.edu/~tjd9961/SIS/sismod.user.js';
-var firefoxExtensionURL = 'https://addons.mozilla.org/firefox/downloads/file/149327/rit_sis_extension-1.0.0-fx.xpi?src=dp-btn-primary';
+var firefoxExtensionURL = 'http://www.sisextension.com/downloads/rit_sis_extension-1.0.0-fx.xpi';
 var safariExtensionURL = 'http://www.sisextension.com/downloads/RIT%20SIS%20Extension.safariextz';
 
 var browse;
