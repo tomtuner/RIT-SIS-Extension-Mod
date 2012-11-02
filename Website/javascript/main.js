@@ -156,7 +156,20 @@ function replaceElementWithChrome(eid) {
 	var element = document.getElementById(eid);
 	element.innerHTML = 
 		'<a href="index.html">BACK</a>' +
-		'<h1>Google Chrome</h1>' +
+		'<h1>Google Chrome (Latest Version)</h1>' +
+		/* '<h4>Currently tested on Chrome 18+</h4>' + */
+		'<h4 class="underline">Installation Instructions</h4>' +
+		'<ol>' +
+			'<li><p>Click on the "SIS Extension Download" button below.</p></li>' +
+			'<a href="' + extensionURL + '" onclick="_gaq.push([\'_trackEvent\', \'Script\', \'Downloaded\', \'Chrome Page\']);"><span class="download align_center">SIS Extension Download</span></a>' +
+			'<li><p>Click the wrench icon on the browser toolbar.</p></li>' +
+			'<li><p>Select <b>Tools > Extensions</b>.</p></li>' +
+			'<li><p>Locate the extension file on your computer and drag the file onto the Extensions page.</li>' +
+			'<li><p>Another window will pop open on your browser confirming you would like to install the extension. Click "Install".</p></li>' +
+			'<img src="images/chrome_install_dialog.png" alt="Chrome Install Dialog" width="391" height="154"/>' +
+			'<li><p>Visit the new <a href="http://infocenter.rit.edu" target="new">RIT SIS page</a> and enjoy!</p></li>' +
+		'</ol>' +
+		'<h1>Google Chrome (Older Versions)</h1>' +
 		/* '<h4>Currently tested on Chrome 18+</h4>' + */
 		'<h4 class="underline">Installation Instructions</h4>' +
 		'<ol>' +

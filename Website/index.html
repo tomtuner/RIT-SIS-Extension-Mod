@@ -15,7 +15,7 @@
 		
 		<!-- 	Galleria Theme Setter	 -->
 
-		<script>
+		<script type="text/javascript">
    			 Galleria.loadTheme('galleria/themes/classic/galleria.classic.min.js');
    			 Galleria.run('#galleria');
     	</script>
@@ -37,6 +37,61 @@
 		  })();
 		</script>
 		<!-- 	End of Google Analytics Code	 -->
+		
+		<!-- 	Google Analytics API Code	 -->
+
+		<script type="text/javascript">
+		
+		var clientId = '338246663823';
+		var apiKey = 'AIzaSyBg7yVxrFbtk28ZhtUA3oXVA0eRO3Gx2Fc';
+		// To enter one or more authentication scopes, refer to the documentation for the API.
+	    var scopes = 'https://www.google.com/analytics/feeds/';
+	      
+		function handleClientLoad() {
+			gapi.client.setApiKey(apiKey);
+	        window.setTimeout(checkAuth,1);
+	    }
+	    
+	    function checkAuth() {
+	        gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: true}, handleAuthResult);
+	    }
+
+		function handleAuthResult(authResult) {
+	        if (authResult) {
+	          makeApiCall();
+	        } else {
+	          console.log('AUTH FAILED');
+	        }
+	      }
+		
+	      function appendResults(text) {
+	        var results = document.getElementById('results');
+	        results.appendChild(document.createElement('P'));
+	        if ((text)) {
+		        results.appendChild(document.createTextNode(text));
+	        }
+	        console.log(text);
+	      }
+	
+	      function makeAPICall() {
+	        var params = {
+	        	id : 'AIzaSyBg7yVxrFbtk28ZhtUA3oXVA0eRO3Gx2Fc',
+	        	metrics : 'ga:pageviews'
+	        
+	        };
+	        var reqs = {
+	        	'path' : 'https://www.googleapis.com/analytics/v3/data/ga?',
+	        	'params' : params,
+	        	'callback' : appendResults()
+	        
+	        };
+	        gapi.client.request(reqs);
+	      }
+	    </script>
+   		<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+   		
+		<!-- 	End of Google Analytics API Code	 -->
+
 	</head>
 	<body>
 	<!-- Facebook Code	 -->
@@ -65,8 +120,9 @@
 		<div class="left" id="left_header">
 <!-- 			<img src="https://sis.rit.edu/info/sis_images/rit_logo.gif" alt="RIT Header" width="161" height="56"/> -->
 			<span id="sis_extension">RIT SIS Extension</span>
+			<div id="results"></div>
 		</div>
-		<div class="right" id="right_header">
+		<div class="right" style="display:inline-block;" id="right_header">
 <!-- 			<span id="facebook">Like us on <a id="facebook_link" target="_blank" href="http://facebook.com/sisextension">Facebook</a></span> -->
 		<div class="fb-like" data-href="https://facebook.com/sisextension" data-send="true" data-width="450" data-show-faces="true" data-colorscheme="dark" data-font="verdana"></div>
 		</div>
