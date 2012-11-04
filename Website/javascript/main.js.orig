@@ -75,7 +75,11 @@ var tooltip=function(){
 
 var TimeToFade = 500.0;
 var extensionURL = 'https://people.rit.edu/~tjd9961/SIS/sismod.user.js';
+<<<<<<< Updated upstream
 var firefoxExtensionURL = 'http://www.sisextension.com/downloads/rit_sis_extension-1.0.0-fx.xpi';
+=======
+var firefoxExtensionURL = 'http://www.sisextension.com/downloads/rit_sis_firefox_extension.xpi';
+>>>>>>> Stashed changes
 var safariExtensionURL = 'http://www.sisextension.com/downloads/RIT%20SIS%20Extension.safariextz';
 
 var browse;
@@ -164,7 +168,7 @@ function replaceElementWithChrome(eid) {
 			'<a href="' + extensionURL + '" onclick="_gaq.push([\'_trackEvent\', \'Script\', \'Downloaded\', \'Chrome Page\']);"><span class="download align_center">SIS Extension Download</span></a>' +
 			'<li><p>Click the wrench icon on the browser toolbar.</p></li>' +
 			'<li><p>Select <b>Tools > Extensions</b>.</p></li>' +
-			'<li><p>Locate the extension file ("sismod.user.js") on your computer and drag the file onto the Extensions page.</li>' +
+			'<li><p>Locate the extension file on your computer and drag the file onto the Extensions page.</li>' +
 			'<li><p>Another window will pop open on your browser confirming you would like to install the extension. Click "Install".</p></li>' +
 			'<img src="images/chrome_install_dialog.png" alt="Chrome Install Dialog" width="391" height="154"/>' +
 			'<li><p>Visit the new <a href="http://infocenter.rit.edu" target="new">RIT SIS page</a> and enjoy!</p></li>' +
