@@ -12,7 +12,7 @@
 // DO NOT FORGET TO CHANGE THIS TO FALSE WHEN PUSHING LIVE
 var testEnvironment = true;
 
-// Test Path
+// Tom's Test Path
 var testPath = 'https://people.rit.edu/~tjd9961/SIS/test/src';
 
 // Production Path
