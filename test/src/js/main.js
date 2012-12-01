@@ -97,7 +97,7 @@
 		// Check to see if you are on the view my grades page
 		if(onViewMyGradesPage()){
 			//addTwitterBox();
-			//addGPAModelBox();
+			addGPAModelBox();
 		}
         
 /*         uncheckOpenClassesOnly(); */ 
@@ -249,7 +249,7 @@ window.location.href = additionalSearchCriteria.href;
   
     var twitterFeedHeader = '<h3>RIT Twitter Feed</h3>' + 
 	            '<ul id="twitter_choices"><li class="twitter_titles selected_orange" id="tweet_news" style="display:inline-block;" onclick="selectTwitterFeed(\'RITNEWS\', \'tweet_news\'); _gaq.push([\'_trackEvent\', \'Twitter\', \'Selected\', \'RIT News\']);">RIT News</li><li class="twitter_titles" id="tweet_athletics" style="display:inline-block;" onclick="selectTwitterFeed(\'RITsports\', \'tweet_athletics\');_gaq.push([\'_trackEvent\', \'Twitter\', \'Selected\', \'RIT Athletics\']);">RIT Athletics<li class="twitter_titles" id="tweet_sg" style="display:inline-block;" onclick="selectTwitterFeed(\'RIT_SG\', \'tweet_sg\');_gaq.push([\'_trackEvent\', \'Twitter\', \'Selected\', \'RIT Student Government\']);">RIT SG</li></ul>';
-	var gpa_model_header = '<h3>GPA Model</h3>' + '<h2>Select the letter grade for each class you are currently taking</h2>';
+	
     
     function addTwitterBox() {
     	if (window.innerWidth > 1429) {
@@ -281,10 +281,46 @@ window.location.href = additionalSearchCriteria.href;
 	
 	
 	function addGPAModelBox(){
-    	if (window.innerWidth > 1429) {
+
+	var classTable = document.getElementsByClassName('PSLEVEL1GRIDWBO');
+	var gpa_childs = classTable[0].getElementsByTagName('tr');
+	
+	var gpa_childs_length = gpa_childs.length - 2;
+	
+	var gpa_model_header = '<h2>GPA Model</h2> <table border="1"> <tr> <th>Course Number</th> <th>Credit Units</th> <th>Projected Grade</th> </tr>';
+	var gpa_model_footer =  '</table> <div id="current_gpa">Current GPA: <span>3.9</span></div><div id="projected_gpa">Projected GPA: <span>3.9</span></div><div id="calculate_gpa_button"><button id="calculate_gpa_button_background" onclick="computeGPA(' + gpa_childs_length + ')">Compute Projected GPA</button></div>';
+	
+    	if (window.innerWidth > 980) {
 			if(!(document.getElementById('gpa_model_box'))){
-				var gpa_box = create('<div id="gpa_model_box">' + gpa_model_header + '</div>');
+			
+			var gpa_model_body = '';
+			var class_number_id_pre = 'CLS_LINK$';
+			var class_number_credit_pre = 'STDNT_ENRL_SSV1_UNT_TAKEN$';
+			for (var i = 0; i < gpa_childs_length;i++) {
+			
+				var class_number_id = document.getElementById(class_number_id_pre + i);
+				var class_number_credit = document.getElementById(class_number_credit_pre + i);
+				
+				var class_number_credit_value = class_number_credit.innerHTML;
+				console.log('Value: ' + class_number_credit_value);
+				if (isNaN(parseFloat(class_number_credit_value))) {
+					class_number_credit_value = '0.00';
+				}
+				
+				gpa_model_body += '<tr> <td>' + class_number_id.innerHTML + '</td> <td id=unit_' + i + '>' + class_number_credit_value + '</td> <td> <select id=grade_' + i + '>   <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="F">F</option></select> </td> </tr>';
+			}
+			
+				var gpa_box = create('<div id="gpa_model_box">' + gpa_model_header + gpa_model_body + gpa_model_footer + '</div>');
 				document.body.appendChild(gpa_box);
+				
+				var total_grade_points = document.getElementById('STATS_CUMS$12');
+				var units_taken = document.getElementById('STATS_CUMS$13');
+		
+				var total = parseFloat(total_grade_points.innerHTML);
+				var units = parseFloat(units_taken.innerHTML);
+				
+				document.getElementById('current_gpa').innerHTML = 'Current GPA: ' + Number((total/units).toFixed(3));
+				document.getElementById('projected_gpa').innerHTML = 'Projected GPA: ' + Number((total/units).toFixed(3));
 			}
 		}else{
 			var active_box = document.getElementById('gpa_model_box');
@@ -294,6 +330,53 @@ window.location.href = additionalSearchCriteria.href;
 		}
 	
 	}
+	
+	function computeGPA(rows) {
+		var total_grade_points = document.getElementById('STATS_CUMS$12');
+		var units_taken = document.getElementById('STATS_CUMS$13');
+		
+		var total = parseFloat(total_grade_points.innerHTML);
+		var units = parseFloat(units_taken.innerHTML);
+		console.log(total);
+		
+		var new_units = 0;
+		var new_towards_gpa = 0;
+		var credit_unit;
+		
+		for (var i = 0; i < rows;i++) {
+			console.log('Units: ' + document.getElementById('unit_' + i).innerHTML);
+			credit_unit = parseFloat(document.getElementById('unit_' + i).innerHTML)
+			new_towards_gpa += credit_unit;
+			console.log('Float from letter: ' + floatFromLetterGrade(document.getElementById('grade_' + i).value));
+
+			new_units += floatFromLetterGrade(document.getElementById('grade_' + i).value) * credit_unit;
+		}
+		console.log('New Units: ' + new_towards_gpa);
+		console.log('New Towards GPA: ' + new_units);
+		
+		total += new_units;
+		units += new_towards_gpa;
+		
+		console.log('New GPA: ' + (total/units));
+		document.getElementById('projected_gpa').innerHTML = 'Projected GPA: ' + Number((total/units).toFixed(3));
+
+	}
+    
+    function floatFromLetterGrade(letter) {
+    	
+    	if (letter == 'A') {
+    		return 4;
+    	}else if (letter == 'B') {
+    		return 3;
+    	}else if (letter == 'C') {
+    		return 2;
+    	}else if (letter == 'D') {
+    		return 1;
+    	}else {
+    		return 0;
+    	}
+    
+    }
     
     function selectTwitterFeed(feed_id, div_id) {
     	var tweets = document.getElementById('tweets');

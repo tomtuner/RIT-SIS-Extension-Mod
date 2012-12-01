@@ -24,13 +24,62 @@ email:     thomasdemeo@gmail.com
 
 /** GPA Model Styles **/
 #gpa_model_box{
-	position: absolute;
-	top: 0;
-	right: 10px;
-	width: 300px;
-	height: 150px;
+	position: fixed;
+	top: 140;
+	right: 20px;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-o-border-radius: 10px;
+	-moz-border-radius: 10px;
+	padding: 10px;
 	background-color: #FFFFFF;
+	border: 2px solid;
 }
+
+#current_gpa, #projected_gpa {
+	font-size: 18px;
+}
+
+#current_gpa {
+	float: left;
+}
+
+#projected_gpa {
+	float: right;
+}
+
+#calculate_gpa_button {
+	margin-top: 10px;
+	clear: both;
+	float: right;
+}
+
+#calculate_gpa_button_background {
+	font-size: 14px;
+	background-color: #F36E21;
+	background-image: -webkit-linear-gradient(top,#FFAD33,#F36E21);
+	background-image: -moz-linear-gradient(top,#FFAD33,#F36E21);
+	background-image: -o-linear-gradient(top,#FFAD33,#F36E21);
+	background-image: linear-gradient(top,#FFAD33,#F36E21);
+	border-color: #513127;
+	color: white;
+	text-shadow: 0.1em 0.1em 0.2em black;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-o-border-radius: 5px;
+	-moz-border-radius: 5px;
+	cursor:pointer;
+	border: 1px black outset;
+}
+
+#calculate_gpa_button_background:hover {
+	background-image: -webkit-linear-gradient(top,#FFAD33,#B34100);
+	background-image: -moz-linear-gradient(top,#FFAD33,#B34100);
+	background-image: -o-linear-gradient(top,#FFAD33,#B34100);
+	background-image: linear-gradient(top,#FFAD33,#B34100);
+}
+
+
 
 /** Style the tweets */
 
