@@ -77,7 +77,7 @@ var TimeToFade = 500.0;
 var extensionURL = 'https://people.rit.edu/~tjd9961/SIS/sismod.user.js';
 var firefoxExtensionURL = 'http://www.sisextension.com/downloads/rit_sis_extension-1.0.0-fx.xpi';
 var safariExtensionURL = 'http://www.sisextension.com/downloads/RIT%20SIS%20Extension.safariextz';
-
+var chromeExtensionURL = 'http://www.sisextension.com/downloads/chrome_extension.crx';
 var browse;
 
 function fade(browser, eid)
