@@ -319,7 +319,7 @@ window.location.href = additionalSearchCriteria.href;
 	var gpa_childs_length = gpa_childs.length - 2;
 	
 	var gpa_model_header = '<h2>GPA Model</h2> <table border="1"> <tr> <th>Course Number</th> <th>Credit Units</th> <th>Projected Grade</th> </tr>';
-	var gpa_model_footer =  '</table> <div id="current_gpa">Current GPA: <span>3.9</span></div><div id="projected_gpa">Projected GPA: <span>3.9</span></div><div id="calculate_gpa_button"><button id="calculate_gpa_button_background" onclick="computeGPA(' + gpa_childs_length + ')">Compute Projected GPA</button></div>';
+	var gpa_model_footer =  '</table> <div id="current_gpa">Current GPA: <span>3.9</span></div><div id="projected_gpa">Projected GPA: <span>3.9</span></div><div id="calculate_gpa_button"><button id="calculate_gpa_button_background" onclick="computeGPA(' + gpa_childs_length + ');_gaq.push([\'_trackEvent\', \'GPA Model\', \'Selected\', \'Calculate GPA\']);">Compute Projected GPA</button></div>';
 	
     	if (window.innerWidth > 980) {
 			if(!(document.getElementById('gpa_model_box'))){
@@ -338,20 +338,28 @@ window.location.href = additionalSearchCriteria.href;
 					class_number_credit_value = '0.00';
 				}
 				
-				gpa_model_body += '<tr> <td>' + class_number_id.innerHTML + '</td> <td id=unit_' + i + '>' + class_number_credit_value + '</td> <td> <select id=grade_' + i + '>   <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="F">F</option></select> </td> </tr>';
+				gpa_model_body += '<tr> <td>' + class_number_id.innerHTML + '</td> <td id=unit_' + i + '>' + class_number_credit_value + '</td> <td> <select id=grade_' + i + '>   <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="F">F</option><option value="W">W</option></select> </td> </tr>';
 			}
 			
 				var gpa_box = create('<div id="gpa_model_box">' + gpa_model_header + gpa_model_body + gpa_model_footer + '</div>');
 				document.body.appendChild(gpa_box);
 				
-				var total_grade_points = document.getElementById('STATS_CUMS$12');
-				var units_taken = document.getElementById('STATS_CUMS$13');
+				var numberCheck = document.getElementById('STATS_CUMS$14');
+				var total_grade_points;
+				var units_taken;
+				if (numberCheck) {
+					total_grade_points = document.getElementById('STATS_CUMS$12');
+					units_taken = document.getElementById('STATS_CUMS$13');
+				}else {
+					total_grade_points = document.getElementById('STATS_CUMS$11');
+					units_taken = document.getElementById('STATS_CUMS$12');
+				}
 		
 				var total = parseFloat(total_grade_points.innerHTML);
 				var units = parseFloat(units_taken.innerHTML);
 				
 				document.getElementById('current_gpa').innerHTML = 'Current GPA: ' + Number((total/units).toFixed(3));
-				document.getElementById('projected_gpa').innerHTML = 'Projected GPA: ' + Number((total/units).toFixed(3));
+				document.getElementById('projected_gpa').innerHTML = 'Projected GPA: --';
 			}
 		}else{
 			var active_box = document.getElementById('gpa_model_box');
@@ -363,8 +371,16 @@ window.location.href = additionalSearchCriteria.href;
 	}
 	
 	function computeGPA(rows) {
-		var total_grade_points = document.getElementById('STATS_CUMS$12');
-		var units_taken = document.getElementById('STATS_CUMS$13');
+		var numberCheck = document.getElementById('STATS_CUMS$14');
+		var total_grade_points;
+		var units_taken;
+		if (numberCheck) {
+			total_grade_points = document.getElementById('STATS_CUMS$12');
+			units_taken = document.getElementById('STATS_CUMS$13');
+		}else {
+			total_grade_points = document.getElementById('STATS_CUMS$11');
+			units_taken = document.getElementById('STATS_CUMS$12');
+		}
 		
 		var total = parseFloat(total_grade_points.innerHTML);
 		var units = parseFloat(units_taken.innerHTML);
@@ -377,10 +393,11 @@ window.location.href = additionalSearchCriteria.href;
 		for (var i = 0; i < rows;i++) {
 			console.log('Units: ' + document.getElementById('unit_' + i).innerHTML);
 			credit_unit = parseFloat(document.getElementById('unit_' + i).innerHTML)
-			new_towards_gpa += credit_unit;
 			console.log('Float from letter: ' + floatFromLetterGrade(document.getElementById('grade_' + i).value));
-
-			new_units += floatFromLetterGrade(document.getElementById('grade_' + i).value) * credit_unit;
+			if ((document.getElementById('grade_' + i).value) != 'W' ) {
+				new_units += floatFromLetterGrade(document.getElementById('grade_' + i).value) * credit_unit;
+				new_towards_gpa += credit_unit;
+			}
 		}
 		console.log('New Units: ' + new_towards_gpa);
 		console.log('New Towards GPA: ' + new_units);
