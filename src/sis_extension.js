@@ -19,10 +19,9 @@ var testPath = 'https://people.rit.edu/~tjd9961/SIS/test/src';
 var prodPath = 'https://people.rit.edu/~tjd9961/SIS/src';
 
 // Adds support for jQuery
-// a function that loads jQuery and calls a callback function when jQuery has finished loading
-function addJQuery(callback) {
+function addJQuery() {
     
-    var jQueryId = "jQuery";  // you could encode the css path itself to generate id..
+    var jQueryId = "jQuery";
 	if (!document.getElementById(jQueryId)) {
 	    var head  = document.getElementsByTagName('head')[0];
 	    var link  = document.createElement('script');
@@ -36,7 +35,7 @@ function addJQuery(callback) {
 }
 
 function addCSS() {
-	var mainCSSId = "mainCSS";  // you could encode the css path itself to generate id..
+	var mainCSSId = "mainCSS";
 	if (!document.getElementById(mainCSSId)) {
 	    var head  = document.getElementsByTagName('head')[0];
 	    var link  = document.createElement('link');
@@ -54,7 +53,7 @@ function addCSS() {
 }
 
 function addJavascript() {
-	var mainJavascript = "mainJavascript";  // you could encode the css path itself to generate id..
+	var mainJavascript = "mainJavascript";
 	if (!document.getElementById(mainJavascript)) {
 	    var head  = document.getElementsByTagName('head')[0];
 	    var link  = document.createElement('script');
@@ -69,22 +68,22 @@ function addJavascript() {
 	    head.appendChild(link);
 	}
 	
-	var twitterJavascript = "twitterJavascript";  // you could encode the css path itself to generate id..
-			if (!document.getElementById(twitterJavascript)) {
-				console.log('Load Twitter');
-				console.log(window.innerWidth);
-	   			var head  = document.getElementsByTagName('head')[0];
-	   			var link  = document.createElement('script');
-	   			link.id   = twitterJavascript;
-	  			link.language  = 'JavaScript';
-	    		link.type = 'text/javascript';
-	    		if (testEnvironment) {
-	    			link.src = testPath + '/tweet/twitter.js';
-	    		}else {
-	    			link.src = prodPath + '/tweet/twitter.js';
-	   			}
-	    		head.appendChild(link);
-			}
+	var twitterJavascript = "twitterJavascript";
+	if (!document.getElementById(twitterJavascript)) {
+		console.log('Load Twitter');
+		console.log(window.innerWidth);
+		var head  = document.getElementsByTagName('head')[0];
+		var link  = document.createElement('script');
+		link.id   = twitterJavascript;
+		link.language  = 'JavaScript';
+		link.type = 'text/javascript';
+		if (testEnvironment) {
+			link.src = testPath + '/tweet/twitter.js';
+		}else {
+			link.src = prodPath + '/tweet/twitter.js';
+		}
+		head.appendChild(link);
+	}
 }
 
 // load jQuery, css and javascript files

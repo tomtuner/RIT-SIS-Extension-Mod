@@ -4,7 +4,7 @@ RIT SIS Extensions Mod
 									-Dr. Seuss
 
 This project is meant to deliver extended funtionality for students
-who use the new RIT GeneSIS registration system.
+who use the new RIT SIS registration system (PeopleSoft).
 
 Any unauthorized use or modification of this project in any form
 will result in the forceful laws of nature being brought down upon you.
@@ -15,17 +15,21 @@ will result in the forceful laws of nature being brought down upon you.
 **Current features to date**
 
 * Allows users to search by subject name, by converting alpha code to numeric code.
+* Added GPA Model to calculate your projected GPA based on current courses.
 * Added RIT Logo.
 * Updated color theme to match RIT.
 * Enhanced the layout of the pages (centered).
 * Formatted numerical input fields to correct sizes.
 * Removed unneccesary verbiage.
 * Added mouseover affect to describe new terminology.
+* Google Analytics Integration
+
 
 **Desired future features**
 
+* Easy Interface to create a custom banner for the day/week/month.
+* API tie in to course subjects so it is not a manual process to update.
 * Correct formatting for "Aditional Search Criteria" link of page load.
 * Integrate Rate My Professor Scores when viewing classes/instructors.
 * Matching teacher search to subject selection.
-* Add Google Analytics Integration?
 * Change logo to a standard RIT header.
