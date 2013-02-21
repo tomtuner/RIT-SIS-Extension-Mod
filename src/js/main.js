@@ -78,8 +78,19 @@
 			// when needed
 			
 /*             constructBanner(); */
+            if (!(readCookie('gpamodelcookie'))) {
+            	createCookie('gpamodelcookie','testcookie',1460)
+            	constructGPANotification();
+            }else {
+            	removeGPANotification();
+            }
         }
-        
+        // Check to see if you are on the view my grades page
+		if(onViewMyGradesPage()){
+			//addTwitterBox();
+			addGPAModelBox();
+		}
+		
         constructAutocompleteBox();
 
         sisColorMod();
@@ -128,6 +139,25 @@
     	oEvent.initMouseEvent("click", true, true,window, 1, 1, 1, 1, 1, false, false, false, false, 0, additionalSearchCriteria);
     	additionalSearchCriteria.dispatchEvent( oEvent );
     }
+	
+	function onViewMyGradesPage(){
+		var pageHeader = document.getElementsByClassName("PATRANSACTIONTITLE");
+		if(pageHeader[0]){
+			for (var i = 0; i < pageHeader.length; i++) {
+				if(pageHeader[0].textContent){
+				
+					if(pageHeader[i].textContent.match('View My Grades')){
+						return true;
+					}
+				}else{
+					if(pageHeader[i].innerText.match('View My Grades')){
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+	}
     
     if (onStudentCenterPage()) {
     	// Add Course Names to Classes, DO THIS ONCE
@@ -239,6 +269,120 @@
     		}
     	}
     }
+	
+	function addGPAModelBox(){
+
+	var classTable = document.getElementsByClassName('PSLEVEL1GRIDWBO');
+	var gpa_childs = classTable[0].getElementsByTagName('tr');
+	
+	var gpa_childs_length = gpa_childs.length - 2;
+	
+	var gpa_model_header = '<h2>GPA Model</h2> <table border="1"> <tr> <th>Course Number</th> <th>Credit Units</th> <th>Projected Grade</th> </tr>';
+	var gpa_model_footer =  '</table> <div id="current_gpa">Current GPA: <span>3.9</span></div><div id="projected_gpa">Projected GPA: <span>3.9</span></div><div id="calculate_gpa_button"><button id="calculate_gpa_button_background" onclick="computeGPA(' + gpa_childs_length + ');_gaq.push([\'_trackEvent\', \'GPA Model\', \'Selected\', \'Calculate GPA\']);">Compute Projected GPA</button></div>';
+	
+    	if (window.innerWidth > 980) {
+			if(!(document.getElementById('gpa_model_box'))){
+			
+			var gpa_model_body = '';
+			var class_number_id_pre = 'CLS_LINK$';
+			var class_number_credit_pre = 'STDNT_ENRL_SSV1_UNT_TAKEN$';
+			for (var i = 0; i < gpa_childs_length;i++) {
+			
+				var class_number_id = document.getElementById(class_number_id_pre + i);
+				var class_number_credit = document.getElementById(class_number_credit_pre + i);
+				
+				var class_number_credit_value = class_number_credit.innerHTML;
+				console.log('Value: ' + class_number_credit_value);
+				if (isNaN(parseFloat(class_number_credit_value))) {
+					class_number_credit_value = '0.00';
+				}
+				
+				gpa_model_body += '<tr> <td>' + class_number_id.innerHTML + '</td> <td id=unit_' + i + '>' + class_number_credit_value + '</td> <td> <select id=grade_' + i + '>   <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="F">F</option><option value="W">W</option></select> </td> </tr>';
+			}
+			
+				var gpa_box = create('<div id="gpa_model_box">' + gpa_model_header + gpa_model_body + gpa_model_footer + '</div>');
+				document.body.appendChild(gpa_box);
+				
+				var numberCheck = document.getElementById('STATS_CUMS$14');
+				var total_grade_points;
+				var units_taken;
+				if (numberCheck) {
+					total_grade_points = document.getElementById('STATS_CUMS$12');
+					units_taken = document.getElementById('STATS_CUMS$13');
+				}else {
+					total_grade_points = document.getElementById('STATS_CUMS$11');
+					units_taken = document.getElementById('STATS_CUMS$12');
+				}
+		
+				var total = parseFloat(total_grade_points.innerHTML);
+				var units = parseFloat(units_taken.innerHTML);
+				
+				document.getElementById('current_gpa').innerHTML = 'Current GPA: ' + Number((total/units).toFixed(3));
+				document.getElementById('projected_gpa').innerHTML = 'Projected GPA: --';
+			}
+		}else{
+			var active_box = document.getElementById('gpa_model_box');
+			if(active_box){
+				active_box.parentNode.removeChild(active_box);
+			}
+		}
+	
+	}
+	
+	function computeGPA(rows) {
+		var numberCheck = document.getElementById('STATS_CUMS$14');
+		var total_grade_points;
+		var units_taken;
+		if (numberCheck) {
+			total_grade_points = document.getElementById('STATS_CUMS$12');
+			units_taken = document.getElementById('STATS_CUMS$13');
+		}else {
+			total_grade_points = document.getElementById('STATS_CUMS$11');
+			units_taken = document.getElementById('STATS_CUMS$12');
+		}
+		
+		var total = parseFloat(total_grade_points.innerHTML);
+		var units = parseFloat(units_taken.innerHTML);
+		console.log(total);
+		
+		var new_units = 0;
+		var new_towards_gpa = 0;
+		var credit_unit;
+		
+		for (var i = 0; i < rows;i++) {
+			console.log('Units: ' + document.getElementById('unit_' + i).innerHTML);
+			credit_unit = parseFloat(document.getElementById('unit_' + i).innerHTML)
+			console.log('Float from letter: ' + floatFromLetterGrade(document.getElementById('grade_' + i).value));
+			if ((document.getElementById('grade_' + i).value) != 'W' ) {
+				new_units += floatFromLetterGrade(document.getElementById('grade_' + i).value) * credit_unit;
+				new_towards_gpa += credit_unit;
+			}
+		}
+		console.log('New Units: ' + new_towards_gpa);
+		console.log('New Towards GPA: ' + new_units);
+		
+		total += new_units;
+		units += new_towards_gpa;
+		
+		console.log('New GPA: ' + (total/units));
+		document.getElementById('projected_gpa').innerHTML = 'Projected GPA: ' + Number((total/units).toFixed(3));
+
+	}
+    
+    function floatFromLetterGrade(letter) {
+    	
+    	if (letter == 'A') {
+    		return 4;
+    	}else if (letter == 'B') {
+    		return 3;
+    	}else if (letter == 'C') {
+    		return 2;
+    	}else if (letter == 'D') {
+    		return 1;
+    	}else {
+    		return 0;
+    	}
+	}
     
     function selectTwitterFeed(feed_id, div_id) {
     	var tweets = document.getElementById('tweets');
@@ -408,7 +552,7 @@
 								var fragment = create('<li class="suggestion_option"><span class="course_number">' + 'Search ' + ' </span>' + value + '</li>');
 									suggestions.appendChild(fragment);
 								for (el in matches) {
-									var fragment = create('<li class="suggestion_option" id=' + alphaCodes[matches[el]] + '><span class="course_number">' + alphaCodes[matches[el]] + ' </span>' + majorNames[matches[el]] + '</li>');
+									var fragment = create('<li class="suggestion_option" id=' + numericCodes[matches[el]] + '><span class="course_number">' + numericCodes[matches[el]] + ' </span>' + majorNames[matches[el]] + '</li>');
 									suggestions.appendChild(fragment);
 								}
 								// Add click event to suggestion box
@@ -574,6 +718,29 @@
         }
     
     }
+	
+	function constructGPANotification() {
+    	if (!(document.getElementById('banner_bar'))) {
+            var fragment = create('<div id="banner_bar">' + '<div id="enhance_banner">' + '<div id="banner_left_header">' + '<img id="calculator_image" width="50" height="50" title="Calculator" alt="Calculator" src=' + calculatorImageURI + ' />' + '</div>' + '<div id="banner_center">GPA Model is back!</div>' + '<div id="banner_right_header">' + '<div id="sg_right_top_text">Click Here, then View my Grades</div>' + '<a onclick="_gaq.push([\'_trackEvent\', \'Banner\', \'Selected\', \'View Grades\']);" id="sg_vote_now" href="' + gpaLink + '" title="GPA Model Page">' +'<div id="sg_vote_now_box">' + 'View Grades Page' + '</div></a></div>' + '</div></div>');
+
+			var firstBody = document.getElementById('PAGECONTAINER');
+           /*
+ // You can use native DOM methods to insert the fragment:
+            if (firstBody) {
+	            firstBody.appendChild(fragment);
+	        }
+*/
+	        firstBody.insertBefore(fragment, firstBody.firstChild);
+        }
+    
+    }
+
+	function removeGPANotification() {
+    	if (!(document.getElementById('banner_bar'))) {
+    		var element = document.getElementById('banner_bar');
+    		element.innerHTML('');
+    	}
+	}
 
     function constructFooter() {
         if (!(document.getElementById('enhance_footer'))) {
