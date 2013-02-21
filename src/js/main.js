@@ -86,7 +86,7 @@
         addMouseOver();
         changeInputLimit();
         //  fixExpandedSearch();
-        //  convertLetterCodeToNumber();
+        convertLetterCodeToNumber();
         
         formatTopTabBar();
         
