@@ -19,23 +19,9 @@
 		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
-	
-	// Code for updating the script
-	// Code for Chrome where GM_getValue is not supported, switch to HTML5 storage format for Chrome
-	if (!this.GM_getValue || (this.GM_getValue.toString && this.GM_getValue.toString().indexOf("not supported") > -1)) {
-		this.GM_getValue = function (key, def) {
-	    	return localStorage[key] || def;
-		};
-		this.GM_setValue = function (key, value) {
-	    	return localStorage[key] = value;
-		};
-		this.GM_deleteValue = function (key) {
-	    	return delete localStorage[key];
-		};
-	}
 
-    // End of Update Code
-    var alphaCodes = new Array("ACCT", "MGMT", "ESCB", "FINC", "MKTG", "DECS", "BLEG", "MGIS", "INTB", "CFIN", "EEEE", "EGEN", "ISEE", "MECE", "MCEE", "CMPE", "CQAS", "MCSE", "CHME", "BIME", "LADA", "CRIM", "ENGL", "ENGL", "FNRT", "HUMA", "HIST", "STSO", "PHIL", "ANTH", "ECON", "SOCS", "POLS", "PSYC", "SOCI", "GENS", "ITDA", "ITDL", "PUBL", "WGST", "INGS", "MLAR", "MLAS", "MLCH", "MLFR", "MLGR", "MLIT", "MLJP", "MLPO", "MLRU", "MLSP", "URCS", "SPSY", "MCLS", "CRST", "COMM", "HONL", "ENGT", "PACK", "CVET", "EEET", "MCET", "TCET", "MFET", "CPET", "HSPS", "NUTR", "FOOD", "HOTL", "TRAV", "HSPT", "SERQ", "HRDE", "INST", "ESHS", "FCMG", "SFTE", "DEMT", "HLTH", "ROTC", "AERO", "EMET", "ACBS", "BUSI", "QLTM", "GLSO", "TCOM", "MTSC", "GEOT", "SECU", "CMDS", "PROF", "NACC", "NAST", "NBUS", "NACN", "NACS", "NACT", "NCAR", "NCIM", "NSVP", "MSSE", "NCAR", "NAIS", "NGRD", "NGRP", "INTP", "NLST", "NCOM", "NHSS", "NHSS", "NHSS", "NENG", "NMTH", "NSCI", "NASL", "NCAR", "NCAD", "NAUT", "BIOL", "BIOG", "BIOG", "ENVS", "CHMA", "CHMB", "CHEM", "CHMG", "CHMI", "CHMO", "CHMP", "CHEN", "MATH", "STAT", "PHYS", "GSCI", "CMPM", "CHMC", "MEDS", "MTSE", "CHPO", "DMSO", "PHYA", "PMED", "CLRS", "IMGS", "HOSM", "ASTP", "BIOE", "ITDS", "WVAR", "WCLB", "WHWS", "WDAN", "WFIT", "WHLS", "WREC", "WINT", "WMAR", "WMIL", "FACW", "ELCE", "CRPP", "ACSC", "FYEP", "ITDI", "NMDE", "GRDE", "ARED", "ARDE", "FDTN", "CMGD", "INDE", "ILLS", "ILLM", "FNAS", "IDDE", "ADGR", "ARTH", "CCER", "CGLS", "CMTJ", "CWTD", "CWFD", "CGEN", "CEXT", "PHFA", "PHBM", "SOFA", "PHGR", "PHAR", "IMSM", "IMPT", "PRTM", "PRTT", "GMEP", "NMEP", "USPC", "CMPR", "ISTE", "CSCI", "ISTE", "CSCI", "MEDI", "SWEN", "SWEN", "CINT", "CISC", "NSSA", "NSSA", "IGME", "IGME", "ISUS");
+    // Image URI's, variables for course codes, local variables
+    var alphaCodes = new Array("ACCT", "MGMT", "ESCB", "FINC", "MKTG", "DECS", "BLEG", "MGIS", "INTB", "EEEE", "EGEN", "ISEE", "MECE", "MCEE", "CMPE", "CQAS", "MCSE", "CHME", "BIME", "LADA", "CRIM", "ENGL", "ENGL", "FNRT", "HUMA", "HIST", "STSO", "PHIL", "ANTH", "ECON", "SOCS", "POLS", "PSYC", "SOCI", "GENS", "ITDA", "ITDL", "PUBL", "WGST", "INGS", "MLAR", "MLAS", "MLCH", "MLFR", "MLGR", "MLIT", "MLJP", "MLPO", "MLRU", "MLSP", "URCS", "SPSY", "MCLS", "CRST", "COMM", "HONL", "ENGT", "PACK", "CVET", "EEET", "MCET", "TCET", "MFET", "CPET", "HSPS", "NUTR", "FOOD", "HOTL", "TRAV", "HSPT", "SERQ", "HRDE", "INST", "ESHS", "FCMG", "SFTE", "DEMT", "HLTH", "ROTC", "AERO", "EMET", "ACBS", "BUSI", "QLTM", "GLSO", "TCOM", "MTSC", "GEOT", "SECU", "CMDS", "PROF", "NACC", "NAST", "NBUS", "NACN", "NACS", "NACT", "NCAR", "NCIM", "NSVP", "MSSE", "NCAR", "NAIS", "NGRD", "NGRP", "INTP", "NLST", "NCOM", "NHSS", "NHSS", "NHSS", "NENG", "NMTH", "NSCI", "NASL", "NCAR", "NCAD", "NAUT", "BIOL", "BIOG", "BIOG", "ENVS", "CHMA", "CHMB", "CHEM", "CHMG", "CHMI", "CHMO", "CHMP", "CHEN", "MATH", "STAT", "PHYS", "GSCI", "CMPM", "CHMC", "MEDS", "MTSE", "CHPO", "DMSO", "PHYA", "PMED", "CLRS", "IMGS", "HOSM", "ASTP", "BIOE", "ITDS", "WVAR", "WCLB", "WHWS", "WDAN", "WFIT", "WHLS", "WREC", "WINT", "WMAR", "WMIL", "FACW", "ELCE", "CRPP", "ACSC", "FYEP", "ITDI", "NMDE", "GRDE", "ARED", "ARDE", "FDTN", "CMGD", "INDE", "ILLS", "ILLM", "FNAS", "IDDE", "ADGR", "ARTH", "CCER", "CGLS", "CMTJ", "CWTD", "CWFD", "CGEN", "CEXT", "PHFA", "PHBM", "SOFA", "PHGR", "PHAR", "IMSM", "IMPT", "PRTM", "PRTT", "GMEP", "NMEP", "USPC", "CMPR", "ISTE", "CSCI", "ISTE", "CSCI", "MEDI", "SWEN", "SWEN", "CINT", "CISC", "NSSA", "NSSA", "IGME", "IGME", "ISUS");
     
     var numericCodes = new Array("0101", "0102", "0103", "0104", "0105", "0106", "0110", "0112", "0113", "0301", "0302", "0303", "0304", "0305", "0306", "0307", "0308", "0309", "0310", "0501", "0502", "0504", "0505", "0507", "0508", "0509", "0510", "0511", "0513", "0514", "0515", "0519", "0520", "0521", "0522", "0524", "0525", "0525", "0525", "0525", "0525", "0525", "0525", "0525", "0525", "0525", "0525", "0526", "0527", "0533", "0535", "0606", "0607", "0608", "0609", "0610", "0614", "0617", "0618", "0619", "0620", "0621", "0622", "0623", "0624", "0625", "0626", "0630", "0632", "0633", "0634", "0635", "0640", "0650", "0660", "0801", "0804", "0805", "0806", "0813", "0835", "0855", "0875", "0876", "0879", "0880", "0881", "0882", "0883", "0884", "0885", "0886", "0887", "0890", "0891", "1001", "1004", "1005", "1006", "1008", "1009", "1010", "1011", "1012", "1013", "1014", "1016", "1017", "1018", "1026", "1028", "1029", "1030", "1032", "1040", "1050", "1051", "1060", "1107", "1108", "1109", "1110", "1111", "1112", "1113", "1114", "1115", "1701", "1715", "1720", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2019", "2020", "2021", "2035", "2037", "2039", "2040", "2041", "2042", "2043", "2044", "2045", "2046", "2061", "2065", "2066", "2067", "2076", "2080", "2081", "2082", "2083", "3081", "3084", "3088", "3092", "3097", "3099", "4001", "4002", "4003", "4004", "4005", "4006", "4010", "4011", "4020", "4040", "4050", "4055", "4080", "4085", "5001", "5010");
     
@@ -84,19 +70,27 @@
 
     function loadFunc() {
     
-    	
-    
         // Check to see if you are on the main search page
         if (onStudentCenterPage()) {
             constructFeedbackBox();
             addTwitterBox();
+			// Used to create the header banner on Student Center Page
+			// when needed
+			
 /*             constructBanner(); */
-            constructAppointmentTooltip();
+            if (!(readCookie('gpamodelcookie'))) {
+            	createCookie('gpamodelcookie','testcookie',1460)
+            	constructGPANotification();
+            }else {
+            	removeGPANotification();
+            }
         }
-        
-/*         uncheckOpenClassesOnly(); */ 
-/*         setCourseCareerDropDown(); */
-        
+        // Check to see if you are on the view my grades page
+		if(onViewMyGradesPage()){
+			//addTwitterBox();
+			addGPAModelBox();
+		}
+		
         constructAutocompleteBox();
 
         sisColorMod();
@@ -139,21 +133,31 @@
         return frag;
     }
     
-    function constructAppointmentTooltip() {
-    	
-    
-    }
-    
     var additionalSearchCriteria = document.getElementById('DERIVED_CLSRCH_SSR_EXPAND_COLLAPS$82$');
     if (additionalSearchCriteria) {
-    	/*
-window.location.href = additionalSearchCriteria.href;
-    	console.log(additionalSearchCriteria.href);
-*/
 		var oEvent = document.createEvent( "MouseEvents" );
     	oEvent.initMouseEvent("click", true, true,window, 1, 1, 1, 1, 1, false, false, false, false, 0, additionalSearchCriteria);
     	additionalSearchCriteria.dispatchEvent( oEvent );
     }
+	
+	function onViewMyGradesPage(){
+		var pageHeader = document.getElementsByClassName("PATRANSACTIONTITLE");
+		if(pageHeader[0]){
+			for (var i = 0; i < pageHeader.length; i++) {
+				if(pageHeader[0].textContent){
+				
+					if(pageHeader[i].textContent.match('View My Grades')){
+						return true;
+					}
+				}else{
+					if(pageHeader[i].innerText.match('View My Grades')){
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+	}
     
     if (onStudentCenterPage()) {
     	// Add Course Names to Classes, DO THIS ONCE
@@ -207,9 +211,7 @@ window.location.href = additionalSearchCriteria.href;
     if (onShoppingCartPage()) {
     	// Add Course Names to Classes, DO THIS ONCE
     	var classNums = document.getElementsByClassName('PSHYPERLINK');
-    	if (classNums) {
-/*     		console.log(classNum.innerText); */
-			
+    	if (classNums) {			
 			for (var i = 0; i < classNums.length; i++) {
 				if (classNums[i].tagName == 'A') {
 					var courseString;
@@ -226,8 +228,7 @@ window.location.href = additionalSearchCriteria.href;
 		    			classNums[i].innerText = courseNames[matches[0]] + "\n" + classNums[i].innerText;
 	    			}
     			}
-			}
-			
+			}	
     	}
     	
     	var courseDiv = document.getElementById('win0divP_CLASS_NAME$0');
@@ -259,11 +260,8 @@ window.location.href = additionalSearchCriteria.href;
        			 count: 5, 
        			 ignoreReplies: true,
        			 newwindow: true
-   				 });
-   				 
-   				 
-            }
-            
+   				 });   				 
+            }   
     	}else {
     		var tweetBox = document.getElementById('tweets');
     		if (tweetBox) {
@@ -271,6 +269,120 @@ window.location.href = additionalSearchCriteria.href;
     		}
     	}
     }
+	
+	function addGPAModelBox(){
+
+	var classTable = document.getElementsByClassName('PSLEVEL1GRIDWBO');
+	var gpa_childs = classTable[0].getElementsByTagName('tr');
+	
+	var gpa_childs_length = gpa_childs.length - 2;
+	
+	var gpa_model_header = '<h2>GPA Model</h2> <table border="1"> <tr> <th>Course Number</th> <th>Credit Units</th> <th>Projected Grade</th> </tr>';
+	var gpa_model_footer =  '</table> <div id="current_gpa">Current GPA: <span>3.9</span></div><div id="projected_gpa">Projected GPA: <span>3.9</span></div><div id="calculate_gpa_button"><button id="calculate_gpa_button_background" onclick="computeGPA(' + gpa_childs_length + ');_gaq.push([\'_trackEvent\', \'GPA Model\', \'Selected\', \'Calculate GPA\']);">Compute Projected GPA</button></div>';
+	
+    	if (window.innerWidth > 980) {
+			if(!(document.getElementById('gpa_model_box'))){
+			
+			var gpa_model_body = '';
+			var class_number_id_pre = 'CLS_LINK$';
+			var class_number_credit_pre = 'STDNT_ENRL_SSV1_UNT_TAKEN$';
+			for (var i = 0; i < gpa_childs_length;i++) {
+			
+				var class_number_id = document.getElementById(class_number_id_pre + i);
+				var class_number_credit = document.getElementById(class_number_credit_pre + i);
+				
+				var class_number_credit_value = class_number_credit.innerHTML;
+				console.log('Value: ' + class_number_credit_value);
+				if (isNaN(parseFloat(class_number_credit_value))) {
+					class_number_credit_value = '0.00';
+				}
+				
+				gpa_model_body += '<tr> <td>' + class_number_id.innerHTML + '</td> <td id=unit_' + i + '>' + class_number_credit_value + '</td> <td> <select id=grade_' + i + '>   <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="F">F</option><option value="W">W</option></select> </td> </tr>';
+			}
+			
+				var gpa_box = create('<div id="gpa_model_box">' + gpa_model_header + gpa_model_body + gpa_model_footer + '</div>');
+				document.body.appendChild(gpa_box);
+				
+				var numberCheck = document.getElementById('STATS_CUMS$14');
+				var total_grade_points;
+				var units_taken;
+				if (numberCheck) {
+					total_grade_points = document.getElementById('STATS_CUMS$12');
+					units_taken = document.getElementById('STATS_CUMS$13');
+				}else {
+					total_grade_points = document.getElementById('STATS_CUMS$11');
+					units_taken = document.getElementById('STATS_CUMS$12');
+				}
+		
+				var total = parseFloat(total_grade_points.innerHTML);
+				var units = parseFloat(units_taken.innerHTML);
+				
+				document.getElementById('current_gpa').innerHTML = 'Current GPA: ' + Number((total/units).toFixed(3));
+				document.getElementById('projected_gpa').innerHTML = 'Projected GPA: --';
+			}
+		}else{
+			var active_box = document.getElementById('gpa_model_box');
+			if(active_box){
+				active_box.parentNode.removeChild(active_box);
+			}
+		}
+	
+	}
+	
+	function computeGPA(rows) {
+		var numberCheck = document.getElementById('STATS_CUMS$14');
+		var total_grade_points;
+		var units_taken;
+		if (numberCheck) {
+			total_grade_points = document.getElementById('STATS_CUMS$12');
+			units_taken = document.getElementById('STATS_CUMS$13');
+		}else {
+			total_grade_points = document.getElementById('STATS_CUMS$11');
+			units_taken = document.getElementById('STATS_CUMS$12');
+		}
+		
+		var total = parseFloat(total_grade_points.innerHTML);
+		var units = parseFloat(units_taken.innerHTML);
+		console.log(total);
+		
+		var new_units = 0;
+		var new_towards_gpa = 0;
+		var credit_unit;
+		
+		for (var i = 0; i < rows;i++) {
+			console.log('Units: ' + document.getElementById('unit_' + i).innerHTML);
+			credit_unit = parseFloat(document.getElementById('unit_' + i).innerHTML)
+			console.log('Float from letter: ' + floatFromLetterGrade(document.getElementById('grade_' + i).value));
+			if ((document.getElementById('grade_' + i).value) != 'W' ) {
+				new_units += floatFromLetterGrade(document.getElementById('grade_' + i).value) * credit_unit;
+				new_towards_gpa += credit_unit;
+			}
+		}
+		console.log('New Units: ' + new_towards_gpa);
+		console.log('New Towards GPA: ' + new_units);
+		
+		total += new_units;
+		units += new_towards_gpa;
+		
+		console.log('New GPA: ' + (total/units));
+		document.getElementById('projected_gpa').innerHTML = 'Projected GPA: ' + Number((total/units).toFixed(3));
+
+	}
+    
+    function floatFromLetterGrade(letter) {
+    	
+    	if (letter == 'A') {
+    		return 4;
+    	}else if (letter == 'B') {
+    		return 3;
+    	}else if (letter == 'C') {
+    		return 2;
+    	}else if (letter == 'D') {
+    		return 1;
+    	}else {
+    		return 0;
+    	}
+	}
     
     function selectTwitterFeed(feed_id, div_id) {
     	var tweets = document.getElementById('tweets');
@@ -288,7 +400,6 @@ window.location.href = additionalSearchCriteria.href;
 	    	
 	    	tweet_title_div.className += " selected_orange";
 	    	
-
     		getTwitters('tweets', {
       		  	id: feed_id, 
        			 prefix: '<img height="16" width="16" src="%profile_image_url%" /><a href="http://twitter.com/%screen_name%">%name%</a> said: ', 
@@ -364,23 +475,23 @@ window.location.href = additionalSearchCriteria.href;
 
     
     function majorAutocomplete() {
-    	 var majorInput = document.getElementById('CLASS_SRCH_WRK2_SUBJECT$70$');
-		    if (majorInput) {
-		    	majorInput.maxLength = 50;
-		    	majorInput.style.width = '150px';
-		    	majorInput.onclick = (function() {
+    	var majorInput = document.getElementById('CLASS_SRCH_WRK2_SUBJECT$70$');
+		if (majorInput) {
+			majorInput.maxLength = 50;
+			majorInput.style.width = '150px';
+			majorInput.onclick = (function() {
 				if (majorInput.value == 'Start typing in a major' || majorInput.value == 'START TY') {
 					majorInput.value = '';    	
 				}
-		   	})
-		   	
-		   	if (majorInput.value == '') {
-		   		var suggestions = document.getElementById('suggestions');
+			})
+		
+			if (majorInput.value == '') {
+				var suggestions = document.getElementById('suggestions');
 				suggestions.style.visibility = 'hidden';
-		   	}
-		   	majorInput.onkeydown = (function(event) {
+			}
+			majorInput.onkeydown = (function(event) {
 
-		   	// Arrow down event
+				// Arrow down event
 				if (event.keyCode == 40 || event.keyCode == 38) {
 					var list = document.getElementsByTagName('ul');
 					var listChilds = list[0].childNodes;
@@ -425,49 +536,44 @@ window.location.href = additionalSearchCriteria.href;
 							majorSelectedWithElement(listChilds[i]);
 						}
 					}
-					
-					/*
 
-					var numberSelector = document.getElementById('CLASS_SRCH_WRK2_SUBJECT$70$');
-		   			numberSelector.blur();
-*/
 				}else {
-		   		var value = majorInput.value;
-		   		var matches = getIndexes(majorNames, value);
-		   		var suggestions = document.getElementById('suggestions');
-		   		
+					var value = majorInput.value;
+					var matches = getIndexes(majorNames, value);
+					var suggestions = document.getElementById('suggestions');
+					
 		/*    		console.log(matches.length); */
-		   			if (majorInput.value) {
-		   			if (matches.length) {
-		   				if (suggestions) {
-		   				suggestions.style.visibility = 'visible';
-		   				// Remove all of the elements in the div before adding new ones
-		   				while (suggestions.hasChildNodes()) suggestions.removeChild(suggestions.firstChild);
-		   				var fragment = create('<li class="suggestion_option"><span class="course_number">' + 'Search ' + ' </span>' + value + '</li>');
-		   					suggestions.appendChild(fragment);
-		   				for (el in matches) {
-		   					var fragment = create('<li class="suggestion_option" id=' + numericCodes[matches[el]] + '><span class="course_number">' + numericCodes[matches[el]] + ' </span>' + majorNames[matches[el]] + '</li>');
-		   					suggestions.appendChild(fragment);
-		   				}
-		   					// Add click event to suggestion box
-					   	var suggestionOptions = document.getElementsByClassName('suggestion_option');
-					   	if (suggestionOptions) {
-					   		for (var i = 0; i < suggestionOptions.length; i++) {
-						   		if (suggestionOptions[i]) {
-							 	  	suggestionOptions[i].onclick = majorSelected;
-					   			}
-					   		}
-					   	}	
-		   			}
-		   			}
-		   		}else {
+					if (majorInput.value) {
+						if (matches.length) {
+							if (suggestions) {
+								suggestions.style.visibility = 'visible';
+								// Remove all of the elements in the div before adding new ones
+								while (suggestions.hasChildNodes()) suggestions.removeChild(suggestions.firstChild);
+								var fragment = create('<li class="suggestion_option"><span class="course_number">' + 'Search ' + ' </span>' + value + '</li>');
+									suggestions.appendChild(fragment);
+								for (el in matches) {
+									var fragment = create('<li class="suggestion_option" id=' + numericCodes[matches[el]] + '><span class="course_number">' + numericCodes[matches[el]] + ' </span>' + majorNames[matches[el]] + '</li>');
+									suggestions.appendChild(fragment);
+								}
+								// Add click event to suggestion box
+								var suggestionOptions = document.getElementsByClassName('suggestion_option');
+								if (suggestionOptions) {
+									for (var i = 0; i < suggestionOptions.length; i++) {
+										if (suggestionOptions[i]) {
+											suggestionOptions[i].onclick = majorSelected;
+										}
+									}
+								}	
+							}
+						}
+					}else {
 					suggestions.style.visibility = 'hidden';
-		   		}
-		   		
-		   		}
-		   	});
-		   	
-		   	}    	    	
+					}
+				
+				}
+			});
+		
+		}    	    	
     }
     
     function majorSelectedWithElement(element) {
@@ -487,13 +593,6 @@ window.location.href = additionalSearchCriteria.href;
 			suggestions.style.visibility = 'hidden';
 		}
 	}
-
-    function setCourseCareerDropDown() {
-        var courseCareerDropDown = document.getElementById("CLASS_SRCH_WRK2_ACAD_CAREER");
-        if (courseCareerDropDown) {
-            courseCareerDropDown.options[3].selected = true;
-        }
-    }
 
     var openClassesCheckBox = document.getElementById("CLASS_SRCH_WRK2_SSR_OPEN_ONLY");
     if (openClassesCheckBox) {
@@ -619,6 +718,29 @@ window.location.href = additionalSearchCriteria.href;
         }
     
     }
+	
+	function constructGPANotification() {
+    	if (!(document.getElementById('banner_bar'))) {
+            var fragment = create('<div id="banner_bar">' + '<div id="enhance_banner">' + '<div id="banner_left_header">' + '<img id="calculator_image" width="50" height="50" title="Calculator" alt="Calculator" src=' + calculatorImageURI + ' />' + '</div>' + '<div id="banner_center">GPA Model is back!</div>' + '<div id="banner_right_header">' + '<div id="sg_right_top_text">Click Here, then View my Grades</div>' + '<a onclick="_gaq.push([\'_trackEvent\', \'Banner\', \'Selected\', \'View Grades\']);" id="sg_vote_now" href="' + gpaLink + '" title="GPA Model Page">' +'<div id="sg_vote_now_box">' + 'View Grades Page' + '</div></a></div>' + '</div></div>');
+
+			var firstBody = document.getElementById('PAGECONTAINER');
+           /*
+ // You can use native DOM methods to insert the fragment:
+            if (firstBody) {
+	            firstBody.appendChild(fragment);
+	        }
+*/
+	        firstBody.insertBefore(fragment, firstBody.firstChild);
+        }
+    
+    }
+
+	function removeGPANotification() {
+    	if (!(document.getElementById('banner_bar'))) {
+    		var element = document.getElementById('banner_bar');
+    		element.innerHTML('');
+    	}
+	}
 
     function constructFooter() {
         if (!(document.getElementById('enhance_footer'))) {
@@ -705,7 +827,6 @@ window.location.href = additionalSearchCriteria.href;
 				}
             }
         }
-
     }
 
     function addLogos() {
@@ -734,31 +855,26 @@ window.location.href = additionalSearchCriteria.href;
                 body[i].style.cssText = "margin: 0 auto";
                 body[i].style.backgroundColor = bgColor;
                 body[i].style.width = "600px";
-
             }
         }
-
     }
 	function contains(arrayName, element) {
-            for (var i = 0; i < arrayName.length; i++) {
-                if (arrayName[i] == element) {
-                    return true;
-                }
-            }
-            return false;
+		for (var i = 0; i < arrayName.length; i++) {
+			if (arrayName[i] == element) {
+				return true;
+			}
+		}
+		return false;
     }
 
     function convertLetterCodeToNumber() {
-        
-        var letterCode = document.getElementById("CLASS_SRCH_WRK2_SUBJECT$70$");
+		var letterCode = document.getElementById("CLASS_SRCH_WRK2_SUBJECT$70$");
         if (letterCode) {
-
             for (var i = 0; i < alphaCodes.length; i++) {
                 if (letterCode.value == alphaCodes[i]) {
                     letterCode.value = numericCodes[i];
                 }
             }
-
         }
     }
 
