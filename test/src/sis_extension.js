@@ -10,9 +10,9 @@
  */
 
 // DO NOT FORGET TO CHANGE THIS TO FALSE WHEN PUSHING LIVE
-var testEnvironment = true;
+var testEnvironment = false;
 
-// Tom's Test Path
+// Test Path
 var testPath = 'https://people.rit.edu/~tjd9961/SIS/test/src';
 
 // Production Path
@@ -44,7 +44,7 @@ function addCSS() {
 	    link.rel  = 'stylesheet';
 	    link.type = 'text/css';
 	    if (testEnvironment) {
-	    	link.href = testPath + '/css/sis_main.css';
+	    	link.href = testPath + '/css/sis_main_test.css';
 	    }else {
 	    	link.href = prodPath + '/css/sis_main.css';
 	    }
@@ -62,7 +62,7 @@ function addJavascript() {
 	    link.language  = 'JavaScript';
 	    link.type = 'text/javascript';
 	    if (testEnvironment) {
-	    	link.src = testPath + '/js/main.js';
+	    	link.src = testPath + '/js/main_test.js';
 	    }else {
 	    	link.src = prodPath + '/js/main.js';
 	   	}
